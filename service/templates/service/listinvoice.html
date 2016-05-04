@@ -1,0 +1,76 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="side-body">
+        <div class="page-title">
+            <span class="title">Service</span>
+            <div class="description"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="card-title">
+                        <div class="title">Service Details</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="datatable table table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Invoice Number</th>
+                                    <th>Serviced Product</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Total Paid</th>
+                                    <th>Total Pending</th>
+                                    <th>Serviced</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Invoice Number</th>
+                                    <th>Serviced Product</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Total Paid</th>
+                                    <th>Total Pending</th>
+                                    <th>Serviced</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for service in services %}
+                                <tr>
+                                    <td>{{service.invoice_number}}</td>
+                                    {% if service.vehical %}
+                                        <td>{{service.vehical}}</td>
+                                    {% else %}
+                                        <td>{{service.otherservice}}</td>
+                                    {% endif %}
+                                    <td>{{service.customer|title }}</td>
+                                    <td>{{service.service_date}}</td>
+                                    <td>$ {{service.total_paid}}</td>
+                                    <td>$ {{service.total_pending}}</td>
+                                    <td>{{service.is_serviced}}</td>
+                                    <td>
+                                        <div aria-label="Extra-small button group" role="group" class="btn-group btn-group-xs">
+                                          <a class="btn btn-default customerbutton" href="{% url 'service:invoice_view' service.invoice_number%}" id={{service.invoice_number}} value="view" type="button">Generate Invoice</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>    
+</div>
+{% endblock content %}

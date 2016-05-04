@@ -1,0 +1,51 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<form id="central">
+<div class="side-body">
+<div class="page-title">
+    <span class="title">Generate Invoice</span>
+    <div class="description"></div>
+</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Select Details To Generate Invoice</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline">
+                         <label for="exampleInputEmail2">Select Customer: </label>&nbsp; &nbsp;
+                         <select id="customerdropdown">
+                             <option value=0>Select Customer</option>
+                          {% for service in services%}
+                              <option value="{{service.invoice_number}}">{{service.customer}}</option>
+                          {% endfor %}
+                        </select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </form>
+                    <form class="form-inline pull-right">
+                         <label for="exampleInputEmail2">Select Invoice Number: </label>&nbsp; &nbsp;
+                         <select id="invoicedropdown">
+                             <option value=0>Select Invoice Number</option>
+                          {% for service in services%}
+                              <option value="{{service.invoice_number}}">{{service.invoice_number}}</option>
+                          {% endfor %}
+                        </select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/invoicecreate.js' %}"></script>
+{% endblock scripts_extend %}

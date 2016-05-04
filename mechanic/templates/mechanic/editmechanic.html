@@ -1,0 +1,76 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="side-body">
+<div class="page-title">
+                        <span class="title">Edit Mechanics</span>
+                        <div class="description"></div>
+                    </div>
+<div class="row">
+                        <div class="col-xs-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <div class="title">Update mechanics details</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                <form id="mechaniceditform" method="POST">
+                                    {%csrf_token%}
+                                    <div class="sub-title">First Name</div>
+                                    <div>
+                                        <input type="text" id="first_name" name="first_name" placeholder="First Name" autocomplete="off" class="form-control" value={{mechanic.first_name}} required>
+                                    </div>
+                                    <div class="sub-title">Last Name</div>
+                                    <div>
+                                        <input type="text" id="last_name" name="last_name" placeholder="Last Name" class="form-control" autocomplete="off" value={{mechanic.last_name}} required>
+                                    </div>
+                                    <div class="sub-title">Email</div>
+                                    <div>
+                                        <input type="email" id="email" name="email" value="{{mechanic.email}}" placeholder="Email" autocomplete="off" class="form-control">
+                                    </div>
+                                    <div class="sub-title">Contact Number</div>
+                                    <div>
+                                        <input type="text" autocomplete="off" id="phone_number" value={{mechanic.phone_number}} name="phone_number" placeholder="Contact Number" class="form-control" MAXLENGTH=12 onKeyPress="return numbersonly(this, event)">
+                                    </div>
+                                    <div class="sub-title">Address</div>
+                                    <div>
+                                        <textarea rows="3" id=address name=address placeholder="Address" class="form-control" required>{{mechanic.address}}</textarea>
+                                    </div>
+
+                                    <div class="sub-title">Gender <span class="description"></span></div>
+                                    <div>
+                                        <div class="radio3">
+                                          <input type="radio" value="male" name="radio1" id="radio1" checked="checked">
+                                          <label for="radio1">
+                                          Male
+                                          </label>
+                                        </div>
+                                        <div class="radio3">
+                                          <input type="radio" value="female" name="radio1" id="radio2">
+                                          <label for="radio2">
+                                            Female
+                                          </label>
+                                        </div>
+                                    </div>
+                                    <div class="sub-title">About</div>
+                                    <div>
+                                        <textarea rows="3" id=about name=about placeholder="About" class="form-control">{{mechanic.about}}</textarea>
+                                    </div>
+                                <div class="login-button text-center">
+                                    <input type="submit" id="" class="btn btn-primary" value="Save">
+                                </div>
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+</div>
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/mechanicedit.js' %}"></script>
+{% endblock scripts_extend %}

@@ -1,0 +1,107 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="side-body">
+<div class="page-title">
+    <span class="title">Service Details</span>
+    <div class="description"></div>
+</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+		        <div class="card-body">
+                    <form id="customerform" class="form-inline">
+                        <div class="sub-title">Customer Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Company Name: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="Company Name" name="company_name" id="company_name" class="form-control" autocomplete="off" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Customer Name: </label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="Customer Name" name="customer_name" id="customer_name" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Email: </label>&nbsp;&nbsp;
+                            <input type="email" autocomplete="off" placeholder="jane.doe@example.com" id="email" name="email" class="form-control">
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="Contact Number" name="phone_number" id="phone_number" class="form-control" MAXLENGTH=12 onKeyPress="return numbersonly(this, event)" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Estimated Delivery:</label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="20 to 22 days" name="estimated_delivery" id="estimated_delivery" class="form-control">
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Payment Details:</label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="50% Advance and 50% After Delivery" name="payment_details" id="payment_details" class="form-control" >
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Address: </label>&nbsp;&nbsp;
+                            <textarea type="text" rows="2" cols="50" id="address" name="address" class="form-control"> </textarea>
+                        </div>
+                    </form>
+
+		            <div class="panel panel-default">
+		                <!-- Default panel contents -->
+		                <div class="panel-heading">Item Description</div>
+		                <div class="panel-body">
+		                </div>
+		                <!-- Table -->
+		                <form id="tabledata">
+			                <table class="table" id="itemtable">
+			                    <thead>
+			                        <tr>
+			                            <th>#</th>
+			                            <th>Name</th>
+			                            <th>Description</th>
+			                            <th>Quantity</th>
+			                            <th>Price</th>
+			                            <th></th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                    </tbody>
+			                </table>
+		                </form> 
+		            </div>
+		            <button class="btn btn-sm btn-default" id="addpart" type="button">Add Part</button>
+
+                    <form id="costform">
+                        <div class="card-body">
+                            <div class="form-group pull-right" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Vat Percentage: </label>&nbsp;&nbsp;
+                                <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" value=0 required>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Total Cost: </label>&nbsp;&nbsp;
+                            <input type="text" name="total_amount" id="totalcost" placeholder="Total Amount" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Total Tax Cost: </label>&nbsp;&nbsp;
+                            <input type="text" name="tax_amount" id="tax_amount" placeholder="Total Tax Amount" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="login-button text-center">
+                            <a class="btn btn-primary" id="calculateamount">Calculate Amount</a>
+                            <a class="btn btn-primary" id="makepayment" >Generate Quotation</a>
+                        </div>
+                    </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/quotation.js' %}"></script>
+{% endblock scripts_extend %}

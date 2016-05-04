@@ -1,0 +1,47 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+{% endblock scripts_extend %}
+
+{% block content %}
+<div class="side-body">
+<div class="page-title">
+<span class="title"></span>
+<div class="description"></div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">
+<div class="title">Mechanic's Information</div>
+</div>
+</div>
+<div class="card-body">
+<div class="row row-example">
+{% for mechanic in mechanics %} 
+<div id="mechanic-{{mechanic.id}}" class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+        {% if mechanic.profile_picture %}
+        <img class="img-responsive" height="800" width="533" src="{{mechanic.profile_picture.url}}">
+        {% else %}
+        <img class="img-responsive" height="800" width="533" src="{% static 'images/default-profile-pic.png' %}">
+        {% endif %}
+        <div class="caption">
+            <h3 id="thumbnail-label" style="text-transform:capitalize;">{{mechanic.first_name}} {{mechanic.last_name}}<a href="#thumbnail-label" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h3>
+            <h5>Contact Number : {{mechanic.phone_number}} </h5>
+            <h5>Email : {{mechanic.email}}</h5>
+            <h5>Gender : {{mechanic.gender}}</h5>
+            <h5>Address : {{mechanic.address}}</h5>
+            <p><a role="button" id={{mechanic.id}} class="btn btn-primary" href="{% url 'mechanic:mechanic_edit' mechanic.id %}">Edit</a> <a id={{mechanic.id}} role="button" class="btn btn-default deletemechanic" >Delete</a></p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+</div> </div> </div> </div></div>
+{% endblock content %}

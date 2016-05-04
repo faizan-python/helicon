@@ -1,0 +1,196 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="side-body">
+<div class="page-title">
+    <span class="title">Service Details</span>
+    <div class="description"></div>
+</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Customer Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <form class="form-inline">
+                        <div class="sub-title">Customer Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">First Name: </label>&nbsp;&nbsp;
+                            {{service.customer.first_name|title|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Last Name: </label>&nbsp;&nbsp;
+                            {{service.customer.last_name|title|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Email: </label>&nbsp;&nbsp;
+                            {{service.customer.email|default:"NA"|default_if_none:"NA"}}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
+                            {{service.customer.phone_number}}
+                        </div>
+                            <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Gender:</label>&nbsp;&nbsp;
+                            {{service.customer.gender|title|default:"NA"}}
+                            </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Address: </label>&nbsp;&nbsp;
+                            {{service.customer.address|title|default:"NA"}} 
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+            </div>
+    <div class="row">
+        <div class="col-xs-12">
+            {% if service.vehical %}
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Vehicle Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline">
+                        <div class="sub-title">Vehicle Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Vehicle Number: </label>&nbsp;&nbsp;
+                            {{service.vehical.vehical_number}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Vehicle Name: </label>&nbsp;&nbsp;
+                            {{service.vehical.vehical_name|title}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Vehicle Colour: </label>&nbsp;&nbsp;
+                            {{service.vehical.vehical_colour|title|default:"NA"}}
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Problem Description: </label>&nbsp;&nbsp;
+                            {{service.vehical.about|title|default:"NA"|default_if_none:"NA"}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Service Product Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline">
+                        <div class="sub-title">Product Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Model Number: </label>&nbsp;&nbsp;
+                            {{service.otherservice.number}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Name: </label>&nbsp;&nbsp;
+                            {{service.otherservice.name|title}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Company Name: </label>&nbsp;&nbsp;
+                            {{service.otherservice.company_name|title|default:"NA"}}
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Problem Description: </label>&nbsp;&nbsp;
+                            {{service.otherservice.about|title|default:"NA"|default_if_none:"NA"}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Service Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Invoice Number: </label>&nbsp;&nbsp;
+                            {{service.invoice_number}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Serviced By: </label>&nbsp;&nbsp;
+                            {{service.mechanic|title|default:"Mechanic Not Assigned Yet"}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Remarks: </label>&nbsp;&nbsp;
+                            {{service.remark|title|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Service Created By: </label>&nbsp;&nbsp;
+                            {{service.created_by}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Service Reported Date: </label>&nbsp;&nbsp;
+                            {{service.service_date}}
+                        </div>
+
+
+                        {% if service.is_serviced %}
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Service Delivery Date: </label>&nbsp;&nbsp;
+                                {{service.delivery_date}}
+                            </div>
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Total Paid Amount: </label>&nbsp;&nbsp;
+                                {{service.total_paid}}
+                            </div>
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Pending Amount: </label>&nbsp;&nbsp;
+                                {{service.total_pending}}
+                            </div>
+
+
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Next Service Date: </label>&nbsp;&nbsp;
+                                {{service.next_service_date}}
+                            </div>
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Labour Cost: </label>&nbsp;&nbsp;
+                                {{service.labour_cost}}
+                            </div>
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Part Cost: </label>&nbsp;&nbsp;
+                                {{service.part_cost}}
+                            </div>
+
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Total Cost: </label>&nbsp;&nbsp;
+                                {{service.total_cost}}
+                            </div>
+                        {% else %}
+
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Expected Delivery Date: </label>&nbsp;&nbsp;
+                            {{service.expected_delivery_date}}
+                        </div>
+                        {% endif %}
+
+                        <br>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

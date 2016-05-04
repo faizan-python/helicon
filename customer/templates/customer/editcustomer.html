@@ -1,0 +1,75 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="side-body">
+<div class="page-title">
+                        <span class="title">Edit Customer</span>
+                        <div class="description"></div>
+                    </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="title">Update Customer details</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    <form id="customereditform" method="POST">
+                        {%csrf_token%}
+                        <div class="sub-title">First Name</div>
+                        <div>
+                            <input type="text" id="first_name" name="first_name" placeholder="First Name" class="form-control" autocomplete="off" value={{customer.first_name}} required readonly>
+                        </div>
+                        <div class="sub-title">Last Name</div>
+                        <div>
+                            <input type="text" id="last_name" name="last_name" placeholder="Last Name" class="form-control" autocomplete="off" value={{customer.last_name}} required readonly>
+                        </div>
+                        <div class="sub-title">Email</div>
+                        <div>
+                            <input type="email" id="email" name="email" value="{{customer.email}}" placeholder="Email" autocomplete="off" class="form-control">
+                        </div>
+                        <div class="sub-title">Contact Number</div>
+                        <div>
+                            <input type="text" id="phone_number" value={{customer.phone_number}} name="phone_number" placeholder="Contact Number" autocomplete="off" MAXLENGTH=12 onKeyPress="return numbersonly(this, event)" class="form-control" required="">
+                        </div>
+                        <div class="sub-title">Address</div>
+                        <div>
+                            <textarea rows="3" id=address name=address placeholder="Address" class="form-control" required>{{customer.address}}</textarea>
+                        </div>
+
+                        <div class="sub-title">Gender <span class="description"></span></div>
+                        <div>
+                            <div class="radio3">
+                              <input type="radio" value="male" name="radio1" id="radio1" checked="checked">
+                              <label for="radio1">
+                              Male
+                              </label>
+                            </div>
+                            <div class="radio3">
+                              <input type="radio" value="female" name="radio1" id="radio2">
+                              <label for="radio2">
+                                Female
+                              </label>
+                            </div>
+                        </div>
+                        <div class="sub-title">About</div>
+                        <div>
+                            <textarea rows="3" id=about name=about placeholder="About" class="form-control">{{customer.about}}</textarea>
+                        </div>
+                    <div class="login-button text-center">
+                        <input type="submit" id="" class="btn btn-primary" value="Update">
+                    </div>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/customeredit.js' %}"></script>
+{% endblock scripts_extend %}

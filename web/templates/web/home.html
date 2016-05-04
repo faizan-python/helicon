@@ -1,0 +1,47 @@
+{% extends "templates/web-base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+     {% include 'templates/web-topheader.html' %}
+	<!-- header stricky menu -->
+     {% include 'templates/web-header.html' %}
+	<!-- start header -->
+	
+    <!--Main Slider-->
+     {% include 'templates/web-slider.html' %}
+    <!-- Main slider end -->
+    
+	<!--- start area -->
+     {% include 'templates/web-about.html' %}
+	<!-- end area -->
+	
+	<!-- choose area start -->
+     {% include 'templates/web-whyus.html' %}
+	<!-- choose area end  -->  
+
+	<!-- project area start -->
+      {% include 'templates/web-projects.html' %}
+	<!-- Project end area -->
+ 
+	<!--- service start area -->
+      {% include 'templates/web-service.html' %}
+	<!-- service end area -->
+
+	<!--- start area -->
+      {% include 'templates/web-process.html' %}
+	<!-- end area -->
+	
+	<!--- start area -->
+      {% include 'templates/web-testimonials.html' %}
+	<!-- end area -->	
+
+	<!--- News start area -->
+      {% include 'templates/web-news.html' %}
+	<!-- News end area -->
+
+	<!---footer start area -->
+      {% include 'templates/web-footer.html' %}
+	<!-- footer end area -->
+{% endblock content %}

@@ -1,0 +1,112 @@
+{% extends "templates/web-base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+     {% include 'templates/web-topheader.html' %}
+	<!-- header stricky menu -->
+     {% include 'templates/web-header.html' %}
+	<!-- start header -->
+
+<div class="page_titel">
+	<div class="container">
+		<div class="row">
+			<div class="page_heading text-center">
+				 <h2>We are Helicon Engineering Works</h2>
+				 <span></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="service_details">
+	 	<div class="container">
+	 		<div class="row">
+				<div class="single_service">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="about_single">
+							<div class="img-holder service_left">
+								<img alt="" src="/static/images/shaft-cutting.jpg">
+								<div class="overlay">
+									<a href="#"><i class="fa fa-link"></i></a>
+								</div>
+							</div>
+						</div> 
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+						<div class="service_right">
+							<div class="service_one">
+								<h2>01</h2>
+							</div>
+							<div class="service_title">
+								<h2>Shaft Cutting Gear Box</h2>
+							</div>
+							<h3>We feel immensely pleased to offer an exclusive gamut of Shaft Cutting Gear Box that is used in various industries. Our provided boxes are manufactured by using the finest quality raw material and cutting edge technology by our adroit professionals. So as to ensure their quality, these boxes are strictly checked by our quality examiners. We provide these boxes in different sizes and specifications as per the demands of our clients. </h3>
+							<hr class="service_line">
+							<h3>Features:</h3>
+
+							    <p>&#9658 Rugged construction <br>
+							    &#9658 Easy installation<br>
+							    &#9658 Rust proof </p>
+
+
+							<h3>Specifications:</h3>
+
+							    <p>&#9658 Density: 6.8-7.0<br>
+							    &#9658 Accuracy: 0.02-0.03 mm<br>
+							    &#9658 Pressure Angle: 20/ 30</p>
+							<button class="btn btn-info hvr-sweep-to-right  sevice_button">GET QUOTE</button>
+						</div>
+					</div>
+				</div>
+				<div class="single_service">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="service_right pull-left spacing">
+							<div class="service_one">
+								<h2>02</h2>
+							</div>
+							<div class="service_title">
+								<h2>Single Shaft Extruder Gear Box</h2>
+							</div>
+							<h3>Being a customer oriented firm, we are engaged in offering a wide range of Single Shaft Extruder Gear Box that is utilized for plastic extruder machine. The offered gear box is manufactured using the finest quality components and sophisticated technology in synchronization with industry norms. In order to maintain its quality, this gear box is rigorously checked on different parameters. Apart from this, we offer this gear box in different sizes and specifications. </h3>
+							<hr class="service_line">
+							<h3>Features:</h3>
+
+							    <p>&#9658 Precisely design <br>
+							    &#9658 Easy usage<br>
+							    &#9658 Light weight </p>
+
+
+							<h3>Specifications:</h3>
+
+							    <p>&#9658 Input Speed: 600~ 1500 rpm<br>
+							    &#9658 Rated Power: 5.5~ 540 kw</p>
+							<button class="btn btn-info hvr-sweep-to-right  sevice_button">GET QUOTE</button>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
+						<div class="about_single">
+							<div class="img-holder service_left">
+								<img alt="" src="/static/images/single-shaft.jpg">
+								<div class="overlay">
+									<a href="#"><i class="fa fa-link"></i></a>
+								</div>
+							</div>
+						</div> 
+					</div> 
+				</div>				
+			</div>
+	 	</div>
+	 </div>
+
+
+
+	<!---footer start area -->
+      {% include 'templates/web-footer.html' %}
+	<!-- footer end area -->
+{% endblock content %}
+
+{% block scripts_extend %}
+	<script src="{% static 'js/jquery.appear.js' %}"></script>
+{% endblock %}

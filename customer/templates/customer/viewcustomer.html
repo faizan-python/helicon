@@ -1,0 +1,74 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="side-body">
+        <div class="page-title">
+            <span class="title">Customer's</span>
+            <div class="description"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="card-title">
+                        <div class="title">Customer Details</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="datatable table table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Contact Number</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Pending Payment</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Contact Number</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Pending Payment</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for customer in customers %}
+                                <tr>
+                                    <td>{{customer.first_name|title }} {{customer.last_name|title }}</td>
+                                    <td>{{customer.phone_number}}</td>
+                                    <td>{{customer.address|title|truncatewords:15 }}</td>
+                                    <td>{{customer.email|default:"NA"}}</td>
+                                    <td>{{customer.gender|title|default:"NA"}}</td>
+                                    <td>$ {{customer.total_pending}}</td>
+                                    <td>
+                                        <div aria-label="Extra-small button group" role="group" class="btn-group btn-group-xs">
+                                          <a class="btn btn-default customerbutton" href="{% url 'customer:customer_edit' customer.id %}" type="button">Edit</a>
+                                          <a class="btn btn-default customerbutton" href="{% url 'customer:customer_detail' customer.id %}" id={{customer.id}} value="view" type="button">View</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>    
+</div>
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/customersearch.js' %}"></script>
+{% endblock scripts_extend %}

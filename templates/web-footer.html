@@ -1,0 +1,88 @@
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+
+<script>
+function initialize() {
+  var mapProp = {
+    center:new google.maps.LatLng(20.3666683,72.8978009),
+    zoom:8
+  };
+  var map=new google.maps.Map(document.getElementById("footerGoogleMap"), mapProp);
+	var marker=new google.maps.Marker({
+	position:new google.maps.LatLng(20.3666683,72.8978009),
+	});
+
+	marker.setMap(map);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<section id="footer_area">
+	<div class="container">
+		<div class="row">
+			<div class="footer_content">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer_spacing">
+					<div class="single_footer">
+						<h2>HELICON</h2>
+						<p>Since 1984</p>
+					</div>
+					<div class="footer_social">
+						<a href="http://www.facebook.com" class="i fa fa-facebook"></a>
+						<a href="http://www.twitter.com" class="i fa fa-twitter"></a>
+						<a href="http://www.google.com" class="i fa fa-google-plus"></a>
+						<a href="http://www.pinterest.com" class="i fa fa-pinterest"></a>
+						<a href="http://www.rss.com" class="i fa fa-rss"></a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer_spacing">
+					<div class="column-three">
+						<h2>Address</h2> 
+						<span></span>
+						<a href="" class="i fa fa-map-marker"></a> Plot No. 16/17, Behind I. D. B. I. Bank, Near Mahavirnagar National Highway, No. 8, G. I. D. C.
+                        Vapi - 396195, Gujarat, India<br />
+						<a href="" class="i fa fa-phone"></a>   +(91)-9624999911, +(91)-9824786300<br />
+						<a href="" class="i fa fa-envelope-o"></a> info@companyname.com <br />
+					</div>
+					<div class="subcriber">
+						<h2>Leave Your Email We Will Contact You Back</h2>
+						<span></span>
+						<div class="footer-subscriber">
+							<form action="#" class="search-form">
+								<input type="text" placeholder="Enter you email here">
+								<button type="submit"><i class="fa fa-location-arrow"></i></button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer_spacing">
+					<div class="small_gallery">
+						<h2>Location</h2>
+						<span></span>
+           			<div id="footerGoogleMap" style="width:200px;height:180px;"></div>
+					</div>
+				</div>
+			</div> 
+		</div>
+	</div>
+	<hr class="horizenal" /> 
+	<div class="container">
+		<div class="row">
+			<div class="copy_right_area">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="copy_left">
+						<p>&copy;copyright 2015 <span>Dupplex</span></p>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+					<div class="copy_right">
+						<ul>
+							<li><a href="">Home</a></li>
+							<li><a href="">FAQ</a></li>
+							<li><a href="">About</a></li>
+							<li><a href="">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

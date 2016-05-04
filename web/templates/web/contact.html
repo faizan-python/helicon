@@ -1,0 +1,146 @@
+{% extends "templates/web-base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+     {% include 'templates/web-topheader.html' %}
+	<!-- header stricky menu -->
+     {% include 'templates/web-header.html' %}
+	<!-- start header -->
+
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+
+<script>
+function initialize() {
+  var mapProp = {
+    center:new google.maps.LatLng(20.3666683,72.8978009),
+    zoom:17
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+	var marker=new google.maps.Marker({
+	position:new google.maps.LatLng(20.3666683,72.8978009),
+	});
+
+	marker.setMap(map);
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<div class="page_titel">
+	<div class="container">
+		<div class="row">
+			<div class="page_heading text-center">
+				 <h2>Contact Us</h2>
+				 <span></span>
+				 <h3>Home / Contact Us </h3>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="contact_area">
+ 	<div class="container">
+ 		<div class="row">
+			<div class="contact text-center">
+				<h2>It,s Easy to Find Us</h2>
+				<span></span>
+			</div>
+			<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+			<div id="googleMap" style="width:700px;height:480px;"></div>
+			</div>
+			<div class="col-lg-4 col-md-4">
+				<div class="contact_details">
+					<div class="contact_text_area">
+						<div class="col-lg-4 co-md-4 col-sm-12 col-xs-12">
+						<div class="contact_icon">
+							<i class="fa fa-map-marker"></i>
+						</div>
+						</div>
+						<div class="col-lg-8 col-md-8">
+							<div class="contact_text">
+								<h2>Address</h2>
+								<p>Plot No. 16/17, Behind I. D. B. I. Bank, Near Mahavirnagar National Highway, No. 8, G. I. D. C.
+									Vapi - 396195, Gujarat, India </p>
+							</div>
+						</div>
+					</div>
+					<div class="contact_text_area">
+						<div class="col-lg-4 co-md-4">
+							<div class="contact_icon">
+								<i class="fa fa-phone"></i>
+							</div>
+						</div>
+						<div class="col-lg-8 col-md-8">
+							<div class="contact_text">
+								<h2>Phone</h2>
+								<p>  +(91)-9624999911, +(91)-9824786300</p>
+							</div>
+						</div>
+					</div>
+					<div class="contact_text_area">
+						<div class="col-lg-4 co-md-4">
+						<div class="contact_icon">
+							<i class="fa fa-envelope-o"></i>
+						</div>
+						</div>
+						<div class="col-lg-8 col-md-8">
+							<div class="contact_text">
+								<h2>Email</h2>
+								<p>info@somecompanyname.com, <br>
+								 otheremail@gmail.com</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="contact_social">
+					<ul class="ul">
+						<li><a href="http://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="http://www.rss.com"><i class="fa fa-rss"></i></a></li>
+						<li><a href="http://www.youtube.com"><i class="fa fa-youtube"></i></a></li>
+						<li><a href="http://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="http://www.pinterest.com"><i class="fa fa-pinterest"></i> </a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+ 	</div>
+ </div>
+
+ <div id="form_area">
+ 	<div class="container">
+ 		<div class="row">
+			<form class="contact-form" action="sendemail.php" novalidate="novalidate">
+				<div class="form_send"> 
+					 <input type="text" placeholder="Your Name" name="name"> 
+				</div>
+				<div class="form_send"> 
+					 <input type="text" placeholder="Your Mail" name="email">  
+				</div>
+				<div class="form_send"> 
+					 <input type="text" placeholder="Message Subject" name="subject"><br><br>  
+				</div>
+				 
+				<div class="col-lg-12 col-md-12">
+					<textarea placeholder="Message" rows="10" name="message" class="text"></textarea><br>
+				</div>
+				<div class="submit-form">
+					<button class="btn btn-info hvr-sweep-to-right frombutton" type="submit">Send</button>
+				</div>  
+			</form>
+		</div>  
+ 	</div>
+</div>
+
+	<!---footer start area -->
+      {% include 'templates/web-footer.html' %}
+	<!-- footer end area -->
+{% endblock content %}
+
+{% block scripts_extend %}
+
+{% endblock %}

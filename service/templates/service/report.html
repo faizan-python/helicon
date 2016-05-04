@@ -1,0 +1,62 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block stylesheets_extend %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="side-body">
+<div class="page-title">
+    <span class="title">Generate Report</span>
+    <div class="description"></div>
+</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Report Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                   <form  id="report-form" action="/service/report/generate/" class="form-inline" method="post">
+                    {%csrf_token%}
+                    <div class="form-group" style="padding-right:5em;">
+                        <label for="exampleInputEmail2">Generate Report From: </label>&nbsp;&nbsp;
+                        <input type="text" id="from-date" name="from_date" class="form-control" autocomplete="off" required>
+                    </div>
+                    <div class="form-group" style="padding-right:5em;">
+                        <label for="exampleInputEmail2">Generate Report Till: </label>&nbsp;&nbsp;
+                        <input type="text" autocomplete="off" id="till-date" name="till_date" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="padding-right:5em;">
+                        <label for="checkbox-fa-light-1">
+                          Generate Only Pending Amount Report
+                        </label>
+                        <input type="checkbox" id="pending" name="pending" value="pending"><br>
+                    </div>
+                    <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="login-button text-center">
+                        <input type="submit" id="generate-report" class="btn btn-primary" value="Generate Report">
+                        <input type="submit" style="display: none;" id="generate-invoice" class="btn btn-primary" value="Generate Invoice">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="reportresult">
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/report.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.formautofill.min.js' %}"></script>
+{% endblock scripts_extend %}

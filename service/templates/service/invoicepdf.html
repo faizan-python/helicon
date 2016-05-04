@@ -1,0 +1,194 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>M.J. Engineering Works</title>
+
+</head>
+
+<body>
+       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+       <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+       <link rel="stylesheet" type="text/css" href="{% static 'css/pdf.css' %}">
+
+    <nav role="navigation" class="navbar navbar-default">
+
+        <!-- Brand and toggle get grouped for better mobile display -->
+
+        <div class="navbar-header">
+
+        </div>
+
+        <!-- Collection of nav links and other content for toggling -->
+
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+
+            <ul class="nav navbar-nav">
+
+                <li><a href="/home/">Home</a></li>
+
+            <ul class="nav navbar-nav navbar-right pull-right">
+
+                <li><a id="print_id" href="javascript:void(0)">Print</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+    <div class="invoice-box" id="printable">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="{% static 'images/create_thumb.png' %}" style="width:100%; max-width:135px;">
+                            </td>
+                            <!-- "http://nextstepwebs.com/images/logo.png" -->                            
+                            <td>
+                                Invoice #: {{service.invoice_number}}<br>
+                                Created: {{service.service_date}}<br>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                M.J. Engineering Works<br>
+                                Aman Complex, Behind Hotel Delhi Darbar, Char Rasta,<br>
+                                Vapi, Gujarat, India<br>
+                                <b>PAN NO:</b> ACRPK1146Q<br>
+                                <b>Ph:</b> 0260-2425520 <br>
+                                <b>Mobile:</b> 9426156069
+                            </td>
+                            
+                            <td class="pull-right">
+                                <span class="fa fa-user">  {{service.customer}}<span><br>
+                                <span class="fa fa-phone">  {{service.customer.phone_number}}<span><br>
+                                {% if service.vehical %}
+                                <span class="fa fa-truck">  {{service.vehical}} <span>
+                                {% else %}
+                                <span class="fa fa-truck">  {{service.otherservice}} <span><br>
+                                <span class="fa fa-barcode">  {{service.otherservice.number}} <span>
+                                {% endif %}
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <table>
+            <h4>Item Description</h4>
+            <tr class="heading">
+                <td>
+                    Check #
+                </td>
+                <td>
+                   Name
+                </td>
+                <td>
+                    Quantity
+                </td>
+                <td>
+                    Price
+                </td>
+            </tr>
+            
+               {% for part in service.parts.all %}
+                <tr class="item">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{part.part_name}}</td>
+                    <td>{{part.part_quantity}}</td>
+                    <td>{{part.price}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <table>
+            <h4>Labour Cost Descriptions</h4>
+            <tr class="heading">
+                <td>
+                    Check #
+                </td>
+                <td>
+                   Name
+                </td>
+                <td>
+                    Price
+                </td>
+            </tr>
+            
+               {% for labour in service.labourcost_detail.all %}
+                <tr class="item">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{labour.name}}</td>
+                    <td>{{labour.labour_price}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <table>
+            <h4>Payment Description</h4>
+            <tr class="heading">
+                <td>
+                    Check #
+                </td>
+                <td>
+                    Amount
+                </td>
+                <td>
+                    Date
+                </td>
+                <td>
+                    Recieved By
+                </td>
+            </tr>
+            
+             {% for payment in service.payment.all %}
+              <tr class="item">
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{payment.payment_amount}}</td>
+                  <td>{{payment.created_date}}</td>
+                  <td>{{payment.recieved_by}}</td>
+              </tr>
+              {% endfor %}
+            </table>
+
+            <br>
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                Tax: {{service.tax}}%<br>
+                                Labour Cost: {{service.labour_cost}}<br>
+                                Total Paid Amount: {{service.total_paid}}<br>
+                                Pending Amount: {{service.total_pending}}<br>
+                                <h3>Total Amount: {{service.total_cost}}</h3>
+                            </td>
+                            
+                            <td class="pull-right">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jQuery.print.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/invoicepdf.js' %}"></script>
+</body>
+</html>

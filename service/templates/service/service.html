@@ -1,0 +1,206 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block stylesheets_extend %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<style type="text/css">
+    .customdropdown{
+        width: 150px;
+    }
+</style>
+<form id="central">
+<div class="side-body">
+<div class="page-title">
+    <span class="title">Create Service</span>
+    <div class="description"></div>
+</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Enter Customer Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                   <form class="form-inline">
+                         <label for="exampleInputEmail2">Select Customer: </label>&nbsp; &nbsp;
+                         <select id="customerdropdown">
+                             <option value="">Select Customer's</option>
+                          {% for customer in customers%}
+                              <option value="{{customer.id}}">{{customer}}</option>
+                          {% endfor %}
+                        </select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-xs btn-default" id="addcustomer">Add New Customer</button>
+                    </form>
+
+                    <form id="customerform" style="display: none;" class="form-inline">
+                        <div class="sub-title">Customer Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">First Name: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="First Name" name="first_name" id="first_name" class="form-control" autocomplete="off" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Last Name: </label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="Last Name" name="last_name" id="last_name" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Email: </label>&nbsp;&nbsp;
+                            <input type="email" autocomplete="off" placeholder="jane.doe@example.com" id="email" name="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="Contact Number" name="phone_number" id="phone_number" class="form-control" MAXLENGTH=12 onKeyPress="return numbersonly(this, event)" required>
+                        </div>
+                        <br>
+                        <br>
+                            <div class="radio3 form-group" style="padding-right:5em;">
+                              <input type="radio" value="male" name="radio1" id="radio1" checked="checked">
+                              <label for="radio1">
+                              Male
+                              </label>
+                              <input type="radio" value="female" name="radio1" id="radio2">
+                              <label for="radio2">
+                                Female
+                              </label>
+                            </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Address: </label>&nbsp;&nbsp;
+                            <textarea type="text" rows="2" cols="50" id="address" name="address" class="form-control"> </textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+            </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Enter Vehicle Detail</div>
+                    </div>
+                </div>
+                <div id="service_type" class="card-body">
+                    <div class="sub-title">Select Service Type</div>
+                    <form class="form-inline">
+                        <div class="checkbox">
+                            <input type="checkbox" class="group1"  id="vehical_service" name="vehical_service">
+                            <label for="exampleInputEmail2">
+                                Vehical
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" class="group1" id="other" name="other">
+                            <label for="exampleInputEmail2">
+                                Other
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body" style="display: none;" id="vehicalcompleteform">
+                    <form class="form-inline">
+                         <label for="exampleInputEmail2">Select Vehicle: </label>&nbsp;&nbsp;
+                         <select id="vehicaldropdown" class="customdropdown">
+                            <option value="">Select Vehicle</option>
+                        </select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-xs btn-default" id="addvehical">Add New Vehicle</button>
+                    </form>
+                    <form class="form-inline" id="vechicalform">
+                        <div class="sub-title">Vehicle Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Vehicle Number: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="GJ XX ES XXXX" name="vehical_number" id="vehical_number" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Vehicle Name: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="Audi" name="vehical_name" id="vehical_name" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Vehicle Colour: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="Black / Blue" id="vehical_colour" name="vehical_colour" class="form-control">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Problem Description: </label>&nbsp;&nbsp;
+                            <textarea type="text" rows="2" cols="50" placeholder="" id="about" name="about" class="form-control"> </textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body" style="display: none;" id="othercompleteform">
+                    <form class="form-inline" id="otherform">
+                        <div class="sub-title">Service Type Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Model Number: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="ES XXXX" name="number" id="number" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Name: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="Audi" name="name" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Company Name: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="Company Name" id="company_name" name="company_name" class="form-control">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Problem Description: </label>&nbsp;&nbsp;
+                            <textarea type="text" rows="2" cols="50" placeholder="" id="about" name="about" class="form-control"> </textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Enter Service Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline" id="serviceform">
+                        <label for="exampleInputEmail2">Select Mechanic: </label>&nbsp;&nbsp;
+                         <select id="mechanicdropdown">
+                          {% for mechanic in mechanics%}
+                              <option value="{{mechanic.id}}">{{mechanic}}</option>
+                          {% endfor %}
+                        </select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Expected Delivery Date: </label>&nbsp;&nbsp;
+                            <input type="text" id="expected-date" name="expected_delivery_date" class="form-control" autocomplete="off" required>
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Advance Payment: </label>&nbsp;&nbsp;
+                            <input type="text" onKeyPress="return floatonly(this, event)" placeholder="0" name="advance_payment" id="advance_payment" autocomplete="off" class="form-control" value=0>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="login-button text-center">
+                            <input type="submit" id="save-service" class="btn btn-primary" value="Save">
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/service.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.formautofill.min.js' %}"></script>
+{% endblock scripts_extend %}

@@ -1,0 +1,405 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block stylesheets_extend %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="side-body">
+<div class="page-title">
+    <span class="title">Generate Invoice</span>
+    <div class="description"></div>
+</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Customer Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline">
+                        <div class="sub-title">Customer Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">First Name: </label>&nbsp;&nbsp;
+                            {{service.customer.first_name|title|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Last Name: </label>&nbsp;&nbsp;
+                            {{service.customer.last_name|title|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Email: </label>&nbsp;&nbsp;
+                            {{service.customer.email|default:"NA"|default_if_none:"NA"}}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
+                            {{service.customer.phone_number}}
+                        </div>
+                            <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Gender:</label>&nbsp;&nbsp;
+                            {{service.customer.gender|title|default:"NA"}}
+                            </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Address: </label>&nbsp;&nbsp;
+                            {{service.customer.address|title|default:"NA"}} 
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+            </div>
+    <div class="row">
+        <div class="col-xs-12">
+           {% if service.vehical %}
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Vehicle Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline">
+                        <div class="sub-title">Vehicle Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Vehicle Number: </label>&nbsp;&nbsp;
+                            {{service.vehical.vehical_number}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Vehicle Name: </label>&nbsp;&nbsp;
+                            {{service.vehical.vehical_name|title}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Vehicle Colour: </label>&nbsp;&nbsp;
+                            {{service.vehical.vehical_colour|title|default:"NA"}}
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Problem Description: </label>&nbsp;&nbsp;
+                            {{service.vehical.about|title|default:"NA"|default_if_none:"NA"}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Service Product Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline">
+                        <div class="sub-title">Product Details</div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Model Number: </label>&nbsp;&nbsp;
+                            {{service.otherservice.number}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Name: </label>&nbsp;&nbsp;
+                            {{service.otherservice.name|title}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Company Name: </label>&nbsp;&nbsp;
+                            {{service.otherservice.company_name|title|default:"NA"}}
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Problem Description: </label>&nbsp;&nbsp;
+                            {{service.otherservice.about|title|default:"NA"|default_if_none:"NA"}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title">Service Details</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline">
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Invoice Number: </label>&nbsp;&nbsp;
+                            {{service.invoice_number}}
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Serviced By: </label>&nbsp;&nbsp;
+                            {{service.serviced_by|title|default:"NA"|default_if_none:"NA"}}
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Service Created By: </label>&nbsp;&nbsp;
+                            {{service.created_by}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Service Reported Date: </label>&nbsp;&nbsp;
+                            {{service.service_date}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Expected Delivery Date: </label>&nbsp;&nbsp;
+                            {{service.expected_delivery_date}}
+                        </div>
+                        <input type="hidden" value="{{service.invoice_number}}" id="service-invoice-number">
+                    </form>
+
+                        {% if service.is_serviced %}
+                               <br>
+                               <br>
+                              <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Next Service Date: </label>&nbsp;&nbsp;
+                                    {{service.next_service_date}}
+                                </div>
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Remarks: </label>&nbsp;&nbsp;
+                                    {{service.remark|title|default:"NA"}}
+                                </div>
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Service Delivery Date: </label>&nbsp;&nbsp;
+                                    {{service.delivery_date}}
+                                </div>
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Total Paid Amount: </label>&nbsp;&nbsp;
+                                    $ {{service.total_paid}}
+                                </div>
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Pending Amount: </label>&nbsp;&nbsp;
+                                    $ {{service.total_pending}}
+                                </div>
+
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Labour Cost: </label>&nbsp;&nbsp;
+                                    $ {{service.labour_cost}}
+                                </div>
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Part Cost: </label>&nbsp;&nbsp;
+                                    $ {{service.part_cost}}
+                                </div>
+
+                                <div class="form-group" id="display-total-cost" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Total Cost: </label>&nbsp;&nbsp;
+                                    $ {{service.total_cost}}
+                                </div>
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Tax: </label>&nbsp;&nbsp;
+                                     {{service.tax}} %
+                                </div> 
+                                <div class="card-body">
+                                    <div class="panel panel-default">
+                                        <!-- Default panel contents -->
+                                        <div class="panel-heading">Item Descriptions</div>
+                                        <div class="panel-body">
+                                        </div>
+                                        <!-- Table -->
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               {% for part in service.parts.all %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{part.part_name}}</td>
+                                                    <td>{{part.part_quantity}}</td>
+                                                    <td>{{part.price}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="panel panel-default">
+                                        <!-- Default panel contents -->
+                                        <div class="panel-heading">Labour Cost Descriptions</div>
+                                        <div class="panel-body">
+                                        </div>
+                                        <!-- Table -->
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               {% for labour in service.labourcost_detail.all %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{labour.name}}</td>
+                                                    <td>{{labour.labour_price}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                {% if not service.complete_payment %}
+                                    <form id="costform">
+                                    <div class="card-body">
+                                        <div class="form-group pull-right" style="padding-right:5em;">
+                                            <label for="exampleInputEmail2">Pending Payment: </label>&nbsp;&nbsp;
+                                            <input type="text" name="pending_amount" id="pending_amount" onKeyPress="return floatonly(this, event)" autocomplete="off" value=0 class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail2">Total Cost: </label>&nbsp;&nbsp;
+                                            <input type="text" name="total_amount" id="totalcost" placeholder="Total Amount" autocomplete="off" class="form-control" value="{{service.total_cost}}" readonly>
+                                        </div>
+                                        <div class="form-group" >
+                                            <label for="exampleInputEmail2">Total Pending: </label>&nbsp;&nbsp;
+                                            <input type="text" name="total_pending" id="total_pending" placeholder="Pending Amount" value="{{service.total_pending}}" class="form-control" autocomplete="off" readonly>
+                                        </div>
+                                    </div>
+                                    </form>
+                                    <div class="card-body">
+                                        <div class="login-button text-center">
+                                            <a class="btn btn-primary" id="pendingamount">Pay Pending Amount</a>
+                                            <a class="btn btn-primary" href="{% url 'service:invoice_view' service.invoice_number %}" id="generateinvoice" >Generate Invoice</a>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="card-body">
+                                        <div class="login-button text-center">
+                                            <a class="btn btn-primary" href="{% url 'service:invoice_view' service.invoice_number %}" id="generateinvoice" >Generate Invoice</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <br>
+                                <br>
+                              <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Next Service Date: </label>&nbsp;&nbsp;
+                                    <input type="text" id="expected-date" name="next_service_date" class="form-control" autocomplete="off">
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Remarks abot the Service: </label>&nbsp;&nbsp;
+                                    <textarea type="text" rows="2" cols="80" placeholder="" id="remark" name="remark" class="form-control"> </textarea>
+                                </div>
+                            <div class="card-body">
+                                <div class="panel panel-default">
+                                    <!-- Default panel contents -->
+                                    <div class="panel-heading">Item Description</div>
+                                    <div class="panel-body">
+                                    </div>
+                                    <!-- Table -->
+                                    <form id="tabledata">
+                                        <table class="table" id="itemtable">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Weight</th>
+                                                    <th>Price</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </form>    
+                                </div>
+                                <button class="btn btn-sm btn-default" id="additem" type="button">Add Part</button>
+                            </div>
+
+<!--                             Labour Cost Cut Down -->
+                            <div class="card-body">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">Labour Cost Description</div>
+                                <div class="panel-body">
+                                </div>
+                                <!-- Table -->
+                                <form id="labourtabledata">
+                                    <table class="table" id="labouritemtable">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </form>    
+                            </div>
+                            <button class="btn btn-sm btn-default" id="addlabour" type="button">Add Labour cost</button>
+                            </div>
+                            </div>
+
+                            <br>
+                            <br>
+                            <form id="costform">
+                                <div class="card-body">
+                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">Tax Percentage: </label>&nbsp;&nbsp;
+                                        <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" value=0 required>
+                                    </div>
+                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">Total Paid: </label>&nbsp;&nbsp;
+                                        <input type="text" name="total_paid" id="total_paid" onKeyPress="return floatonly(this, event)" class="form-control" value=0 required>
+                                    </div>
+                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">Advance Paid: </label>&nbsp;&nbsp;
+                                        <input type="text" name="advance_payment" id="advance_payment" onKeyPress="return floatonly(this, event)" class="form-control" value={{service.advance_payment}} readonly>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail2">Total Cost: </label>&nbsp;&nbsp;
+                                    <input type="text" name="total_amount" id="totalcost" placeholder="Total Amount" class="form-control" readonly>
+                                </div>
+                                <div class="form-group" >
+                                    <label for="exampleInputEmail2">Total Pending: </label>&nbsp;&nbsp;
+                                    <input type="text" name="total_pending" id="total_pending" placeholder="Pending Amount" class="form-control" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail2">Labour Cost: </label>&nbsp;&nbsp;
+                                    <input type="text" name="labour_cost" id="labour_cost" onKeyPress="return floatonly(this, event)" class="form-control" value=0 readonly>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="login-button text-center">
+                                    <a class="btn btn-primary" id="calculateamount">Calculate Amount</a>
+                                    <a class="btn btn-primary" id="makepayment">Make Payment</a>
+                                    <a class="btn btn-primary" href="{% url 'service:invoice_view' service.invoice_number %}" id="generateinvoice" >Generate Invoice</a>
+                                </div>
+                            </div>
+                            {% endif %}
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/invoice.js' %}"></script>
+{% endblock scripts_extend %}
