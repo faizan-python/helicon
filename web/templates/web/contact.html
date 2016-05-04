@@ -114,12 +114,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
  <div id="form_area">
  	<div class="container">
  		<div class="row">
-			<form class="contact-form" action="sendemail.php" novalidate="novalidate">
+			<form class="contact-form" novalidate="novalidate" id="detailcontactform">
 				<div class="form_send"> 
 					 <input type="text" placeholder="Your Name" name="name"> 
 				</div>
 				<div class="form_send"> 
-					 <input type="text" placeholder="Your Mail" name="email">  
+					 <input type="number" id="detailcontact-number" placeholder="Your Contact Number" name="number">  
 				</div>
 				<div class="form_send"> 
 					 <input type="text" placeholder="Message Subject" name="subject"><br><br>  

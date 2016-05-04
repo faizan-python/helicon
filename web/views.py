@@ -29,3 +29,8 @@ def contact(request):
 
 def product(request):
     return render(request, 'web/product.html')
+
+def save_contact(request):
+    if request.POST.dict().get('number'):
+         return True
+    return render(request, 'web/product.html')

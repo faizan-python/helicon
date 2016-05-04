@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^$', 'web.views.home', name='web_home'),
     url(r'^about/', 'web.views.about', name='web_about'),
     url(r'^contact/', 'web.views.contact', name='web_contactus'),
+    url(r'^save/contact/', 'web.views.save_contact', name='web_save_contactus'),
     url(r'^product/', 'web.views.product', name='web_product'),
 
     url(r'^admin/', 'core.views.index', name='core_index'),
