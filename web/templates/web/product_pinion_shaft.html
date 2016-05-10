@@ -1,0 +1,84 @@
+{% extends "templates/web-base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+     {% include 'templates/web-topheader.html' %}
+	<!-- header stricky menu -->
+     {% include 'templates/web-header.html' %}
+	<!-- start header -->
+
+<div class="page_titel">
+	<div class="container">
+		<div class="row">
+			<div class="page_heading text-center">
+				 <h2>We are Helicon Engineering Works</h2>
+				 <span></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="service_details">
+	 	<div class="container">
+	 		<div class="row">
+				<!-- Right side -->
+				<div class="single_service">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="about_single">
+							<div class="img-holder service_left">
+								<img alt="" src="/static/images/helicalpinion.jpg">
+								<div class="overlay">
+									<a href="#"><i class="fa fa-link"></i></a>
+								</div>
+							</div>
+						</div> 
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+						<div class="service_right">
+							<div class="service_one">
+								<h2>01</h2>
+							</div>
+							<div class="service_title">
+								<h2>Pinion Shaft</h2>
+							</div>
+							<h3>Leveraging on our industrial success, we manage to bring forth a standardized array of Pinion Shaft. These pinions are manufactured using high grade raw material and are available in two major variety of spur and helical. Having accurate dimensions and excellent functioning ability, these boxes are widely used for perfect matching of gears and racks. </h3>
+							<hr class="service_line">
+							<h3>Features:</h3>
+
+							    <p>&#9658 Unmatched strength<br>
+							    &#9658  Resistant to corrosion<br>
+							    &#9658 Dimensionally accurate</p>
+
+							<h3>Material:</h3>
+
+							    <p>&#9658 Alloy steel<br>
+							    &#9658  Mild steel<br>
+							    &#9658 Carbon steel</p>
+
+
+
+							<h3>Specifications:</h3>
+
+							    <p>&#9658 Rated Power: 0.12-22 kw<br>
+							    &#9658 Output Torque: 17-4200 nm <br>
+							    &#9658 Output Speed: 0.1-185 rpm</p>
+							<button class="btn btn-info hvr-sweep-to-right  sevice_button">GET QUOTE</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+				<!-- Right side  end-->
+
+	<!---footer start area -->
+      {% include 'templates/web-footer.html' %}
+	<!-- footer end area -->
+{% endblock content %}
+
+{% block scripts_extend %}
+	<script src="{% static 'js/jquery.appear.js' %}"></script>
+{% endblock %}

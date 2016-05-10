@@ -37,6 +37,21 @@ urlpatterns = [
     url(r'^login/$', 'userdetails.views.login',
         name='login'),
     url(r'^logout/$',
-        'django.contrib.auth.views.logout', {'next_page': '/'},
+        'django.contrib.auth.views.logout', {'next_page': '/admin/'},
         name='logout'),
+
+    # Html URL's
+    url(r'^product_warm-shaft/', 'web.views.product_warm_shaft', name='web_product_warm_shaft'),
+    url(r'^product_crown-pinion/', 'web.views.product_crown_pinion', name='web_product_crown_pinion'),
+    url(r'^product_warm_wheel/', 'web.views.product_warm_wheel', name='web_product_warm_wheel'),
+    url(r'^product_pinion_shaft/', 'web.views.product_pinion_shaft', name='web_product_pinion_shaft'),
+    url(r'^product_spiral_bevel_gear/', 'web.views.product_spiral_bevel_gear',name='web_product_spiral_bevel_gear'),
+    url(r'^product_gear_shafts/', 'web.views.product_gear_shafts',name='web_product_gear_shafts'),
+    url(r'^product_worm_wheel_shaft/', 'web.views.product_worm_wheel_shaft',name='web_product_worm_wheel_shaft'),
+    url(r'^product_worm_shaft_elevators/', 'web.views.product_worm_shaft_elevators',name='web_product_worm_shaft_elevators'),
+    url(r'^product_worm_forging_gear_shaft/', 'web.views.product_forging_gear_shaft',name='web_product_forging_gear_shaft'),
+    url(r'^product_worm_crown_pinion_steel/', 'web.views.product_crown_pinion_steel',name='web_product_crown_pinion_steel'),
+    url(r'^product_balancing_gear/', 'web.views.product_balancing_gear',name='web_product_balancing_gear'),
+    url(r'^product_spur_gear/', 'web.views.product_spur_gear',name='web_product_spur_gear'),
+    url(r'^product_loose_gears/', 'web.views.product_loose_gears',name='web_product_loose_gears'),
 ]
