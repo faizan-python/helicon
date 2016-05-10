@@ -125,6 +125,7 @@ $(document).ready(function() {
     });
 
     $("#addpart").click(function(event){
+        console.log("Clicked")
         var row1= '<th id='+labour_table_id+' scope="row"> # </th>'
         var row2='<td><input type="text" name="part_name" id="part_name" class="form-control" required></td>'
         var row3='<td><input type="text" name="part_quantity" id="part_quantity" class="form-control" onKeyPress="return floatonly(this, event)"required></td>'

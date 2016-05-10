@@ -38,6 +38,8 @@
 
     </nav>
 
+
+
     <div class="invoice-box" id="printable">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
@@ -45,17 +47,19 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="{% static 'images/create_thumb.png' %}" style="width:100%; max-width:135px;">
+                                <img src="{% static 'images/helicon-logo.png' %}" style="width:100%; max-width:135px;">
                             </td>
-                            <!-- "http://nextstepwebs.com/images/logo.png" -->
-                            <h2>Helicon Engineering Works</h2>                            
+                            <!-- "http://nextstepwebs.com/images/logo.png" -->                            
                             <td>
+                                <h2> Helicon Engineering Works </h2>
+                                Invoice #: {{quotation.id}}<br>
+                                Created: {{quotation.created_date}}<br>
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
-
+            
             <tr class="information">
                 <td colspan="2">
                     <table>
@@ -63,7 +67,7 @@
                             <td>
                                 Helicon Engineering Works<br>
                                 Plot No. 16 & 17,  Behind IDBI Bank,<br>
-                                Near Mahavir Nagar, N.H. No.8 GIDC,<br>
+                                Near Mahavir Nagar, N.H. No.8 GIDC
                                 Vapi, Gujarat, India<br>
                                 <b>PAN NO:</b> - <br>
                                 <b>Contact Number:</b> 8980974974 / 9824786300 <br>
@@ -71,50 +75,56 @@
                             </td>
                             
                             <td class="pull-right">
+                                <span class="fa fa-user">  {{quotation.customer_name}}<span><br>
+                                <span class="fa fa-phone">  {{quotation.phone_number}}<span><br>
+                                <span class="fa fa-truck">  {{quotation.email}} <span>
+                                <span class="fa fa-truck">  {{quotation.address}} <span><br>
+                                <span class="fa fa-barcode">  {{quotation.company_name}} <span>
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
 
-            <br>
-
             <table>
-                <h4>{{customer}} Report</h4>
-                <tr class="heading">
-                <td>#</td>
-                <td>Name</td>
-                <td>Serviced Product</td>
-                <td>Total Price</td>
-                <td>Total Paid</td>
-                <td>Total Pending</td>
+            <h4>Item Description</h4>
+            <tr class="heading">
+                <td>
+                    Sr. No.
+                </td>
+                <td>
+                   Name
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Quantity
+                </td>
+                <td>
+                    Price
+                </td>
+            </tr>
+            
+               {% for part in quotation.parts.all %}
+                <tr class="item">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{part.part_name}}</td>
+                    <td>{{part.description}}</td>
+                    <td>{{part.part_quantity}}</td>
+                    <td>{{part.price}}</td>
                 </tr>
-
-                   {% for service in services%}
-                    <tr class="item">
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{service.customer}}</td>
-                        {% if service.vehical %}
-                            <td>{{service.vehical}}</td>
-                        {% else %}
-                            <td>{{service.otherservice}}</td>
-                        {% endif %}
-                        <td>{{service.total_cost}}</td>
-                        <td>{{service.total_paid}}</td>
-                        <td>{{service.total_pending}}</td>
-                    </tr>
-                    {% endfor %}
+                {% endfor %}
             </table>
-
             <br>
             <tr class="information">
                 <td colspan="2">
                     <table>
                         <tr>
                             <td>
-                                Total Paid Amount: {{total_paid}}<br>
-                                Pending Amount: {{total_pending}}<br>
-                                <h3>Total Amount: {{total_cost}}</h3>
+                                Vat Tax: {{quotation.tax}}%<br>
+                                Tax Amount: {{quotation.tax_amount}}<br>
+                                <h3>Total Amount: {{quotation.total_cost}}</h3>
                             </td>
                             
                             <td class="pull-right">
@@ -123,6 +133,10 @@
                     </table>
                 </td>
             </tr>
+            TERMS & CONDITION:<br>
+            PAYMENT: {{quotation.payment_details}}<br>
+            DELIVERY: {{quotation.estimated_delivery}}<br>
+            TAXES & TRANSPORTATION AS APPLICABLE<br>
         </table>
     </div>
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>

@@ -67,3 +67,16 @@ def quotation_list(request):
             "quotations": Quotation.objects.filter(is_active=True)})
         return render_to_response('quotation/quotation_list.html',
                                   context_instance=context)
+
+
+@require_http_methods(["GET"])
+@login_required(login_url='/admin/')
+def quotation_pdf(request, id):
+    if request.method == "GET":
+        quotation_obj = Quotation.objects.filter(is_active=True, id=id)
+        if quotation_obj:
+            context = RequestContext(request, {
+                "quotation": quotation_obj[0]})
+            return render_to_response('quotation/quotationpdf.html',
+                                      context_instance=context)
+    return HttpResponseBadRequest("Error")
