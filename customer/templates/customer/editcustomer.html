@@ -35,6 +35,10 @@
                         <div>
                             <input type="text" id="phone_number" value={{customer.phone_number}} name="phone_number" placeholder="Contact Number" autocomplete="off" MAXLENGTH=12 onKeyPress="return numbersonly(this, event)" class="form-control" required="">
                         </div>
+                        <div class="sub-title">Tin Number</div>
+                        <div>
+                            <input type="text" id="tin_no" value={{customer.tin_no}} name="tin_no" placeholder="Tin Number" autocomplete="off">
+                        </div>
                         <div class="sub-title">Address</div>
                         <div>
                             <textarea rows="3" id=address name=address placeholder="Address" class="form-control" required>{{customer.address}}</textarea>

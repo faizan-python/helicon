@@ -37,6 +37,10 @@
                             <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
                             {{service.customer.phone_number}}
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Tin Number:</label>&nbsp;&nbsp;
+                            {{service.customer.tin_no|default:"NA"}}
+                        </div>
                             <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Gender:</label>&nbsp;&nbsp;
                             {{service.customer.gender|title|default:"NA"}}

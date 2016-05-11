@@ -77,6 +77,9 @@
                             <td class="pull-right">
                                 <span class="fa fa-user">  {{service.customer}}<span><br>
                                 <span class="fa fa-phone">  {{service.customer.phone_number}}<span><br>
+                                {% if service.customer.tin_no %}
+                                <span class="fa fa-phone">  {{service.customer.tin_no}}<span><br>
+                                {% endif %}
                                 {% if service.vehical %}
                                 <span class="fa fa-truck">  {{service.vehical}} <span>
                                 {% else %}

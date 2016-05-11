@@ -3,7 +3,6 @@ $(document).ready(function() {
 
     $("#contactfooterform").submit(function(event){
         event.preventDefault();
-        console.log($("#contactfooterform").serialize())
         var number = $('#contact-number').val();
         if (number) {
             $.ajax({
@@ -15,9 +14,10 @@ $(document).ready(function() {
         },
                  success: function(data){
                     $("#customerform").trigger('reset');
+                    $("#footerformmessage").html("<h2>Thank You for Query. We will contact You Back. You can also reach us on the Above Number.</h2>")
                     $.toast({
                         heading: 'Success',
-                        text: 'Customer added successfully!!!  ',
+                        text: 'Thank You for Query. We will contact You Back. You can also reach us on the Above Number.  ',
                         icon: 'success',
                         hideAfter: 4000,
                         position: 'bottom-right'
@@ -51,7 +51,7 @@ $(document).ready(function() {
                     $("#customerform").trigger('reset');
                     $.toast({
                         heading: 'Success',
-                        text: 'Customer added successfully!!!  ',
+                        text: 'Thank You for Query. We will contact You Back. You can also reach us on the Above Number!!!  ',
                         icon: 'success',
                         hideAfter: 4000,
                         position: 'bottom-right'
