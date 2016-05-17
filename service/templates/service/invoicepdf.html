@@ -64,22 +64,21 @@
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td>
+                            <td class="col-lg-6">
                                 Helicon Engineering Works<br>
                                 Plot No. 16 & 17,  Behind IDBI Bank,<br>
                                 Near Mahavir Nagar, N.H. No.8 GIDC,<br>
                                 Vapi, Gujarat, India<br>
                                 <b>PAN NO:</b> - <br>
+                                <b>TIN NO:</b> - <br>
+                                <b>VAT NO:</b> - <br>
                                 <b>Contact Number:</b> 8980974974 / 9824786300 <br>
                                 <b>Alternate Contact Number:</b> 9925391516
                             </td>
                             
-                            <td class="pull-right">
+                            <td class="col-lg-6 pull-right">
                                 <span class="fa fa-user">  {{service.customer}}<span><br>
                                 <span class="fa fa-phone">  {{service.customer.phone_number}}<span><br>
-                                {% if service.customer.tin_no %}
-                                <span class="fa fa-phone">  {{service.customer.tin_no}}<span><br>
-                                {% endif %}
                                 {% if service.vehical %}
                                 <span class="fa fa-truck">  {{service.vehical}} <span>
                                 {% else %}
@@ -176,7 +175,10 @@
                     <table>
                         <tr>
                             <td>
-                                Tax: {{service.tax}}%<br>
+                                C-Form or Tax: {{service.tax}}%<br>
+                                C-Form or Tax Amount: {{service.tax_amount}}<br>
+                                Service Tax: {{service.service_tax}}%<br>
+                                Service Tax Amount: {{service.service_tax_amount}}%<br>
                                 Labour Cost: {{service.labour_cost}}<br>
                                 Total Paid Amount: {{service.total_paid}}<br>
                                 Pending Amount: {{service.total_pending}}<br>
@@ -190,6 +192,10 @@
                 </td>
             </tr>
         </table>
+        <br>
+        <br>
+        <br>
+        <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
     </div>
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>

@@ -21,6 +21,7 @@ $(document).ready(function() {
         var parts_list = []
         var labour_cost_list = []
         var total_labour_cost = 0
+        var total_part_cost = 0
 
         /*Part Table*/
         tbl.find('tr').each(function () {
@@ -47,6 +48,7 @@ $(document).ready(function() {
             parts_list.push(sub_dict)
 
             sum += quantity * price
+            total_part_cost += sum
 
             $(this).find('.total').val(sum.toFixed(2));
         });
@@ -76,11 +78,16 @@ $(document).ready(function() {
 
         $('#labour_cost').val(total_labour_cost)
         var tax = checkifblank(parseFloat($('#tax').val()))
+        var service_tax = checkifblank(parseFloat($('#service_tax').val()))
         var paid = checkifblank(parseFloat($('#total_paid').val()))
         var labour_cost = checkifblank(parseFloat($('#labour_cost').val()))
         sum += labour_cost
-        var tax_cost = (tax*sum)/100
-        sum += tax_cost
+        var service_tax_cost = (service_tax*labour_cost)/100
+        var part_tax_cost = (tax*total_part_cost)/100
+        sum += part_tax_cost
+        sum += service_tax_cost
+        $('#tax_amount').val(part_tax_cost)
+        $('#service_tax_amount').val(service_tax_cost)
         var advance_payment = checkifblank(parseFloat($('#advance_payment').val()))
 
         if (paid > sum){
@@ -196,6 +203,9 @@ $(document).ready(function() {
                 'labour_cost' : checkifblank($('#labour_cost').val()),
                 'pending_cost' : checkifblank($('#total_pending').val()),
                 'next_service_date' : checkifblank($('#next_service_date').val()),
+                'service_tax_amount' : checkifblank($('#service_tax_amount').val()),
+                'service_tax' : checkifblank($('#service_tax').val()),
+                'tax_amount' : checkifblank($('#tax_amount').val()),
                 'remark': $('#remark').val(),
                 'part_data': part_list,
                 'labour_data': labour_cost_list,

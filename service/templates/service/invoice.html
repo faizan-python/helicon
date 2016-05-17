@@ -39,10 +39,6 @@
                             <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
                             {{service.customer.phone_number}}
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail2">Tin Number:</label>&nbsp;&nbsp;
-                            {{service.customer.tin_no|default:"NA"}}
-                        </div>
                             <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Gender:</label>&nbsp;&nbsp;
                             {{service.customer.gender|title|default:"NA"}}
@@ -100,11 +96,11 @@
                     <form class="form-inline">
                         <div class="sub-title">Product Details</div>
                         <div class="form-group" style="padding-right:5em;">
-                            <label for="exampleInputEmail2">Model Number: </label>&nbsp;&nbsp;
+                            <label for="exampleInputEmail2">Item Code: </label>&nbsp;&nbsp;
                             {{service.otherservice.number}}
                         </div>
                         <div class="form-group" style="padding-right:5em;">
-                            <label for="exampleInputEmail2">Name: </label>&nbsp;&nbsp;
+                            <label for="exampleInputEmail2">Product Name: </label>&nbsp;&nbsp;
                             {{service.otherservice.name|title}}
                         </div>
                         <div class="form-group" style="padding-right:5em;">
@@ -197,9 +193,25 @@
                                     $ {{service.total_cost}}
                                 </div>
                                 <div class="form-group" style="padding-right:5em;">
-                                    <label for="exampleInputEmail2">Tax: </label>&nbsp;&nbsp;
+                                    <label for="exampleInputEmail2">C-Form or Tax: </label>&nbsp;&nbsp;
                                      {{service.tax}} %
-                                </div> 
+                                </div>
+
+
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Tax Amount: </label>&nbsp;&nbsp;
+                                     {{service.tax_amount}} %
+                                </div>
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Service Tax: </label>&nbsp;&nbsp;
+                                     {{service.service_tax}} %
+                                </div>
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Service Tax Amount: </label>&nbsp;&nbsp;
+                                     {{service.service_tax_amount}} %
+                                </div>
+
+
                                 <div class="card-body">
                                     <div class="panel panel-default">
                                         <!-- Default panel contents -->
@@ -315,7 +327,7 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Name</th>
-                                                    <th>Weight</th>
+                                                    <th>Quantity</th>
                                                     <th>Price</th>
                                                     <th></th>
                                                 </tr>
@@ -360,8 +372,12 @@
                             <form id="costform">
                                 <div class="card-body">
                                     <div class="form-group pull-right" style="padding-right:5em;">
-                                        <label for="exampleInputEmail2">Tax Percentage: </label>&nbsp;&nbsp;
+                                        <label for="exampleInputEmail2">C-Form or Tax Percentage: </label>&nbsp;&nbsp;
                                         <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" value=0 required>
+                                    </div>
+                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">Service Tax Percentage: </label>&nbsp;&nbsp;
+                                        <input type="text" name="first_name" id="service_tax" onKeyPress="return floatonly(this, event)" class="form-control" value=0 required>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Total Paid: </label>&nbsp;&nbsp;
@@ -385,6 +401,14 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail2">Labour Cost: </label>&nbsp;&nbsp;
                                     <input type="text" name="labour_cost" id="labour_cost" onKeyPress="return floatonly(this, event)" class="form-control" value=0 readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail2">Service Tax Cost: </label>&nbsp;&nbsp;
+                                    <input type="text" name="service_tax_amount" id="service_tax_amount" onKeyPress="return floatonly(this, event)" class="form-control" value=0 readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail2">C-Form or Tax Cost: </label>&nbsp;&nbsp;
+                                    <input type="text" name="tax_amount" id="tax_amount" onKeyPress="return floatonly(this, event)" class="form-control" value=0 readonly>
                                 </div>
                             </div>
                             <div class="card-body">

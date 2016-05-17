@@ -38,6 +38,8 @@
 
     </nav>
 
+
+
     <div class="invoice-box" id="printable">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
@@ -45,18 +47,19 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="{% static 'images/create_thumb.png' %}" style="width:100%; max-width:135px;">
+                                <img src="{% static 'images/helicon-logo.png' %}" style="width:100%; max-width:135px;">
                             </td>
                             <!-- "http://nextstepwebs.com/images/logo.png" -->                            
                             <td>
-                            Helicon Engineering Works
-                            <h4>Report from {{from_date}} to {{till_date}}</h4>
+                                <h2> Helicon Engineering Works </h2>
+                                Invoice #: {{service.invoice_number}}<br>
+                                Created: {{service.service_date}}<br>
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
-
+            
             <tr class="information">
                 <td colspan="2">
                     <table>
@@ -74,49 +77,53 @@
                             </td>
                             
                             <td class="col-lg-6 pull-right">
+                                <span class="fa fa-user">  {{service.customer}}<span><br>
+                                <span class="fa fa-phone">  {{service.customer.phone_number}}<span><br>
+                                {% if service.vehical %}
+                                <span class="fa fa-truck">  {{service.vehical}} <span>
+                                {% else %}
+                                <span class="fa fa-truck">  {{service.otherservice}} <span><br>
+                                <span class="fa fa-barcode">  {{service.otherservice.number}} <span>
+                                {% endif %}
+
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
 
-            <br>
             <table>
-            <h4>Report Description</h4>
+            <h4>Labour Cost Descriptions</h4>
             <tr class="heading">
-            <td>#</td>
-            <td>Name</td>
-            <td>Serviced Product</td>
-            <td>Total Price</td>
-            <td>Total Paid</td>
-            <td>Total Pending</td>
+                <td>
+                    Check #
+                </td>
+                <td>
+                   Name
+                </td>
+                <td>
+                    Price
+                </td>
             </tr>
             
-             {% for service in services%}
-              <tr class="item">
-                <td>{{ forloop.counter }}</td>
-                <td>{{service.customer}}</td>
-                {% if service.vehical %}
-                    <td>{{service.vehical}}</td>
-                {% else %}
-                    <td>{{service.otherservice}}</td>
-                {% endif %}
-                <td>{{service.total_cost}}</td>
-                <td>{{service.total_paid}}</td>
-                <td>{{service.total_pending}}</td>
-              </tr>
-              {% endfor %}
+               {% for labour in service.labourcost_detail.all %}
+                <tr class="item">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{labour.name}}</td>
+                    <td>{{labour.labour_price}}</td>
+                </tr>
+                {% endfor %}
             </table>
-
             <br>
             <tr class="information">
                 <td colspan="2">
                     <table>
                         <tr>
                             <td>
-                                Total Paid Amount: {{total_paid}}<br>
-                                Pending Amount: {{total_pending}}<br>
-                                <h3>Total Amount: {{total_cost}}</h3>
+                                Labour Cost: {{service.labour_cost}}<br>
+                                Service Tax: {{service.service_tax}}%<br>
+                                Service Tax Amount: {{service.service_tax_amount}}<br>
+                                <h3>Total Labour Amount: {{service.labour_cost|add:service.service_tax_amount}}</h3>
                             </td>
                             
                             <td class="pull-right">

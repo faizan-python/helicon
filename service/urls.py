@@ -27,6 +27,12 @@ urlpatterns = patterns(
         name='pending_payment'),
     url(r'^invoice/view/(?P<id>[0-9]+)/$', 'service.views.invoice_view',
         name='invoice_view'),
+
+    url(r'^invoice/tax/view/(?P<id>[0-9]+)/$', 'service.views.invoice_tax_view',
+        name='invoice_tax_view'),
+    url(r'^invoice/retail/view/(?P<id>[0-9]+)/$', 'service.views.invoice_retail_view',
+        name='invoice_retail_view'),
+
     url(r'^report/$', 'service.views.report',
         name='report'),
     url(r'^customer/report/$', 'service.views.customer_report',

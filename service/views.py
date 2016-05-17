@@ -217,6 +217,9 @@ def invoice(request):
                 service_obj.labour_cost = data.get('labour_cost', 0)
                 service_obj.tax = data.get('tax', 0)
                 service_obj.total_cost = data.get('total_cost', 0)
+                service_obj.tax_amount = data.get('tax_amount', 0)
+                service_obj.service_tax = data.get('service_tax', 0)
+                service_obj.service_tax_amount = data.get('service_tax_amount', 0)
                 service_obj.remark = data.get('remark', "")
                 if data.get('next_service_date'):
                     service_obj.next_service_date = datetime.datetime.strptime(
@@ -308,6 +311,30 @@ def invoice_view(request, id):
             context = RequestContext(request, {
                 "service": service_obj[0]})
             return render_to_response('service/invoicepdf.html',
+                                      context_instance=context)
+
+
+@require_http_methods(["GET"])
+@login_required(login_url='/admin/')
+def invoice_retail_view(request, id):
+    if request.method == "GET":
+        service_obj = Service.objects.filter(is_active=True, invoice_number=id)
+        if service_obj:
+            context = RequestContext(request, {
+                "service": service_obj[0]})
+            return render_to_response('service/invoiceretailpdf.html',
+                                      context_instance=context)
+
+
+@require_http_methods(["GET"])
+@login_required(login_url='/admin/')
+def invoice_tax_view(request, id):
+    if request.method == "GET":
+        service_obj = Service.objects.filter(is_active=True, invoice_number=id)
+        if service_obj:
+            context = RequestContext(request, {
+                "service": service_obj[0]})
+            return render_to_response('service/invoicetaxpdf.html',
                                       context_instance=context)
 
 

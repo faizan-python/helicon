@@ -61,9 +61,38 @@
                                     <td>
                                         <div aria-label="Extra-small button group" role="group" class="btn-group btn-group-xs">
                                           <a class="btn btn-default customerbutton" href="{% url 'service:service_view' service.invoice_number%}" id={{service.invoice_number}} value="view" type="button">View</a>
-                                          <a class="btn btn-default customerbutton" href="{% url 'service:invoice_get' service.invoice_number%}" id={{service.invoice_number}} value="view" type="button">Generate Invoice</a>
+                                          <a class="btn btn-default customerbutton" data-toggle="modal" data-target="#Modal{{service.invoice_number}}" id={{service.invoice_number}} value="view" type="button">Generate Invoice</a>
                                         </div>
-                                    </td>
+
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="Modal{{service.invoice_number}}" role="dialog">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">Please select Invoice type</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                             <a class="btn btn-default" type="button" href="{% url 'service:invoice_view' service.invoice_number%}">
+                                             Invoice
+                                             </a><br>
+                                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                          <a class="btn btn-default" type="button" href="{% url 'service:invoice_retail_view' service.invoice_number%}">
+                                              Retail Invoice
+                                          </a><br>
+                                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        <a class="btn btn-default" type="button" href="{% url 'service:invoice_tax_view' service.invoice_number%}">
+                                              Tax Invoice
+                                          </a>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div> 
+                                   </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

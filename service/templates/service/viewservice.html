@@ -36,10 +36,6 @@
                             <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
                             {{service.customer.phone_number}}
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail2">Tin Number:</label>&nbsp;&nbsp;
-                            {{service.customer.tin_no|default:"NA"}}
-                        </div>
                             <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Gender:</label>&nbsp;&nbsp;
                             {{service.customer.gender|title|default:"NA"}}
@@ -97,11 +93,11 @@
                     <form class="form-inline">
                         <div class="sub-title">Product Details</div>
                         <div class="form-group" style="padding-right:5em;">
-                            <label for="exampleInputEmail2">Model Number: </label>&nbsp;&nbsp;
+                            <label for="exampleInputEmail2">Item COde: </label>&nbsp;&nbsp;
                             {{service.otherservice.number}}
                         </div>
                         <div class="form-group" style="padding-right:5em;">
-                            <label for="exampleInputEmail2">Name: </label>&nbsp;&nbsp;
+                            <label for="exampleInputEmail2">Product Name: </label>&nbsp;&nbsp;
                             {{service.otherservice.name|title}}
                         </div>
                         <div class="form-group" style="padding-right:5em;">
@@ -157,19 +153,17 @@
                                 {{service.delivery_date}}
                             </div>
                             <div class="form-group" style="padding-right:5em;">
-                                <label for="exampleInputEmail2">Total Paid Amount: </label>&nbsp;&nbsp;
-                                {{service.total_paid}}
-                            </div>
-                            <div class="form-group" style="padding-right:5em;">
-                                <label for="exampleInputEmail2">Pending Amount: </label>&nbsp;&nbsp;
-                                {{service.total_pending}}
-                            </div>
-
-
-                            <div class="form-group" style="padding-right:5em;">
                                 <label for="exampleInputEmail2">Next Service Date: </label>&nbsp;&nbsp;
                                 {{service.next_service_date}}
                             </div>
+
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <div class="title">Payment Details</div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
                             <div class="form-group" style="padding-right:5em;">
                                 <label for="exampleInputEmail2">Labour Cost: </label>&nbsp;&nbsp;
                                 {{service.labour_cost}}
@@ -178,8 +172,32 @@
                                 <label for="exampleInputEmail2">Part Cost: </label>&nbsp;&nbsp;
                                 {{service.part_cost}}
                             </div>
-
                             <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">C-Form or Tax: </label>&nbsp;&nbsp;
+                                {{service.tax}} %
+                            </div>
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">C-Form or Tax Amount: </label>&nbsp;&nbsp;
+                                {{service.tax_amount}}
+                            </div>
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Service Tax: </label>&nbsp;&nbsp;
+                                {{service.service_tax}} %
+                            </div>
+                            <div class="form-group" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Service Tax Amount: </label>&nbsp;&nbsp;
+                                {{service.service_tax_amount}}
+                            </div>
+                            <div class="form-group" style="padding-right:5em;background: lightgray">
+                                <label for="exampleInputEmail2">Total Paid Amount: </label>&nbsp;&nbsp;
+                                {{service.total_paid}}
+                            </div>
+                            <div class="form-group" style="padding-right:5em;background: lightgray">
+                                <label for="exampleInputEmail2">Pending Amount: </label>&nbsp;&nbsp;
+                                {{service.total_pending}}
+                            </div>
+
+                            <div class="form-group" style="padding-right:5em;background: lightgray">
                                 <label for="exampleInputEmail2">Total Cost: </label>&nbsp;&nbsp;
                                 {{service.total_cost}}
                             </div>

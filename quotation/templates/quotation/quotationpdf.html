@@ -59,22 +59,23 @@
                     </table>
                 </td>
             </tr>
-            
             <tr class="information">
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td>
+                            <td class="col-lg-6">
                                 Helicon Engineering Works<br>
                                 Plot No. 16 & 17,  Behind IDBI Bank,<br>
                                 Near Mahavir Nagar, N.H. No.8 GIDC
                                 Vapi, Gujarat, India<br>
                                 <b>PAN NO:</b> - <br>
+                                <b>TIN NO:</b> - <br>
+                                <b>VAT NO:</b> - <br>
                                 <b>Contact Number:</b> 8980974974 / 9824786300 <br>
                                 <b>Alternate Contact Number:</b> 9925391516
                             </td>
                             
-                            <td class="pull-right">
+                            <td class="col-lg-6 pull-right">
                                 <span class="fa fa-user">  {{quotation.customer_name}}<span><br>
                                 <span class="fa fa-phone">  {{quotation.phone_number}}<span><br>
                                 <span class="fa fa-truck">  {{quotation.email}} <span>
@@ -138,6 +139,10 @@
             DELIVERY: {{quotation.estimated_delivery}}<br>
             TAXES & TRANSPORTATION AS APPLICABLE<br>
         </table>
+        <br>
+        <br>
+        <br>
+        <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
     </div>
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
