@@ -1,3 +1,4 @@
+from enum import Enum
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -20,6 +21,19 @@ class Payment(models.Model):
     """
     payment model for service
     """
+
+    class PaymentOptions(Enum):
+        CASH = 'Cash'
+        CHEQUE = 'Cheque'
+        OTHERS = 'Others'
+
+        @classmethod
+        def as_tuple(cls):
+            return ((item.value, item.name.replace('_', ' ')) for item in cls)
+
+    payment_type = models.CharField(blank=True, null=True, max_length=20,
+                                    choices=PaymentOptions.as_tuple())
+    cheque_number = models.CharField(blank=True, null=True, max_length=30)
     payment_amount = models.FloatField(default=0)
     modified_date = models.DateTimeField(auto_now=True)
     created_date = models.DateTimeField(auto_now_add=True)

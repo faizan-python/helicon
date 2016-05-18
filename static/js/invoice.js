@@ -15,6 +15,20 @@ $(document).ready(function() {
         return 0
     }
 
+    payment_type = ""
+    
+    $("#cheque").click(function(event) {
+      $("#chequeform").show();
+      payment_type = "Cheque"
+      $("#cash").attr('checked', false);
+    });
+
+    $("#cash").click(function(event) {
+      payment_type = "Cash"
+      $("#chequeform").hide();
+      $("#cheque").attr('checked', false);
+    });
+
     function calculateSum() {
         var tbl = $('#itemtable');
         var sum = 0;
@@ -190,8 +204,32 @@ $(document).ready(function() {
         });
     }
 
+    function checkChequeValidations() {
+        if (payment_type == "Cheque") {
+            if ($('#chequedataform').valid()) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            if (payment_type == "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please Select Payment Type !!!',
+                    icon: 'error',
+                    hideAfter: 4000,
+                    position: 'mid-center'
+                })
+                return false;
+            }
+        }
+    }
+
     $("#makepayment").click(function(event){
-        if ($('#tabledata').valid() && $('#costform').valid() && $('#labourtabledata').valid()) {
+        var chequeStatus = checkChequeValidations();
+        if ($('#tabledata').valid() && $('#costform').valid() && $('#labourtabledata').valid() && chequeStatus) {
             $('body').loading({stoppable: false}, 'start');
             var list = calculateSum()
             var part_list = list.parts_list
@@ -209,7 +247,9 @@ $(document).ready(function() {
                 'remark': $('#remark').val(),
                 'part_data': part_list,
                 'labour_data': labour_cost_list,
-                'service_id': $('#service-invoice-number').val()
+                'service_id': $('#service-invoice-number').val(),
+                'payment_type': payment_type,
+                'cheque_number': $('#cheque_number').val()
             }
             submitdata(data)
         }

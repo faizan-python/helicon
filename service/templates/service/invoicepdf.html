@@ -157,6 +157,12 @@
                 <td>
                     Recieved By
                 </td>
+                <td>
+                    Payment Type
+                </td>
+                <td>
+                    Cheque Number
+                </td>
             </tr>
             
              {% for payment in service.payment.all %}
@@ -165,10 +171,13 @@
                   <td>{{payment.payment_amount}}</td>
                   <td>{{payment.created_date}}</td>
                   <td>{{payment.recieved_by}}</td>
+                  <td>{{payment.payment_type}}</td>
+                  <td>{{payment.cheque_number|default:"NA"}}</td>
               </tr>
               {% endfor %}
             </table>
 
+            <br>
             <br>
             <tr class="information">
                 <td colspan="2">
@@ -178,7 +187,7 @@
                                 C-Form or Tax: {{service.tax}}%<br>
                                 C-Form or Tax Amount: {{service.tax_amount}}<br>
                                 Service Tax: {{service.service_tax}}%<br>
-                                Service Tax Amount: {{service.service_tax_amount}}%<br>
+                                Service Tax Amount: {{service.service_tax_amount}}<br>
                                 Labour Cost: {{service.labour_cost}}<br>
                                 Total Paid Amount: {{service.total_paid}}<br>
                                 Pending Amount: {{service.total_pending}}<br>

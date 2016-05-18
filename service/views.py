@@ -228,7 +228,9 @@ def invoice(request):
                 service_obj.total_paid += int(data.get('total_paid', 0))
                 if int(data.get('total_paid')) > 0:
                     payment = Payment.objects.create(payment_amount=data.get('total_paid'),
-                                                     recieved_by=request.user)
+                                                     recieved_by=request.user,
+                                                     cheque_number=data.get('cheque_number'),
+                                                     payment_type=data.get('payment_type'))
                     service_obj.payment.add(payment)
                 total_pending = int(
                     data.get('total_cost', 0)) - int(data.get('total_paid', 0))
