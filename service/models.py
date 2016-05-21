@@ -33,7 +33,9 @@ class Payment(models.Model):
 
     payment_type = models.CharField(blank=True, null=True, max_length=20,
                                     choices=PaymentOptions.as_tuple())
-    cheque_number = models.CharField(blank=True, null=True, max_length=30)
+    cheque_number = models.CharField(blank=True, null=True, max_length=70)
+    cheque_bank_name = models.CharField(blank=True, null=True, max_length=250)
+    cheque_date = models.DateTimeField(blank=True, null=True)
     payment_amount = models.FloatField(default=0)
     modified_date = models.DateTimeField(auto_now=True)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -81,6 +83,7 @@ class Service(models.Model):
     is_archive = models.BooleanField(default=False)
     is_serviced = models.BooleanField(default=False)
     complete_payment = models.BooleanField(default=False)
+    gate_pass_no = models.CharField(blank=True, null=True, max_length=100)
 
     def __unicode__(self):
         return str(self.invoice_number)

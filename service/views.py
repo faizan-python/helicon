@@ -231,6 +231,11 @@ def invoice(request):
                                                      recieved_by=request.user,
                                                      cheque_number=data.get('cheque_number'),
                                                      payment_type=data.get('payment_type'))
+                    if payment.payment_type == Payment.PaymentOptions.CHEQUE.value:
+                        payment.cheque_bank_name = data.get('cheque_bank_name', "")
+                        if data.get('cheque_date'):
+                            payment.cheque_date = data.get('cheque_date')
+                        payment.save()
                     service_obj.payment.add(payment)
                 total_pending = int(
                     data.get('total_cost', 0)) - int(data.get('total_paid', 0))
@@ -270,6 +275,7 @@ def invoice(request):
                 service_obj.parts.add(*part_obj)
                 service_obj.labourcost_detail.add(*labour_obj)
                 service_obj.part_cost = part_total_cost
+                service_obj.gate_pass_no = data.get('gate_pass_no', "")
                 service_obj.save()
                 return HttpResponse("Invoice Generated Successfilly")
             return HttpResponseRedirect("/home/")

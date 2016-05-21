@@ -21,6 +21,9 @@ $(document).ready(function() {
       $("#chequeform").show();
       payment_type = "Cheque"
       $("#cash").attr('checked', false);
+      $("#cheque_date").datepicker({
+            maxDate: new Date()
+      });
     });
 
     $("#cash").click(function(event) {
@@ -249,7 +252,10 @@ $(document).ready(function() {
                 'labour_data': labour_cost_list,
                 'service_id': $('#service-invoice-number').val(),
                 'payment_type': payment_type,
-                'cheque_number': $('#cheque_number').val()
+                'cheque_number': $('#cheque_number').val(),
+                'cheque_bank_name': $('#cheque_bank_name').val(),
+                'cheque_date': $('#cheque_date').val(),
+                'gate_pass_no': $('#gate_pass_no').val()
             }
             submitdata(data)
         }

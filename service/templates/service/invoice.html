@@ -309,6 +309,11 @@
                                     <input type="text" id="expected-date" name="next_service_date" class="form-control" autocomplete="off">
                                 </div>
                                 <br>
+                              <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Gate Pass Number: </label>&nbsp;&nbsp;
+                                    <input type="text" id="gate_pass_no" name="gate_pass_no" class="form-control" autocomplete="off">
+                                </div>
+                                <br>
                                 <br>
                                 <div class="form-group" style="padding-right:5em;">
                                     <label for="exampleInputEmail2">Remarks abot the Service: </label>&nbsp;&nbsp;
@@ -394,7 +399,18 @@
                                         <div class="sub-title">Enter Cheque Details</div>
                                         <div class="form-group" style="padding-right:5em;">
                                             <label for="exampleInputEmail2">Cheque Number: </label>&nbsp;&nbsp;
-                                            <input type="text" placeholder="EX19 XX XXXX" name="cheque_number" id="cheque_number" class="form-control" required>
+                                            <input type="text" placeholder="EX19 XX XXXX" name="cheque_number" autocomplete="off" id="cheque_number" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group" style="padding-right:5em;">
+                                            <label for="exampleInputEmail2">Cheque Bank Name: </label>&nbsp;&nbsp;
+                                            <input type="text" placeholder="XX XXXX Bank" name="cheque_bank_name" id="cheque_bank_name" class="form-control" autocomplete="off" required>
+                                        </div>
+
+
+                                        <div class="form-group" style="padding-right:5em;">
+                                            <label for="exampleInputEmail2">Cheque Date: </label>&nbsp;&nbsp;
+                                            <input type="text" id="cheque_date" name="cheque_date" class="form-control" autocomplete="off">
                                         </div>
                                     </form>
                                 </div>
@@ -404,19 +420,19 @@
                                 <div class="card-body">
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">C-Form or Tax Percentage: </label>&nbsp;&nbsp;
-                                        <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" value=0 required>
+                                        <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" autocomplete="off" value=0 required>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Service Tax Percentage: </label>&nbsp;&nbsp;
-                                        <input type="text" name="first_name" id="service_tax" onKeyPress="return floatonly(this, event)" class="form-control" value=0 required>
+                                        <input type="text" name="first_name" id="service_tax" onKeyPress="return floatonly(this, event)" autocomplete="off" class="form-control" value=0 required>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Total Paid: </label>&nbsp;&nbsp;
-                                        <input type="text" name="total_paid" id="total_paid" onKeyPress="return floatonly(this, event)" class="form-control" value=0 required>
+                                        <input type="text" name="total_paid" id="total_paid" onKeyPress="return floatonly(this, event)" autocomplete="off" class="form-control" value=0 required>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Advance Paid: </label>&nbsp;&nbsp;
-                                        <input type="text" name="advance_payment" id="advance_payment" onKeyPress="return floatonly(this, event)" class="form-control" value={{service.advance_payment}} readonly>
+                                        <input type="text" name="advance_payment" id="advance_payment" onKeyPress="return floatonly(this, event)" class="form-control" value={{service.advance_payment}} autocomplete="off" readonly>
                                     </div>
                                 </div>
                             </form>

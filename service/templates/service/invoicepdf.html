@@ -69,15 +69,16 @@
                                 Plot No. 16 & 17,  Behind IDBI Bank,<br>
                                 Near Mahavir Nagar, N.H. No.8 GIDC,<br>
                                 Vapi, Gujarat, India<br>
-                                <b>PAN NO:</b> - <br>
+                                <b>PAN NO:</b> AAHFH98904 <br>
                                 <b>TIN NO:</b> - <br>
-                                <b>VAT NO:</b> - <br>
+                                <b>VAT NO:</b> 24750701947 dt. 07-01-2004 <br>
+                                <b>CST NO:</b> 24750701947 dt. 12-01-2004 <br>
                                 <b>Contact Number:</b> 8980974974 / 9824786300 <br>
                                 <b>Alternate Contact Number:</b> 9925391516
                             </td>
                             
                             <td class="col-lg-6 pull-right">
-                                <span class="fa fa-user">  {{service.customer}}<span><br>
+                                {{service.customer}}<br>
                                 <span class="fa fa-phone">  {{service.customer.phone_number}}<span><br>
                                 {% if service.vehical %}
                                 <span class="fa fa-truck">  {{service.vehical}} <span>
@@ -85,7 +86,6 @@
                                 <span class="fa fa-truck">  {{service.otherservice}} <span><br>
                                 <span class="fa fa-barcode">  {{service.otherservice.number}} <span>
                                 {% endif %}
-
                             </td>
                         </tr>
                     </table>
@@ -184,6 +184,7 @@
                     <table>
                         <tr>
                             <td>
+                                <span class="pull-right"><b> Gate Pass Numbe: </b> {{service.gate_pass_no|default:"NA"}}</span><br>
                                 C-Form or Tax: {{service.tax}}%<br>
                                 C-Form or Tax Amount: {{service.tax_amount}}<br>
                                 Service Tax: {{service.service_tax}}%<br>
