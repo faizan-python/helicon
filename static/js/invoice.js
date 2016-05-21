@@ -18,18 +18,29 @@ $(document).ready(function() {
     payment_type = ""
     
     $("#cheque").click(function(event) {
-      $("#chequeform").show();
-      payment_type = "Cheque"
-      $("#cash").attr('checked', false);
-      $("#cheque_date").datepicker({
-            maxDate: new Date()
-      });
+        if ($("#cheque").is(':checked')) {
+            $("#chequeform").show();
+            payment_type = "Cheque";
+            $("#cash").attr('checked', false);
+            $("#cheque_date").datepicker({
+                maxDate: new Date()
+            });
+        }
+        else{
+            $("#chequeform").hide();
+            payment_type = "";
+        }
     });
 
     $("#cash").click(function(event) {
-      payment_type = "Cash"
-      $("#chequeform").hide();
-      $("#cheque").attr('checked', false);
+        if ($("#cheque").is(':checked')) {
+            payment_type = "Cash";
+            $("#chequeform").hide();
+            $("#cheque").attr('checked', false);
+        }
+        else{
+            payment_type = "";
+        }
     });
 
     function calculateSum() {
