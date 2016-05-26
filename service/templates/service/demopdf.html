@@ -1,0 +1,287 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/pdf.css' %}">
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+        body, h1, h2, h3, h4, h5, h6{
+        font-family: 'Bree Serif', serif;
+        }
+        #sent_mail{
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="" title="back to invoice list">Back</a>
+        </div>
+        <ul class="nav navbar-nav pull-right">
+            <li id="sent_mail">
+                {% if invoice.invoiced %}
+                <a title="re-sent invoice to user">Re-sent mail</a>
+                {% else %}
+                <a title="sent invoice to user">Sent In mail</a>
+                {% endif %}
+            </li>
+            <li title="download pdf of invoie"><a id="print_id" href="javascript:void(0)">Download pdf</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="col-md-9"  style="float: none;margin: 0 auto;" id="demoprint">
+    <div class="row">
+        <div class="col-md-5">
+            <h1>
+                <a href="#">
+                    <img src="{% static 'images/helicon-logo.png' %}">
+                </a>
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <h1>INVOICE</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right pull right" style="padding-right:35px;">
+            <h2>
+                <small>Invoice No. #{{service.invoice_number}}</small>
+            </h2>
+            <span>Date: {{service.service_date}}</span>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>From: <span style="color:#337AB7;">Helicon Engineering Works</span></h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Plot No. 16 & 17,  Behind IDBI Bank,<br>
+                        Near Mahavir Nagar, N.H. No.8 GIDC,<br>
+                        Vapi, Gujarat, India<br>
+                        <b>PAN NO:</b> AAHFH98904 <br>
+                        <b>TIN NO:</b> - <br>
+                        <b>VAT NO:</b> 24750701947 dt. 07-01-2004 <br>
+                        <b>CST NO:</b> 24750701947 dt. 12-01-2004 <br>
+                        <b>Contact Number:</b> 8980974974 / 9824786300 <br>
+                        <b>Alternate Contact Number:</b> 9925391516
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>To : <span style="color:#337AB7;">{{service.customer}}</span></h4>
+                </div>
+                <div class="panel-body">
+                    {% autoescape off %}
+                    <p>
+                        {{ address.get_address }}<br/><br/>
+                        Phone: +91-{{service.customer.phone_number}}<br/>
+                        Email: {{ client.email }}<br/>
+                        Website:
+                    </p>
+                    {% endautoescape %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / end client details section -->
+    <h2><small>Item Detail</small></h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>
+                <h4>Item</h4>
+            </th>
+            <th>
+                <h4>Qty</h4>
+            </th>
+            <th>
+                <h4>Rate/Price</h4>
+            </th>
+            <th>
+                <h4>Sub Total</h4>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for part in service.parts.all %}
+        <tr>
+            <td>{{part.part_name}}
+            </td>
+            <td class="text-right">{{part.part_quantity}}</td>
+            <td class="text-right">{{part.price}}</td>
+            <td class="text-right">{% widthratio part.part_quantity 1 part.price %}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row text-right">
+        <div class="col-md-3 pull-right" style="padding-right:25px;">
+            <p>
+                <strong>
+                    Total : {{ service.part_cost }}<br>
+                </strong>
+            </p>
+        </div>
+    </div>
+
+
+    <h2><small>Labour Cost Detail</small></h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>
+                <h4>Name</h4>
+            </th>
+            <th>
+                <h4>Price</h4>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for labour in service.labourcost_detail.all %}
+        <tr>
+            <td>{{labour.name}}
+            </td>
+            <td class="text-right">{{labour.labour_price}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row text-right">
+        <div class="col-md-3 pull-right" style="padding-right:25px;">
+            <p>
+                <strong>
+                    Total : {{ service.labour_cost }}<br>
+                </strong>
+            </p>
+        </div>
+    </div>
+
+
+    <h2><small>Payment Detail</small></h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>
+                <h4>Amount</h4>
+            </th>
+            <th>
+                <h4>Date</h4>
+            </th>
+            <th>
+                <h4>Payment Type</h4>
+            </th>
+            <th>
+                <h4>Cheque Number</h4>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for payment in service.payment.all %}
+        <tr>
+          <td>{{payment.payment_amount}}</td>
+          <td class="text-right">{{payment.created_date}}</td>
+          <td class="text-right">{{payment.payment_type}}</td>
+          <td class="text-right">{{payment.cheque_number|default:"NA"}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row text-right">
+        <div class="col-md-3 pull-right" style="padding-right:25px;">
+            <p>
+                <strong>
+                    Total Paid : {{ service.total_paid }}<br>
+                </strong>
+            </p>
+        </div>
+    </div>
+
+
+</div>
+    <!-- jQuery Load -->
+    <script src="{% static 'js/jquery-min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.toaster.js' %}"></script>
+
+<script type="text/javascript">
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+$('#sent_mail').click(function(){
+    send_mail();
+});
+function send_mail() {
+
+    var csrftoken = getCookie('csrftoken');
+    $('#sent_mail').html('<a><img src="/static/img/preloader.gif" height="20px" width="20px">Sending</a>');
+    $.ajax({
+        url: "",
+        type: "GET",
+        beforeSend: function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        },
+        data: {
+        },
+        success: function(response) {
+            if(response == 'success'){
+            $.toaster({ priority : 'success', title : 'Invoice Success', message : 'Invoice sent to {{ client.email }} here'});
+            $('#sent_mail').html('<a>Re-sent mail</a>');
+
+        }
+        else{
+            $.toaster({ priority : 'danger', title : 'Invoice Failed', message : 'Invoice failed to {{ client.email }} here'});
+            $('#sent_mail').html('<a>Sending Failed</a>');
+            $("#sent_mail").fadeToggle(100);
+            $("#sent_mail").fadeOut(3000);
+            $('#sent_mail').html('<a>Sent In mail</a>');
+        }
+          },
+        error: function(response) {
+        $.toaster({ priority : 'danger', title : 'Invoice Failed', message : 'Invoice failed to {{ client.email }} here'});
+        $('#sent_mail').html('<a>Sending Failed</a>');
+        $("#sent_mail").fadeToggle(100);
+        $("#sent_mail").fadeOut(3000);
+        $('#sent_mail').html('<a>Sent In mail</a>');
+        },
+        // handle a non-successful response
+        });
+};
+
+</script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jQuery.print.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/invoicepdf.js' %}"></script>
+</body>
+</html>

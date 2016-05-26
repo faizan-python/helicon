@@ -34,6 +34,16 @@ from parts.models import (
 
 @require_http_methods(["GET"])
 @login_required(login_url='/home/')
+def demo(request):
+    if request.method == "GET":
+        context = RequestContext(request, {
+            "service": Service.objects.filter(is_active=True)[0]})
+        return render_to_response('service/demopdf.html',
+                                  context_instance=context)
+
+
+@require_http_methods(["GET"])
+@login_required(login_url='/home/')
 def service_add(request):
     if request.method == "GET":
         context = RequestContext(request, {
@@ -109,9 +119,9 @@ def service_create(request):
             service.payment.add(payment)
             service.total_paid = int(service_form.get('advance_payment'))
             service.save()
-        obj=list(Service.objects.filter(
+        obj = list(Service.objects.filter(
             invoice_number=service.invoice_number).values())
-        json.JSONEncoder.default=lambda self, obj: (
+        json.JSONEncoder.default = lambda self, obj: (
             obj.isoformat() if isinstance(obj, datetime.datetime) else None)
         return HttpResponse(json.dumps(obj), content_type="application/json")
 
@@ -219,7 +229,8 @@ def invoice(request):
                 service_obj.total_cost = data.get('total_cost', 0)
                 service_obj.tax_amount = data.get('tax_amount', 0)
                 service_obj.service_tax = data.get('service_tax', 0)
-                service_obj.service_tax_amount = data.get('service_tax_amount', 0)
+                service_obj.service_tax_amount = data.get(
+                    'service_tax_amount', 0)
                 service_obj.remark = data.get('remark', "")
                 if data.get('next_service_date'):
                     service_obj.next_service_date = datetime.datetime.strptime(
@@ -229,12 +240,15 @@ def invoice(request):
                 if int(data.get('total_paid')) > 0:
                     payment = Payment.objects.create(payment_amount=data.get('total_paid'),
                                                      recieved_by=request.user,
-                                                     cheque_number=data.get('cheque_number'),
+                                                     cheque_number=data.get(
+                                                         'cheque_number'),
                                                      payment_type=data.get('payment_type'))
                     if payment.payment_type == Payment.PaymentOptions.CHEQUE.value:
-                        payment.cheque_bank_name = data.get('cheque_bank_name', "")
+                        payment.cheque_bank_name = data.get(
+                            'cheque_bank_name', "")
                         if data.get('cheque_date'):
-                            payment.cheque_date = data.get('cheque_date')
+                            payment.cheque_date = datetime.datetime.strptime(
+                                data.get('cheque_date'), "%m/%d/%Y").date()
                         payment.save()
                     service_obj.payment.add(payment)
                 total_pending = int(
@@ -355,8 +369,10 @@ def report(request):
                                   context_instance=context)
     if request.method == "POST":
         request_dict = request.POST.dict()
-        from_date = datetime.datetime.strptime(request_dict.get("from_date"), "%m/%d/%Y").date()
-        till_date = datetime.datetime.strptime(request_dict.get("till_date"), "%m/%d/%Y").date()
+        from_date = datetime.datetime.strptime(
+            request_dict.get("from_date"), "%m/%d/%Y").date()
+        till_date = datetime.datetime.strptime(
+            request_dict.get("till_date"), "%m/%d/%Y").date()
         if request_dict.get('pending'):
             complete_payment = False
         else:
@@ -379,7 +395,7 @@ def customer_report(request):
     if request.method == "GET":
         context = RequestContext(request, {
             "customers": Customer.objects.filter(is_active=True)
-            })
+        })
         return render_to_response('service/customerreport.html',
                                   context_instance=context)
     if request.method == "POST":
@@ -425,7 +441,7 @@ def customer_report_generate(request, id):
     if request.method == "GET":
         customer_obj = Customer.objects.get(id=id)
 
-        service_obj = Service.objects.filter(customer = customer_obj,
+        service_obj = Service.objects.filter(customer=customer_obj,
                                              is_serviced=True)
         total_cost = 0
         total_paid = 0
@@ -442,7 +458,7 @@ def customer_report_generate(request, id):
             'total_paid': total_paid,
             'total_cost': total_cost})
         return render_to_response('service/customerreportpdf.html',
-                          context_instance=context)
+                                  context_instance=context)
 
 
 @require_http_methods(["GET", "POST"])
@@ -450,8 +466,10 @@ def customer_report_generate(request, id):
 def report_generate(request):
     if request.method == "POST":
         request_dict = request.POST.dict()
-        from_date = datetime.datetime.strptime(request_dict.get("from_date"), "%m/%d/%Y")
-        till_date = datetime.datetime.strptime(request_dict.get("till_date"), "%m/%d/%Y")
+        from_date = datetime.datetime.strptime(
+            request_dict.get("from_date"), "%m/%d/%Y")
+        till_date = datetime.datetime.strptime(
+            request_dict.get("till_date"), "%m/%d/%Y")
         if request_dict.get('pending'):
             complete_payment = False
         else:
@@ -478,4 +496,4 @@ def report_generate(request):
             'total_paid': total_paid,
             'total_cost': total_cost})
         return render_to_response('service/reportpdf.html',
-                          context_instance=context)
+                                  context_instance=context)
