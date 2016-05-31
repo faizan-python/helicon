@@ -43,5 +43,4 @@ urlpatterns = patterns(
         name='report_generate'),
     url(r'^customer/report/generate/(?P<id>[0-9]+)/$', 'service.views.customer_report_generate',
         name='customer_report_generate'),
-    url(r'^pdf/(?P<pk>[0-9]+)/$', 'service.views.pdf_view', name='pdf_view'),
 )

@@ -23,15 +23,15 @@
                 <div class="card-body">
                     <form class="form-inline">
                         <div class="sub-title">Customer Details</div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">First Name: </label>&nbsp;&nbsp;
                             {{service.customer.first_name|title|default:"NA"}}
                         </div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Last Name: </label>&nbsp;&nbsp;
                             {{service.customer.last_name|title|default:"NA"}}
                         </div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Email: </label>&nbsp;&nbsp;
                             {{service.customer.email|default:"NA"|default_if_none:"NA"}}
                         </div>
@@ -39,11 +39,11 @@
                             <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
                             {{service.customer.phone_number}}
                         </div>
-                            <div class="form-group" style="padding-right:5em;">
+                            <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Gender:</label>&nbsp;&nbsp;
                             {{service.customer.gender|title|default:"NA"}}
                             </div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Address: </label>&nbsp;&nbsp;
                             {{service.customer.address|title|default:"NA"}} 
                         </div>
@@ -64,21 +64,21 @@
                 <div class="card-body">
                     <form class="form-inline">
                         <div class="sub-title">Vehicle Details</div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Vehicle Number: </label>&nbsp;&nbsp;
                             {{service.vehical.vehical_number}}
                         </div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Vehicle Name: </label>&nbsp;&nbsp;
                             {{service.vehical.vehical_name|title}}
                         </div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Vehicle Colour: </label>&nbsp;&nbsp;
                             {{service.vehical.vehical_colour|title|default:"NA"}}
                         </div>
                         <br>
                         <br>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Problem Description: </label>&nbsp;&nbsp;
                             {{service.vehical.about|title|default:"NA"|default_if_none:"NA"}}
                         </div>
@@ -95,21 +95,21 @@
                 <div class="card-body">
                     <form class="form-inline">
                         <div class="sub-title">Product Details</div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Item Code: </label>&nbsp;&nbsp;
                             {{service.otherservice.number}}
                         </div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Product Name: </label>&nbsp;&nbsp;
                             {{service.otherservice.name|title}}
                         </div>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Company Name: </label>&nbsp;&nbsp;
                             {{service.otherservice.company_name|title|default:"NA"}}
                         </div>
                         <br>
                         <br>
-                        <div class="form-group" style="padding-right:5em;">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Problem Description: </label>&nbsp;&nbsp;
                             {{service.otherservice.about|title|default:"NA"|default_if_none:"NA"}}
                         </div>
