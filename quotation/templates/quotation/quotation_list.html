@@ -56,8 +56,36 @@
                                     <td>$ {{quotation.total_cost}}</td>
                                     <td>
                                         <div aria-label="Extra-small button group" role="group" class="btn-group btn-group-xs">
-                                          <a class="btn btn-default customerbutton" href="{% url 'quotation:quotation_pdf' quotation.id%}" id={{quotation.id}} value="view" type="button">Generate Quotation</a>
+                                          <a class="btn btn-default customerbutton" data-toggle="modal" data-target="#Modal{{quotation.id}}" id={{quotation.id}} value="view" type="button">Quotation/Performa</a>
                                         </div>
+
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="Modal{{quotation.id}}" role="dialog">
+                                        <div class="modal-dialog modal-sm">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">Please select Invoice type</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                             <a class="btn btn-default" type="button" href="{% url 'quotation:quotation_pdf' quotation.id%}">
+                                             Quotation Invoice
+                                             </a><br>
+                                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                          <a class="btn btn-default" type="button" href="{% url 'quotation:performa_pdf' quotation.id%}">
+                                              Performa Invoice
+                                          </a>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+
                                     </td>
                                 </tr>
                                 {% endfor %}

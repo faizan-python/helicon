@@ -34,16 +34,6 @@ from parts.models import (
 
 @require_http_methods(["GET"])
 @login_required(login_url='/home/')
-def demo(request):
-    if request.method == "GET":
-        context = RequestContext(request, {
-            "service": Service.objects.filter(is_active=True)[0]})
-        return render_to_response('service/demopdf.html',
-                                  context_instance=context)
-
-
-@require_http_methods(["GET"])
-@login_required(login_url='/home/')
 def service_add(request):
     if request.method == "GET":
         context = RequestContext(request, {

@@ -5,10 +5,6 @@ from service.views import *
 
 urlpatterns = patterns(
     '',
-    url(r'^demo/$', 'service.views.demo',
-        name='demo'),
-
-
     url(r'^add/$', 'service.views.service_add',
         name='service_add'),
     url(r'^create/$', 'service.views.service_create',
@@ -47,4 +43,5 @@ urlpatterns = patterns(
         name='report_generate'),
     url(r'^customer/report/generate/(?P<id>[0-9]+)/$', 'service.views.customer_report_generate',
         name='customer_report_generate'),
+    url(r'^pdf/(?P<pk>[0-9]+)/$', 'service.views.pdf_view', name='pdf_view'),
 )

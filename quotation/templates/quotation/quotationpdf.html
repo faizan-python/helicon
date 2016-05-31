@@ -1,152 +1,136 @@
 {% load staticfiles %}
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Helicon Engineering Works</title>
-
-</head>
-
-<body>
-       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-       <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-       <link rel="stylesheet" type="text/css" href="{% static 'css/pdf.css' %}">
-
-    <nav role="navigation" class="navbar navbar-default">
-
-        <!-- Brand and toggle get grouped for better mobile display -->
-
-        <div class="navbar-header">
-
-        </div>
-
-        <!-- Collection of nav links and other content for toggling -->
-
-        <div id="navbarCollapse" class="collapse navbar-collapse">
-
-            <ul class="nav navbar-nav">
-
+    <head>
+        <meta charset="utf-8">
+        <title>Helicon Engineering Works</title>
+    </head>
+    <body>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/pdf.css' %}">
+        <nav role="navigation" class="navbar navbar-default">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            </div>
+            <!-- Collection of nav links and other content for toggling -->
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
                 <li><a href="/home/">Home</a></li>
-
-            <ul class="nav navbar-nav navbar-right pull-right">
-
-                <li><a id="print_id" href="javascript:void(0)">Print</a></li>
-
-            </ul>
-
-        </div>
-
-    </nav>
-
-
-
-    <div class="invoice-box" id="printable">
-        <table cellpadding="0" cellspacing="0">
-            <tr class="top">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td class="title">
-                                <img src="{% static 'images/helicon-logo.png' %}" style="width:100%; max-width:135px;">
-                            </td>
-                            <!-- "http://nextstepwebs.com/images/logo.png" -->                            
-                            <td>
-                                <h2> Helicon Engineering Works </h2>
-                                Invoice #: {{quotation.id}}<br>
-                                Created: {{quotation.created_date}}<br>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr class="information">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td class="col-lg-6">
-                                Helicon Engineering Works<br>
-                                Plot No. 16 & 17,  Behind IDBI Bank,<br>
-                                Near Mahavir Nagar, N.H. No.8 GIDC
-                                Vapi, Gujarat, India<br>
-                                <b>PAN NO:</b> - <br>
-                                <b>TIN NO:</b> - <br>
-                                <b>VAT NO:</b> - <br>
-                                <b>Contact Number:</b> 8980974974 / 9824786300 <br>
-                                <b>Alternate Contact Number:</b> 9925391516
-                            </td>
-                            
-                            <td class="col-lg-6 pull-right">
-                                <span class="fa fa-user">  {{quotation.customer_name}}<span><br>
-                                <span class="fa fa-phone">  {{quotation.phone_number}}<span><br>
-                                <span class="fa fa-truck">  {{quotation.email}} <span>
-                                <span class="fa fa-truck">  {{quotation.address}} <span><br>
-                                <span class="fa fa-barcode">  {{quotation.company_name}} <span>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <table>
-            <h4>Item Description</h4>
-            <tr class="heading">
-                <td>
-                    Sr. No.
-                </td>
-                <td>
-                   Name
-                </td>
-                <td>
-                    Description
-                </td>
-                <td>
-                    Quantity
-                </td>
-                <td>
-                    Price
-                </td>
-            </tr>
-            
-               {% for part in quotation.parts.all %}
-                <tr class="item">
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{part.part_name}}</td>
-                    <td>{{part.description}}</td>
-                    <td>{{part.part_quantity}}</td>
-                    <td>{{part.price}}</td>
+                <ul class="nav navbar-nav navbar-right pull-right">
+                    <li><a id="print_id" href="javascript:void(0)">Print</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="invoice-box" id="printable">
+            <table cellpadding="0" cellspacing="0">
+                <tr class="top">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td class="title">
+                                    <img src="{% static 'images/helicon-logo5.png' %}">
+                                </td>
+                            </tr>
+                        </table>
+                        <hr style="margin-top: -7px;">
+                        <center><b> Quotation </b></center>
+                        <br>
+                        <hr style="margin-top: -7px;">
+                    </td>
                 </tr>
-                {% endfor %}
+                <br>
+                <tr>
+                    <td>
+                        <table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4>To : <span style="color:#337AB7;">{{quotation.customer_name}}</span></h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>
+                                                <b>Company Name:</b>{{quotation.company_name}} <span class="pull-right"><b>Quotation Number:</b> {{quotation.id}}</span><br>
+                                                <b>Phone:</b> {{quotation.phone_number}}<br>
+                                                <b>Email: </b> {{quotation.email}}<br>
+                                                <b>Address:</b> {{quotation.address}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
+                <table>
+                    <h2><small>Item Description</small></h2>
+                    <tr class="heading">
+                        <td style="border: 1px solid #eee;">
+                            No. 
+                        </td>
+                        <td style="border: 1px solid #eee;">
+                            Name
+                        </td>
+                        <td style="border: 1px solid #eee;">
+                            Description
+                        </td>
+                        <td style="border: 1px solid #eee;">
+                            Quantity
+                        </td>
+                        <td style="border: 1px solid #eee;">
+                            Price
+                        </td>
+                        <td style="border: 1px solid #eee;">
+                            Amount
+                        </td>
+                    </tr>
+                    {% for part in quotation.parts.all %}
+                    <tr class="item">
+                        <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
+                        <td style="border: 1px solid #eee;">{{part.part_name}}</td>
+                        <td style="border: 1px solid #eee;">{{part.description}}</td>
+                        <td style="border: 1px solid #eee; width: 50px;">{{part.part_quantity}}</td>
+                        <td style="border: 1px solid #eee; width: 100px;">{{part.price}}</td>
+                        <td style="border: 1px solid #eee; width: 100px;">{% widthratio part.part_quantity 1 part.price %}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="border: 1px solid #eee; font-size: 12px;">Vat/C-Form</td>
+                        <td style="border: 1px solid #eee;">{{quotation.tax}}%</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="border: 1px solid #eee; font-size: 12px;">Vat Amount</td>
+                        <td style="border: 1px solid #eee;">{{quotation.tax_amount}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
+                        <td style="border: 1px solid #eee;">{{quotation.total_cost}}</td>
+                    </tr>
+                </table>
+                <br>
             </table>
             <br>
-            <tr class="information">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td>
-                                Vat Tax: {{quotation.tax}}%<br>
-                                Tax Amount: {{quotation.tax_amount}}<br>
-                                <h3>Total Amount: {{quotation.total_cost}}</h3>
-                            </td>
-                            
-                            <td class="pull-right">
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            TERMS & CONDITION:<br>
-            PAYMENT: {{quotation.payment_details}}<br>
-            DELIVERY: {{quotation.estimated_delivery}}<br>
-            TAXES & TRANSPORTATION AS APPLICABLE<br>
-        </table>
-        <br>
-        <br>
-        <br>
-        <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
-    </div>
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jQuery.print.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/invoicepdf.js' %}"></script>
-</body>
+            <br>
+            <br>
+            <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
+            <img src="{% static 'images/helicon-footer.png' %}">
+        </div>
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jQuery.print.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/invoicepdf.js' %}"></script>
+    </body>
 </html>

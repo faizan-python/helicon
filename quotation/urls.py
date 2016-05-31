@@ -13,4 +13,6 @@ urlpatterns = patterns(
         name='quotation_list'),
     url(r'^quotation/view/(?P<id>[0-9]+)/$', 'quotation.views.quotation_pdf',
         name='quotation_pdf'),
+    url(r'^performa/view/(?P<id>[0-9]+)/$', 'quotation.views.performa_pdf',
+        name='performa_pdf'),
 )

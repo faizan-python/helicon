@@ -1,5 +1,3 @@
-
-
 {% load staticfiles %}
 <!doctype html>
 <html>
@@ -36,7 +34,7 @@
                             </tr>
                         </table>
                         <hr style="margin-top: -7px;">
-                        <center><b> Tax Invoice </b></center>
+                        <center><b> Performa Invoice </b></center>
                         <br>
                         <hr style="margin-top: -7px;">
                     </td>
@@ -49,19 +47,14 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h4>To : <span style="color:#337AB7;">{{service.customer}}</span></h4>
+                                            <h4>To : <span style="color:#337AB7;">{{quotation.customer_name}}</span></h4>
                                         </div>
                                         <div class="panel-body">
                                             <p>
-                                                <b>Phone:</b> {{service.customer.phone_number|default:"NA"}}<span class="pull-right"><b>Invoice Number:</b> {{service.invoice_number}}</span><br>
-                                                <b>Email: </b> {{quotation.email|default:"NA"}}<br>
-                                                <b>Address:</b> {{quotation.address|default:"NA"}}<br>
-                                                {% if service.vehical %}
-                                                <b>Vehical Number: </b> {{service.vehical|default:"NA"}}
-                                                {% else %}
-                                                <b>Product/Service: </b>{{service.otherservice|default:"NA"}}<br>
-                                                <b>Product/Service Number:</b>{{service.otherservice.number|default:"NA"}}
-                                                {% endif %}
+                                                <b>Company Name:</b>{{quotation.company_name}} <span class="pull-right"><b>Quotation Number:</b> {{quotation.id}}</span><br>
+                                                <b>Phone:</b> {{quotation.phone_number}}<br>
+                                                <b>Email: </b> {{quotation.email}}<br>
+                                                <b>Address:</b> {{quotation.address}}
                                             </p>
                                         </div>
                                     </div>
@@ -80,6 +73,9 @@
                             Name
                         </td>
                         <td style="border: 1px solid #eee;">
+                            Description
+                        </td>
+                        <td style="border: 1px solid #eee;">
                             Quantity
                         </td>
                         <td style="border: 1px solid #eee;">
@@ -89,10 +85,11 @@
                             Amount
                         </td>
                     </tr>
-                    {% for part in service.parts.all %}
+                    {% for part in quotation.parts.all %}
                     <tr class="item">
                         <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
                         <td style="border: 1px solid #eee;">{{part.part_name}}</td>
+                        <td style="border: 1px solid #eee;">{{part.description}}</td>
                         <td style="border: 1px solid #eee; width: 50px;">{{part.part_quantity}}</td>
                         <td style="border: 1px solid #eee; width: 100px;">{{part.price}}</td>
                         <td style="border: 1px solid #eee; width: 100px;">{% widthratio part.part_quantity 1 part.price %}</td>
@@ -102,26 +99,28 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">Vat/C-Form</td>
-                        <td style="border: 1px solid #eee;">{{service.tax}}%</td>
+                        <td style="border: 1px solid #eee;">{{quotation.tax}}%</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">Vat Amount</td>
-                        <td style="border: 1px solid #eee;">{{service.tax_amount}}</td>
+                        <td style="border: 1px solid #eee;">{{quotation.tax_amount}}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid #eee;">{{service.part_cost|add:service.tax_amount}}</td>
+                        <td style="border: 1px solid #eee;">{{quotation.total_cost}}</td>
                     </tr>
                 </table>
                 <br>
-                <b> Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
             </table>
             <br>
             <br>
