@@ -1,0 +1,122 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="side-body">
+<div class="page-title">
+    <span class="title">Service Details</span>
+    <div class="description"></div>
+</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+		        <div class="card-body">
+                    <form id="customerform" class="form-inline">
+                        <div class="sub-title">Customer Details</div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Company Name: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="{{quotation.company_name}}" name="company_name" id="company_name" class="form-control" autocomplete="off" required readonly>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Customer Name: </label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="{{quotation.customer_name}}" name="customer_name" id="customer_name" class="form-control" required readonly>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Email: </label>&nbsp;&nbsp;
+                            <input type="email" autocomplete="off" placeholder="{{quotation.email}}" id="email" name="email" class="form-control" readonly>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="{{quotation.phone_number}}" name="phone_number" id="phone_number" class="form-control" MAXLENGTH=12 onKeyPress="return numbersonly(this, event)" required readonly>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Estimated Delivery:</label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="{{quotation.estimated_delivery}}" name="estimated_delivery" id="estimated_delivery" class="form-control" readonly>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Payment Details:</label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="{{quotation.payment_details}}" name="payment_details" id="payment_details" class="form-control" readonly>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Address: </label>&nbsp;&nbsp;
+                            <textarea type="text" rows="2" cols="50" placeholder="{{quotation.address}}" id="address" name="address" class="form-control" readonly> </textarea>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Purchase Order Number:</label>&nbsp;&nbsp;
+                            <input type="text" autocomplete="off" placeholder="91EC4" name="purchase_order_number" id="purchase_order_number" class="form-control">
+                        </div>
+                        <input type="hidden" id="quotation_id" value="{{quotation.id}}">
+                    </form>
+
+		            <div class="panel panel-default">
+		                <!-- Default panel contents -->
+		                <div class="panel-heading">Item Description</div>
+		                <div class="panel-body">
+		                </div>
+		                <!-- Table -->
+		                <form id="tabledata">
+			                <table class="table" id="itemtable">
+			                    <thead>
+			                        <tr>
+			                            <th>#</th>
+			                            <th>Name</th>
+			                            <th>Description</th>
+			                            <th>Quantity</th>
+			                            <th>Price</th>
+			                            <th></th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+                                {% for part in quotation.parts.all %}
+                                    <tr>
+                                        <th id={{ forloop.counter }} scope="row"> # </th>
+                                        <td><input type="text" name="part_name" id="part_name" class="form-control" value="{{part.part_name}}" required></td>
+                                        <td><input type="text" name="description" id="description" value="{{part.description}}" class="form-control"></td>
+                                        <td><input type="text" name="part_quantity" id="part_quantity" value="{{part.part_quantity}}" class="form-control" onKeyPress="return floatonly(this, event)"required></td>
+                                        <td><input type="text" name="price" id="price" class="form-control" value="{{part.price}}" onKeyPress="return floatonly(this, event)" required></td>
+                                        <td><button class="btn btn-sm btn-default deletepart" type="button">Delete</button></td>
+                                    </tr>
+                                {% endfor %}
+			                    </tbody>
+			                </table>
+		                </form> 
+		            </div>
+		            <button class="btn btn-sm btn-default" id="addpart" type="button">Add Part</button>
+
+                    <form id="costform">
+                        <div class="card-body">
+                            <div class="form-group pull-right" style="padding-right:5em;">
+                                <label for="exampleInputEmail2">Vat Percentage: </label>&nbsp;&nbsp;
+                                <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" value={{quotation.tax}} required>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Total Tax Cost: </label>&nbsp;&nbsp;
+                            <input type="text" name="tax_amount" id="tax_amount" placeholder="Total Tax Amount" value="{{quotation.tax_amount}}" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Total Cost: </label>&nbsp;&nbsp;
+                            <input type="text" name="total_amount" id="totalcost" placeholder="Total Amount" value="{{quotation.total_cost}}" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="login-button text-center">
+                            <a class="btn btn-primary" id="calculateamount">Calculate Amount</a>
+                            <a class="btn btn-primary" id="makepayment" >Generate Performa</a>
+                        </div>
+                    </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/performa.js' %}"></script>
+{% endblock scripts_extend %}

@@ -15,4 +15,8 @@ urlpatterns = patterns(
         name='quotation_pdf'),
     url(r'^performa/view/(?P<id>[0-9]+)/$', 'quotation.views.performa_pdf',
         name='performa_pdf'),
+    url(r'^performa/(?P<id>[0-9]+)/$', 'quotation.views.performa',
+        name='performa'),
+    url(r'^performa/generate/$', 'quotation.views.performa_generate',
+        name='performa_generate'),
 )

@@ -56,7 +56,10 @@
                                     <td>$ {{quotation.total_cost}}</td>
                                     <td>
                                         <div aria-label="Extra-small button group" role="group" class="btn-group btn-group-xs">
-                                          <a class="btn btn-default customerbutton" data-toggle="modal" data-target="#Modal{{quotation.id}}" id={{quotation.id}} value="view" type="button">Quotation/Performa</a>
+                                          <a class="btn btn-default customerbutton" href="{% url 'quotation:quotation_pdf' quotation.id%}" id={{quotation.id}} value="view" type="button">Quotation</a>
+                                        </div>
+                                        <div aria-label="Extra-small button group" role="group" class="btn-group btn-group-xs">
+                                          <a class="btn btn-default customerbutton" data-toggle="modal" data-target="#Modal{{quotation.id}}" id={{quotation.id}} value="view" type="button">Performa</a>
                                         </div>
 
                                       <!-- Modal -->
@@ -69,13 +72,15 @@
                                             </div>
                                             <div class="modal-body">
                                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                             <a class="btn btn-default" type="button" href="{% url 'quotation:quotation_pdf' quotation.id%}">
-                                             Quotation Invoice
+                                             <a class="btn btn-default" type="button" href="{% url 'quotation:performa' quotation.id%}">
+                                             Generate New Performa
                                              </a><br>
+                                             {% if quotation.performa|length %}
                                              <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                          <a class="btn btn-default" type="button" href="{% url 'quotation:performa_pdf' quotation.id%}">
-                                              Performa Invoice
-                                          </a>
+                                              <a class="btn btn-default" type="button" href="{% url 'quotation:performa_pdf' quotation.id%}">
+                                                  View Old Performa
+                                              </a>
+                                              {% endif %}
                                             </div>
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -83,9 +88,6 @@
                                           </div>
                                         </div>
                                       </div>
-
-
-
                                     </td>
                                 </tr>
                                 {% endfor %}

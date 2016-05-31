@@ -15,6 +15,22 @@ class QuotationPart(models.Model):
         return u''.join((self.part_name))
 
 
+class Performa(models.Model):
+    created_by = models.ForeignKey(User, blank=True, null=True)
+    purchase_order_number = models.CharField(blank=True, max_length=50)
+    parts = models.ManyToManyField(QuotationPart)
+    total_cost = models.FloatField(default=0)
+    tax = models.FloatField(default=0)
+    tax_amount = models.FloatField(default=0)
+    is_active = models.BooleanField(default=True)
+    estimated_delivery = models.CharField(blank=True, null=True, max_length=150)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u''.join((self.purchase_order_number))
+
+
 class Quotation(models.Model):
     created_by = models.ForeignKey(User)
     customer_name = models.CharField(max_length=250)
@@ -31,6 +47,7 @@ class Quotation(models.Model):
     estimated_delivery = models.CharField(blank=True, null=True, max_length=150)
     tax = models.FloatField(default=0)
     is_active = models.BooleanField(default=True)
+    performa = models.ManyToManyField(Performa)
 
     def __unicode__(self):
         return u''.join((self.customer_name))

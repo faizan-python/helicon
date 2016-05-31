@@ -14,7 +14,8 @@ from django.shortcuts import render_to_response
 
 from quotation.models import (
     Quotation,
-    QuotationPart
+    QuotationPart,
+    Performa
 )
 
 
@@ -93,3 +94,58 @@ def performa_pdf(request, id):
             return render_to_response('quotation/performapdf.html',
                                       context_instance=context)
     return HttpResponseBadRequest("Error")
+
+
+@require_http_methods(["GET"])
+@login_required(login_url='/admin/')
+def performa(request, id):
+    if request.method == "GET":
+        quotation_obj = Quotation.objects.filter(is_active=True, id=id)
+        if quotation_obj:
+            context = RequestContext(request, {
+                "quotation": quotation_obj[0]})
+            return render_to_response('quotation/performacreate.html',
+                                      context_instance=context)
+    return HttpResponseBadRequest("Error")
+
+
+@require_http_methods(["POST"])
+@login_required(login_url='/admin/')
+def performa_generate(request):
+    if request.method == "POST":
+        data = request.POST.dict()
+        forms = json.loads(data.keys()[0])
+        quotation_id = forms.get('quotation_id')
+
+        if quotation_id:
+            quotation_obj = Quotation.objects.get(id=quotation_id, is_active=True)
+            part_data = forms.get('part_data')
+            del forms['part_data']
+            del forms['quotation_id']
+            forms['created_by'] = request.user
+            performa_obj = Performa.objects.create(**forms)
+
+            part_obj = []
+            part_total_cost = 0
+            for part in part_data:
+                if part:
+                    if part.get('part_name') and part.get('price'):
+                        obj = QuotationPart.objects.create(part_name=part.get('part_name'),
+                                                           price=float(part.get('price')),
+                                                           description=part.get('description'),
+                                                           part_quantity=part.get(
+                                                               'part_quantity'),
+                                                           created_by=request.user)
+                        part_total_cost += (float(obj.price)
+                                            * float(obj.part_quantity))
+                        part_obj.append(obj)
+
+            performa_obj.parts.add(*part_obj)
+            performa_obj.save()
+            quotation_obj.performa.clear()
+            quotation_obj.performa.add(performa_obj)
+            quotation_obj.save()
+
+            return HttpResponse("Invoice Generated Successfilly")
+
+        return HttpResponseBadRequest("Error")
