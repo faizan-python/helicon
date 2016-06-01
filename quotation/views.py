@@ -57,7 +57,7 @@ def quotation_generate(request):
 
         quotation_obj.parts.add(*part_obj)
         quotation_obj.save()
-        return HttpResponse("Invoice Generated Successfilly")
+        return HttpResponse(quotation_obj.id)
 
 
 @require_http_methods(["GET"])
@@ -142,10 +142,7 @@ def performa_generate(request):
 
             performa_obj.parts.add(*part_obj)
             performa_obj.save()
-            quotation_obj.performa.clear()
-            quotation_obj.performa.add(performa_obj)
+            quotation_obj.performa = performa_obj
             quotation_obj.save()
-
             return HttpResponse("Invoice Generated Successfilly")
-
         return HttpResponseBadRequest("Error")

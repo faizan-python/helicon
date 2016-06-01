@@ -136,7 +136,15 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Serviced By: </label>&nbsp;&nbsp;
-                            {{service.serviced_by|title|default:"NA"|default_if_none:"NA"}}
+                            {% if service.serviced_by%}
+                                {{service.serviced_by|title|default:"NA"}}
+                            {% else %}
+                                NA
+                            {% endif %}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Purchase Order Number: </label>&nbsp;&nbsp;
+                            {{service.purchase_order_number|default:"NA"|default_if_none:"NA"}}
                         </div>
                         <br>
                         <br>

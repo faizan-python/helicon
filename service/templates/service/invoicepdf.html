@@ -53,14 +53,14 @@
                                         </div>
                                         <div class="panel-body">
                                             <p>
-                                                <b>Phone:</b> {{service.customer.phone_number|default:"NA"}}<span class="pull-right"><b>Invoice Number:</b> {{service.invoice_number}}</span><br>
-                                                <b>Email: </b> {{quotation.email|default:"NA"}}<br>
-                                                <b>Address:</b> {{quotation.address|default:"NA"}}<br>
+                                                <b>Phone : </b> {{service.customer.phone_number|default:"NA"}}<span class="pull-right"><b>Invoice No. : </b> {{service.invoice_number}}</span><br>
+                                                <b>Email : </b> {{quotation.email|default:"NA"}}<br>
+                                                <b>Address : </b> {{quotation.address|default:"NA"}}<span class="pull-right"><b>P.O. No. : </b> {{service.purchase_order_number|default:"NA"}}</span><br>
                                                 {% if service.vehical %}
-                                                <b>Vehical Number: </b> {{service.vehical|default:"NA"}}
+                                                <b>Vehical Number : </b> {{service.vehical|default:"NA"}}
                                                 {% else %}
-                                                <b>Product/Service: </b>{{service.otherservice|default:"NA"}}<br>
-                                                <b>Product/Service Number:</b>{{service.otherservice.number|default:"NA"}}
+                                                <b>Product/Service : </b>{{service.otherservice|default:"NA"}}<br>
+                                                <b>Product/Service No. : </b>{{service.otherservice.number|default:"NA"}}
                                                 {% endif %}
                                             </p>
                                         </div>

@@ -47,7 +47,7 @@ class Quotation(models.Model):
     estimated_delivery = models.CharField(blank=True, null=True, max_length=150)
     tax = models.FloatField(default=0)
     is_active = models.BooleanField(default=True)
-    performa = models.ManyToManyField(Performa)
+    performa = models.ForeignKey(Performa, blank=True, null=True)
 
     def __unicode__(self):
         return u''.join((self.customer_name))

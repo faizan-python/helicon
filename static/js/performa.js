@@ -143,7 +143,7 @@ $(document).ready(function() {
                 'total_cost': checkifblank($('#totalcost').val()),
                 'tax' : checkifblank($('#tax').val()),
                 'tax_amount' : checkifblank($('#tax_amount').val()),
-                'purchase_order_number' : checkifblank($('#purchase_order_number').val()),
+                'purchase_order_number' : $('#purchase_order_number').val(),
                 'part_data': part_list,
                 'quotation_id': $('#quotation_id').val()
             }

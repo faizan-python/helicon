@@ -13,7 +13,6 @@
             <div class="col-xs-12">
                 <div class="card">
                     <div class="card-header">
-
                         <div class="card-title">
                         <div class="title">Quotation Details</div>
                         </div>
@@ -75,7 +74,7 @@
                                              <a class="btn btn-default" type="button" href="{% url 'quotation:performa' quotation.id%}">
                                              Generate New Performa
                                              </a><br>
-                                             {% if quotation.performa|length %}
+                                             {% if quotation.performa %}
                                              <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                               <a class="btn btn-default" type="button" href="{% url 'quotation:performa_pdf' quotation.id%}">
                                                   View Old Performa

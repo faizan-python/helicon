@@ -108,7 +108,7 @@ $(document).ready(function() {
             },
              success: function(data){
                 $('body').loading('stop');
-                window.location.reload();
+                window.location = "/quotation/view/"+data+"/";
              },
              error: function(){
                 $('body').loading('stop');
