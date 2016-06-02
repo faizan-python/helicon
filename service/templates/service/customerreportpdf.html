@@ -79,9 +79,9 @@
                         {% else %}
                             <td style="border: 1px solid #eee;">{{service.otherservice}}</td>
                         {% endif %}
-                        <td style="border: 1px solid #eee; width: 100px;">{{service.total_cost}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">{{service.total_paid}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">{{service.total_pending}}</td>
+                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{service.total_cost}}</td>
+                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{service.total_paid}}</td>
+                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{service.total_pending}}</td>
                     </tr>
                     {% endfor %}
                     <tr>
@@ -90,7 +90,7 @@
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">Total Paid Amount</td>
-                        <td style="border: 1px solid #eee;">{{total_paid}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{total_paid}}</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -98,7 +98,7 @@
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">Pending Amount</td>
-                        <td style="border: 1px solid #eee;">{{total_pending}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{total_pending}}</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -106,7 +106,7 @@
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">Total Amount</td>
-                        <td style="border: 1px solid #eee;">{{total_cost}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{total_cost}}</td>
                     </tr>
                 </table>
                 <br>

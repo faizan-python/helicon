@@ -91,8 +91,8 @@
                         <td style="border: 1px solid #eee;">{{part.part_name}}</td>
                         <td style="border: 1px solid #eee;">{{part.description}}</td>
                         <td style="border: 1px solid #eee; width: 50px;">{{part.part_quantity}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">{{part.price}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">{% widthratio part.part_quantity 1 part.price %}</td>
+                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{part.price}}</td>
+                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {% widthratio part.part_quantity 1 part.price %}</td>
                     </tr>
                     {% endfor %}
                     <tr>
@@ -109,7 +109,7 @@
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">Vat Amount</td>
-                        <td style="border: 1px solid #eee;">{{quotation.tax_amount}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{quotation.tax_amount}}</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -117,7 +117,7 @@
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid #eee;">{{quotation.total_cost}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{quotation.total_cost}}</td>
                     </tr>
                 </table>
                 <br>

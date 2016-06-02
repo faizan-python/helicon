@@ -88,7 +88,7 @@
                     <tr class="item">
                         <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
                         <td style="border: 1px solid #eee;">{{labour.name}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">{{labour.labour_price}}</td>
+                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{labour.labour_price}}</td>
                     </tr>
                     {% endfor %}
                     <tr>
@@ -99,12 +99,12 @@
                     <tr>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">Service Tax Amount</td>
-                        <td style="border: 1px solid #eee;">{{service.service_tax_amount}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{service.service_tax_amount}}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid #eee;">{{service.labour_cost|add:service.service_tax_amount}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{service.labour_cost|add:service.service_tax_amount}}</td>
                     </tr>
                 </table>
                 <br>

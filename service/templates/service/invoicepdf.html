@@ -192,7 +192,7 @@
                     {% for payment in service.payment.all %}
                     <tr class="item">
                         <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
-                        <td style="border: 1px solid #eee;width: 100px;">{{payment.payment_amount}}</td>
+                        <td style="border: 1px solid #eee;width: 100px;">&#8377; {{payment.payment_amount}}</td>
                         <td style="border: 1px solid #eee;">{{payment.created_date}}</td>
                         <td style="border: 1px solid #eee; width: 100px;">{{payment.recieved_by}}</td>
                         <td style="border: 1px solid #eee; width: 100px;">{{payment.payment_type}}</td>
@@ -205,7 +205,7 @@
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">Total Paid Amount</td>
-                        <td style="border: 1px solid #eee;">{{service.total_paid}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{service.total_paid}}</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -213,7 +213,7 @@
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">Pending Amount</td>
-                        <td style="border: 1px solid #eee;">{{service.total_pending}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{service.total_pending}}</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -221,7 +221,7 @@
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid #eee;">{{service.total_cost}}</td>
+                        <td style="border: 1px solid #eee;">&#8377; {{service.total_cost}}</td>
                     </tr>
                 </table>
                 <br>
