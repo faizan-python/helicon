@@ -46,6 +46,7 @@ class Customer(models.Model):
         blank=True,
         null=True
     )
+    tin_number = models.CharField(blank=True, null=True, max_length=100)
 
     def __unicode__(self):
         return u' '.join((self.first_name, self.last_name))

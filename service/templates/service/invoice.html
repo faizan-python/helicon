@@ -35,14 +35,18 @@
                             <label for="exampleInputEmail2">Email: </label>&nbsp;&nbsp;
                             {{service.customer.email|default:"NA"|default_if_none:"NA"}}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
                             {{service.customer.phone_number}}
                         </div>
-                            <div class="form-group" style="padding:1em;">
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Tin Number:</label>&nbsp;&nbsp;
+                            {{service.customer.tin_number|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Gender:</label>&nbsp;&nbsp;
                             {{service.customer.gender|title|default:"NA"}}
-                            </div>
+                        </div>
                         <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Address: </label>&nbsp;&nbsp;
                             {{service.customer.address|title|default:"NA"}} 
@@ -145,6 +149,10 @@
                         <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Purchase Order Number: </label>&nbsp;&nbsp;
                             {{service.purchase_order_number|default:"NA"|default_if_none:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding-right:5em;">
+                            <label for="exampleInputEmail2">Purchase Order Date: </label>&nbsp;&nbsp;
+                            {{service.purchase_order_date|date:"d M Y"|default:"NA"|default_if_none:"NA"}}
                         </div>
                         <br>
                         <br>
@@ -277,7 +285,49 @@
                                         </table>
                                     </div>
                                 </div>
+
                                 {% if not service.complete_payment %}
+
+                                <div class="card-body">
+                                    <div class="sub-title">Select Payment Type</div>
+                                    <form class="form-inline">
+                                        <div class="checkbox">
+                                            <input type="checkbox" class="group1"  id="cash" name="vehical_service">
+                                            <label for="exampleInputEmail2">
+                                                Cash
+                                            </label>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="checkbox">
+                                            <input type="checkbox" class="group1" id="cheque" name="cheque">
+                                            <label for="exampleInputEmail2">
+                                                Cheque
+                                            </label>
+                                        </div>
+                                    </form>
+
+
+                                    <div class="card-body" style="display: none;" id="chequeform">
+                                        <form class="form-inline" id="chequedataform">
+                                            <div class="sub-title">Enter Cheque Details</div>
+                                            <div class="form-group" style="padding-right:5em;">
+                                                <label for="exampleInputEmail2">Cheque Number: </label>&nbsp;&nbsp;
+                                                <input type="text" placeholder="EX19 XX XXXX" name="cheque_number" autocomplete="off" id="cheque_number" class="form-control" required>
+                                            </div>
+
+                                            <div class="form-group" style="padding-right:5em;">
+                                                <label for="exampleInputEmail2">Cheque Bank Name: </label>&nbsp;&nbsp;
+                                                <input type="text" placeholder="XX XXXX Bank" name="cheque_bank_name" id="cheque_bank_name" class="form-control" autocomplete="off" required>
+                                            </div>
+
+
+                                            <div class="form-group" style="padding-right:5em;">
+                                                <label for="exampleInputEmail2">Cheque Date: </label>&nbsp;&nbsp;
+                                                <input type="text" id="cheque_date" name="cheque_date" class="form-control" autocomplete="off">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                                     <form id="costform">
                                     <div class="card-body">
                                         <div class="form-group pull-right" style="padding-right:5em;">

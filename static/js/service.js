@@ -26,6 +26,8 @@ $(document).ready(function() {
         minDate: dateToday
     });
 
+    $("#purchase_order_date").datepicker();
+
     $("#vehical_service").click(function(event) {
       $("#vehicalcompleteform").show();
       service_type = "vehical"
@@ -41,9 +43,10 @@ $(document).ready(function() {
     function autofillCustomerform(data) {
         $("#customerform").autofill(data);
         $("#customerform").show();
-        $('#customerform input').attr('readonly', 'readonly');;
-        $('#customerform textarea').attr('readonly', 'readonly');;
+        $('#customerform input').attr('readonly', 'readonly');
+        $('#customerform textarea').attr('readonly', 'readonly');
         $('#customerform input:radio').attr('disabled', true);
+        $('#tin_number').attr('readonly', false);
     }
 
     $("#customerdropdown").change(function() {

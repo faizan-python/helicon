@@ -84,8 +84,8 @@ class Service(models.Model):
     is_serviced = models.BooleanField(default=False)
     complete_payment = models.BooleanField(default=False)
     gate_pass_no = models.CharField(blank=True, null=True, max_length=100)
-    party_tin_number = models.CharField(blank=True, null=True, max_length=100)
     purchase_order_number = models.CharField(blank=True, null=True, max_length=100)
+    purchase_order_date = models.DateTimeField(blank=True, null=True)
 
     def __unicode__(self):
         return str(self.invoice_number)

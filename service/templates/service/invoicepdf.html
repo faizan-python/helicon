@@ -53,14 +53,15 @@
                                         </div>
                                         <div class="panel-body">
                                             <p>
-                                                <b>Phone : </b> {{service.customer.phone_number|default:"NA"}}<span class="pull-right"><b>Invoice No. : </b> {{service.invoice_number}}</span><br>
-                                                <b>Email : </b> {{quotation.email|default:"NA"}}<br>
-                                                <b>Address : </b> {{quotation.address|default:"NA"}}<span class="pull-right"><b>P.O. No. : </b> {{service.purchase_order_number|default:"NA"}}</span><br>
+                                                <b>Phone No. : </b> {{service.customer.phone_number|default:"NA"}}<span class="pull-right"><b>Invoice No. : </b> {{service.invoice_number}}</span><br>
+                                                <b>Email : </b> {{service.customer.email|default:"NA"}}<span class="pull-right"><b>P.O. Date : </b> {{service.purchase_order_date|date:"d M Y"|default:"NA"}}</span><br>
+                                                <b>Tine Number : </b> {{service.customer.tin_number|default:"NA"}}<span class="pull-right"><b>P.O. No. : </b> {{service.purchase_order_number|default:"NA"}}</span><br>
+                                                <b>Address : </b> {{service.customer.address|default:"NA"}}<br>
                                                 {% if service.vehical %}
-                                                <b>Vehical Number : </b> {{service.vehical|default:"NA"}}
+                                                <b>Vehical No. : </b> {{service.vehical|default:"NA"}}
                                                 {% else %}
-                                                <b>Product/Service : </b>{{service.otherservice|default:"NA"}}<br>
-                                                <b>Product/Service No. : </b>{{service.otherservice.number|default:"NA"}}
+                                                <b>Service : </b>{{service.otherservice|default:"NA"}}<br>
+                                                <b>Service No. : </b>{{service.otherservice.number|default:"NA"}}
                                                 {% endif %}
                                             </p>
                                         </div>
@@ -72,94 +73,98 @@
                 </tr>
 
 
-                <table>
-                    <h2><small>Item Description</small></h2>
-                    <tr class="heading">
-                        <td style="border: 1px solid #eee;">
-                            No. 
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Name
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Quantity
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Price
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Amount
-                        </td>
-                    </tr>
-                    {% for part in service.parts.all %}
-                    <tr class="item">
-                        <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
-                        <td style="border: 1px solid #eee;">{{part.part_name}}</td>
-                        <td style="border: 1px solid #eee; width: 50px;">{{part.part_quantity}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">{{part.price}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">{% widthratio part.part_quantity 1 part.price %}</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Vat/C-Form</td>
-                        <td style="border: 1px solid #eee;">{{service.tax}}%</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Vat Amount</td>
-                        <td style="border: 1px solid #eee;">{{service.tax_amount}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid #eee;">{{service.part_cost|add:service.tax_amount}}</td>
-                    </tr>
-                </table>
+                {% if service.parts.all %}
+                    <table>
+                        <h2><small>Item Description</small></h2>
+                        <tr class="heading">
+                            <td style="border: 1px solid #eee;">
+                                No. 
+                            </td>
+                            <td style="border: 1px solid #eee;">
+                                Name
+                            </td>
+                            <td style="border: 1px solid #eee;">
+                                Quantity
+                            </td>
+                            <td style="border: 1px solid #eee;">
+                                Price
+                            </td>
+                            <td style="border: 1px solid #eee;">
+                                Amount
+                            </td>
+                        </tr>
+                        {% for part in service.parts.all %}
+                        <tr class="item">
+                            <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
+                            <td style="border: 1px solid #eee;">{{part.part_name}}</td>
+                            <td style="border: 1px solid #eee; width: 50px;">{{part.part_quantity}}</td>
+                            <td style="border: 1px solid #eee; width: 100px;">{{part.price}}</td>
+                            <td style="border: 1px solid #eee; width: 100px;">{% widthratio part.part_quantity 1 part.price %}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border: 1px solid #eee; font-size: 12px;">Vat/C-Form</td>
+                            <td style="border: 1px solid #eee;">{{service.tax}}%</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border: 1px solid #eee; font-size: 12px;">Vat Amount</td>
+                            <td style="border: 1px solid #eee;">{{service.tax_amount}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
+                            <td style="border: 1px solid #eee;">{{service.part_cost|add:service.tax_amount}}</td>
+                        </tr>
+                    </table>
+                {% endif %}
 
 
-                <table>
-                    <h2><small>Labour Cost Description</small></h2>
-                    <tr class="heading">
-                        <td style="border: 1px solid #eee;">
-                            No. 
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Name
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Amount
-                        </td>
-                    </tr>
-                    {% for labour in service.labourcost_detail.all %}
-                    <tr class="item">
-                        <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
-                        <td style="border: 1px solid #eee;">{{labour.name}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">{{labour.labour_price}}</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Service Tax</td>
-                        <td style="border: 1px solid #eee;">{{service.service_tax}}%</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Service Tax Amount</td>
-                        <td style="border: 1px solid #eee;">{{service.service_tax_amount}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid #eee;">{{service.labour_cost|add:service.service_tax_amount}}</td>
-                    </tr>
-                </table>
+                {% if service.labourcost_detail.all %}
+                    <table>
+                        <h2><small>Labour Cost Description</small></h2>
+                        <tr class="heading">
+                            <td style="border: 1px solid #eee;">
+                                No. 
+                            </td>
+                            <td style="border: 1px solid #eee;">
+                                Name
+                            </td>
+                            <td style="border: 1px solid #eee;">
+                                Amount
+                            </td>
+                        </tr>
+                        {% for labour in service.labourcost_detail.all %}
+                        <tr class="item">
+                            <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
+                            <td style="border: 1px solid #eee;">{{labour.name}}</td>
+                            <td style="border: 1px solid #eee; width: 100px;">{{labour.labour_price}}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td style="border: 1px solid #eee; font-size: 12px;">Service Tax</td>
+                            <td style="border: 1px solid #eee;">{{service.service_tax}}%</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="border: 1px solid #eee; font-size: 12px;">Service Tax Amount</td>
+                            <td style="border: 1px solid #eee;">{{service.service_tax_amount}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
+                            <td style="border: 1px solid #eee;">{{service.labour_cost|add:service.service_tax_amount}}</td>
+                        </tr>
+                    </table>
+                {% endif %}
 
 
                 <table>

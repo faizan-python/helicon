@@ -22,9 +22,7 @@ $(document).ready(function() {
             $("#chequeform").show();
             payment_type = "Cheque";
             $("#cash").attr('checked', false);
-            $("#cheque_date").datepicker({
-                maxDate: new Date()
-            });
+            $("#cheque_date").datepicker();
         }
         else{
             $("#chequeform").hide();
@@ -33,7 +31,7 @@ $(document).ready(function() {
     });
 
     $("#cash").click(function(event) {
-        if ($("#cheque").is(':checked')) {
+        if ($("#cash").is(':checked')) {
             payment_type = "Cash";
             $("#chequeform").hide();
             $("#cheque").attr('checked', false);
@@ -160,7 +158,6 @@ $(document).ready(function() {
     });
 
     $("#addpart").click(function(event){
-        console.log("Clicked")
         var row1= '<th id='+labour_table_id+' scope="row"> # </th>'
         var row2='<td><input type="text" name="part_name" id="part_name" class="form-control" required></td>'
         var row3='<td><input type="text" name="part_quantity" id="part_quantity" class="form-control" onKeyPress="return floatonly(this, event)"required></td>'
@@ -238,6 +235,9 @@ $(document).ready(function() {
                 })
                 return false;
             }
+            if (payment_type == "Cash") {
+                return true
+            }
         }
     }
 
@@ -282,38 +282,45 @@ $(document).ready(function() {
     });
 
     $("#pendingamount").click(function(event){
-        $('body').loading({stoppable: false}, 'start');
-        totalcost = checkifblank(parseFloat($('#totalcost').val()))
-        pendingpayment = checkifblank(parseFloat($('#pending_amount').val()))
-        pending_cost = checkifblank(parseFloat($('#total_pending').val()))
-        $('#total_pending').val(pending_cost - pendingpayment)
-        data = {
-            "pending_payment": pendingpayment,
-            "total_cost": totalcost,
-            "service_id": $('#service-invoice-number').val()
+        var chequeStatus = checkChequeValidations();
+        if (chequeStatus) {
+            $('body').loading({stoppable: false}, 'start');
+            totalcost = checkifblank(parseFloat($('#totalcost').val()))
+            pendingpayment = checkifblank(parseFloat($('#pending_amount').val()))
+            pending_cost = checkifblank(parseFloat($('#total_pending').val()))
+            $('#total_pending').val(pending_cost - pendingpayment)
+            data = {
+                "pending_payment": pendingpayment,
+                "total_cost": totalcost,
+                "service_id": $('#service-invoice-number').val(),
+                'payment_type': payment_type,
+                'cheque_number': $('#cheque_number').val(),
+                'cheque_bank_name': $('#cheque_bank_name').val(),
+                'cheque_date': $('#cheque_date').val()
+            }
+            $.ajax({
+                 type:"POST",
+                 url:"/service/pending/payment/",
+                 data: JSON.stringify(data),
+                beforeSend: function(xhr) {
+                    var csrftoken = getCookie('csrftoken');
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                },
+                 success: function(data){
+                    $('body').loading('stop');
+                    window.location.reload();
+                 },
+                 error: function(){
+                    $('body').loading('stop');
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Something went wrong!!! Please try again',
+                        icon: 'error',
+                        hideAfter: 4000,
+                        position: 'bottom-right'
+                    })
+                 }
+            });
         }
-        $.ajax({
-             type:"POST",
-             url:"/service/pending/payment/",
-             data: JSON.stringify(data),
-            beforeSend: function(xhr) {
-                var csrftoken = getCookie('csrftoken');
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            },
-             success: function(data){
-                $('body').loading('stop');
-                window.location.reload();
-             },
-             error: function(){
-                $('body').loading('stop');
-                $.toast({
-                    heading: 'Error',
-                    text: 'Something went wrong!!! Please try again',
-                    icon: 'error',
-                    hideAfter: 4000,
-                    position: 'bottom-right'
-                })
-             }
-        });
     });
 });

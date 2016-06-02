@@ -53,6 +53,9 @@ def service_create(request):
         service_form = forms.get('service_deatils')
         mechanic_id = forms.get('mechanic')
         gender = forms.get('gender')
+        tin_number = customer_form.get('tin_number')
+        del customer_form['tin_number']
+
         if customer_form.get('radio1'):
             del customer_form['radio1']
         customer = Customer.objects.filter(
@@ -63,6 +66,9 @@ def service_create(request):
             customer_obj = Customer.objects.create(**customer_form)
         else:
             customer_obj = customer[0]
+
+        customer_obj.tin_number = tin_number
+        customer_obj.save()
 
         if forms.get("service_type") == "vehical":
             vehical_form = forms.get("service_type_form")
@@ -92,6 +98,13 @@ def service_create(request):
         service_form['customer'] = customer_obj
         service_form['expected_delivery_date'] = datetime.datetime.strptime(
             service_form['expected_delivery_date'], "%m/%d/%Y").date()
+        
+        if service_form.get('purchase_order_date'):
+            service_form['purchase_order_date'] = datetime.datetime.strptime(
+            service_form['purchase_order_date'], "%m/%d/%Y").date()
+        else:
+            del service_form['purchase_order_date']
+
         advance_payment = False
         if service_form.get('advance_payment'):
             if int(service_form.get('advance_payment')) > 0:
@@ -302,7 +315,18 @@ def pending_payment(request):
                 if int(data.get('pending_payment')) > 0:
                     payment = Payment.objects.create(
                         payment_amount=data.get('pending_payment'),
-                        recieved_by=request.user)
+                        recieved_by=request.user,
+                        cheque_number=data.get(
+                             'cheque_number'),
+                        payment_type=data.get('payment_type'))
+
+                    if payment.payment_type == Payment.PaymentOptions.CHEQUE.value:
+                        payment.cheque_bank_name = data.get(
+                            'cheque_bank_name', "")
+                        if data.get('cheque_date'):
+                            payment.cheque_date = datetime.datetime.strptime(
+                                data.get('cheque_date'), "%m/%d/%Y").date()
+                        payment.save()
                     service_obj.payment.add(payment)
                 if pending_amount < 1:
                     service_obj.complete_payment = True

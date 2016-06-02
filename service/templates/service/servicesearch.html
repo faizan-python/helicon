@@ -73,6 +73,14 @@
                                               <h4 class="modal-title">Please select Invoice type</h4>
                                             </div>
                                             <div class="modal-body">
+                                             
+                                          {% if not service.complete_payment %}
+                                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                          <a class="btn btn-default" type="button" href="{% url 'service:invoice_get' service.invoice_number%}">
+                                                Pay Pending Amount
+                                            </a><br>
+                                          {% endif %}
+
                                              <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                              <a class="btn btn-default" type="button" href="{% url 'service:invoice_view' service.invoice_number%}">
                                              Invoice
