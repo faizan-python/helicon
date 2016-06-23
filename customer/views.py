@@ -86,3 +86,16 @@ def customer_detail(request, id):
             return render_to_response('customer/customerdetail.html',
                                       context_instance=context)
         return HttpResponseRedirect("/home/")
+
+
+@require_http_methods(["GET"])
+@login_required(login_url='/admin/')
+def customer_delete(request, id):
+    if request.method == "GET":
+        cust_obj = Customer.objects.filter(id=id, is_active=True)
+        if cust_obj:
+            cust_obj = cust_obj[0]
+            cust_obj.is_active = False
+            cust_obj.save()
+            return HttpResponseRedirect("/customer/view/")
+        return HttpResponseRedirect("/home/")

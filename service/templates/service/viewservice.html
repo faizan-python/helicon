@@ -225,19 +225,36 @@
                         {% endif %}
                         <br>
                     </div>
+                    <div class="card-body">
+                        <div class="login-button text-center">
+                            {% if service.is_serviced %}
+                            {% if not service.complete_payment %}
+                            <a class="btn btn-primary" href="{% url 'service:invoice_get' service.invoice_number%}">Pay Pending Amount</a>
+                            {% endif %}
+                            {% else %}
+                            <a class="btn btn-primary" href="{% url 'service:invoice_get' service.invoice_number%}">Generate Invoice</a>
+                            {% endif %}
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#Modal{{service.invoice_number}}" id={{service.invoice_number}} value="view">Delete</a>
 
-                            <div class="card-body">
-                                <div class="login-button text-center">
-                                    {% if service.is_serviced %}
-                                    {% if not service.complete_payment %}
-                                    <a class="btn btn-primary" href="{% url 'service:invoice_get' service.invoice_number%}">Pay Pending Amount</a>
-                                    {% endif %}
-                                    {% else %}
-                                    <a class="btn btn-primary" href="{% url 'service:invoice_get' service.invoice_number%}">Generate Invoice</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="Modal{{service.invoice_number}}" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">Are You Sure, You Want To Delete This Invoice ?</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <center>
+                                              <a type="button" class="btn btn-default" href="{% url 'service:invoice_delete' service.invoice_number%}">Yes</a>
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                              </center>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                        </div>
+                    </div>
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@
                         <table class="datatable table table-striped" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Quotation Number</th>
+                                    <th>Quotation No.</th>
                                     <th>Customer Name</th>
                                     <th>Company Name</th>
                                     <th>Email</th>
@@ -33,7 +33,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Quotation Number</th>
+                                    <th>Quotation No.</th>
                                     <th>Customer Name</th>
                                     <th>Company Name</th>
                                     <th>Email</th>
@@ -50,7 +50,7 @@
                                     <td>{{quotation.customer_name |title}}</td>
                                     <td>{{quotation.company_name |title }}</td>
                                     <td>{{quotation.email}}</td>
-                                    <td>{{quotation.created_date}}</td>
+                                    <td>{{quotation.created_date|date:"M d, Y"}}</td>
                                     <td>{{quotation.phone_number}}</td>
                                     <td>$ {{quotation.total_cost}}</td>
                                     <td>
@@ -60,10 +60,33 @@
                                         <div aria-label="Extra-small button group" role="group" class="btn-group btn-group-xs">
                                           <a class="btn btn-default customerbutton" data-toggle="modal" data-target="#Modal{{quotation.id}}" id={{quotation.id}} value="view" type="button">Performa</a>
                                         </div>
+                                        <div aria-label="Extra-small button group" role="group" class="btn-group btn-group-xs">
+                                          <a class="btn btn-default customerbutton" data-toggle="modal" data-target="#DeleteModal{{quotation.id}}" id={{quotation.id}} value="view" type="button">Delete</a>
+                                        </div>
+
+
+                                          <!-- Delete Modal -->
+                                          <div class="modal fade" id="DeleteModal{{quotation.id}}" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                  <h4 class="modal-title">Are You Sure, You Want To Delete This Quotation ?</h4>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <center>
+                                                  <a type="button" class="btn btn-default" href="{% url 'quotation:quotation_delete' quotation.id%}">Yes</a>
+                                                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                  </center>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+
 
                                       <!-- Modal -->
                                       <div class="modal fade" id="Modal{{quotation.id}}" role="dialog">
-                                        <div class="modal-dialog modal-sm">
+                                        <div class="modal-dialog modal-lg">
                                           <div class="modal-content">
                                             <div class="modal-header">
                                               <button type="button" class="close" data-dismiss="modal">&times;</button>

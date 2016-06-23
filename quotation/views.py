@@ -85,6 +85,19 @@ def quotation_pdf(request, id):
 
 @require_http_methods(["GET"])
 @login_required(login_url='/admin/')
+def quotation_delete(request, id):
+    if request.method == "GET":
+        quotation_obj = Quotation.objects.filter(is_active=True, id=id)
+        if quotation_obj:
+            quotation_obj =quotation_obj[0]
+            quotation_obj.is_active = False
+            quotation_obj.save()
+            return HttpResponseRedirect("/quotation/list/")
+    return HttpResponseBadRequest("Error")
+
+
+@require_http_methods(["GET"])
+@login_required(login_url='/admin/')
 def performa_pdf(request, id):
     if request.method == "GET":
         quotation_obj = Quotation.objects.filter(is_active=True, id=id)

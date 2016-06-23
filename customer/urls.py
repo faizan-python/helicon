@@ -13,6 +13,8 @@ urlpatterns = patterns(
         name='customer_view'),
     url(r'^edit/(?P<id>[0-9]+)/$', 'customer.views.customer_edit',
         name='customer_edit'),
+    url(r'^delete/(?P<id>[0-9]+)/$', 'customer.views.customer_delete',
+        name='customer_delete'),
     url(r'^detail/(?P<id>[0-9]+)/$', 'customer.views.customer_detail',
         name='customer_detail'),
 )

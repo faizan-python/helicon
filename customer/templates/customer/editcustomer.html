@@ -61,6 +61,26 @@
                         </div>
                     <div class="login-button text-center">
                         <input type="submit" id="" class="btn btn-primary" value="Update">
+                        
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#Modal{{customer.id}}" id={{customer.id}} value="view">Delete</a>
+
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="Modal{{customer.id}}" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h4 class="modal-title">Are You Sure, You Want To Delete Customer <b>{{customer.first_name}} {{customer.last_name}}</b> ?</h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <center>
+                                          <a type="button" class="btn btn-default" href="{% url 'customer:customer_delete' customer.id%}">Yes</a>
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                          </center>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                     </div>
                       </form>
                     </div>

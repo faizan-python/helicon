@@ -21,6 +21,8 @@ urlpatterns = patterns(
         name='create_invoice'),
     url(r'^invoice/create/(?P<id>[0-9]+)/$', 'service.views.invoice_get',
         name='invoice_get'),
+    url(r'^invoice/delete/(?P<id>[0-9]+)/$', 'service.views.invoice_delete',
+        name='invoice_delete'),
     url(r'^invoice/$', 'service.views.invoice',
         name='invoice'),    
     url(r'^pending/payment/$', 'service.views.pending_payment',

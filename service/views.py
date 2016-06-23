@@ -200,6 +200,21 @@ def invoice_get(request, id):
         return HttpResponse("EDit")
 
 
+@require_http_methods(["GET"])
+@login_required(login_url='/admin/')
+def invoice_delete(request, id):
+    if request.method == "GET":
+        service_obj = Service.objects.filter(invoice_number=id)
+        if service_obj:
+            service_obj = service_obj[0]
+            service_obj.is_active = False
+            service_obj.save()
+            return HttpResponseRedirect("/service/search/")
+        return HttpResponseRedirect("/home/")
+    if request.method == "POST":
+        return HttpResponse("EDit")
+
+
 @require_http_methods(["GET", "POST"])
 @login_required(login_url='/admin/')
 def create_invoice(request):
