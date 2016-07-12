@@ -116,17 +116,17 @@ google.maps.event.addDomListener(window, 'load', initialize);
  		<div class="row">
 			<form class="contact-form" novalidate="novalidate" id="detailcontactform">
 				<div class="form_send"> 
-					 <input type="text" placeholder="Your Name" name="name"> 
+					 <input autocomplete="off" type="text" placeholder="Your Name" name="name"> 
 				</div>
 				<div class="form_send"> 
-					 <input type="number" id="detailcontact-number" placeholder="Your Contact Number" name="number">  
+					 <input type="number" autocomplete="off" id="detailcontact-number" placeholder="Your Contact Number" name="number">  
 				</div>
 				<div class="form_send"> 
-					 <input type="text" placeholder="Message Subject" name="subject"><br><br>  
+					 <input type="text" autocomplete="off" placeholder="Message Subject" name="subject"><br><br>  
 				</div>
 				 
 				<div class="col-lg-12 col-md-12">
-					<textarea placeholder="Message" rows="10" name="message" class="text"></textarea><br>
+					<textarea placeholder="Message" autocomplete="off" rows="10" name="message" class="text"></textarea><br>
 				</div>
 				<div class="submit-form">
 					<button class="btn btn-info hvr-sweep-to-right frombutton" type="submit">Send</button>

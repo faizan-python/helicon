@@ -364,7 +364,7 @@
 			$('.preloaderbox').fadeOut();
 		}
 	}
-	
+
 	function CounterNumberChanger () {
 		var timer = $('.timer');
 		if(timer.length) {

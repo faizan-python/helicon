@@ -402,6 +402,9 @@ def report(request):
             request_dict.get("from_date"), "%m/%d/%Y").date()
         till_date = datetime.datetime.strptime(
             request_dict.get("till_date"), "%m/%d/%Y").date()
+        from_date = datetime.datetime.combine(from_date, datetime.time.min)
+        till_date = datetime.datetime.combine(till_date, datetime.time.max)
+
         if request_dict.get('pending'):
             complete_payment = False
         else:
@@ -499,6 +502,9 @@ def report_generate(request):
             request_dict.get("from_date"), "%m/%d/%Y")
         till_date = datetime.datetime.strptime(
             request_dict.get("till_date"), "%m/%d/%Y")
+        from_date = datetime.datetime.combine(from_date, datetime.time.min)
+        till_date = datetime.datetime.combine(till_date, datetime.time.max)
+
         if request_dict.get('pending'):
             complete_payment = False
         else:

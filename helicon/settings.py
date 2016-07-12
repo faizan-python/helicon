@@ -88,10 +88,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'helicon',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '',
+        'USER': 'helicon',
+        'PASSWORD': 'heliconengineering',
+        'HOST': 'heliconengineering.cs0b7tshi8pm.us-west-2.rds.amazonaws.com',
+        # 'USER': 'root',
+        # 'PASSWORD': 'root',
+        # 'HOST': '',
+        'PORT': '3306',
     }
 }
 

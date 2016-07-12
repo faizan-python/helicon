@@ -110,7 +110,7 @@ a, a:hover, a:active, a:focus {
     background-color: #ffffff;
     background-position: center center;
     background-repeat: no-repeat;
-    background-image: url(/static/images/preloader.gif);
+    background-image: url(/static/images/web-preloader.gif);
  }
  
 
@@ -774,7 +774,7 @@ section#aboutus_area {
 .choose_image {
     width: 50%;
     float: left;
-    background: #1b1b1b url(/static/images/home-1/Choose_us.jpg);
+    background: #1b1b1b url(/static/images/why-us.jpg);
     height: 540px;
     background-size: cover;
 }

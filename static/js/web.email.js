@@ -48,7 +48,8 @@ $(document).ready(function() {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         },
                  success: function(data){
-                    $("#customerform").trigger('reset');
+                    $("#detailcontactform").trigger('reset');
+                    $("#detailcontactform").html("<h2>Thank You for Query. We will contact You Back. You can also reach us on the Above Number.</h2>")
                     $.toast({
                         heading: 'Success',
                         text: 'Thank You for Query. We will contact You Back. You can also reach us on the Above Number!!!  ',

@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.views.decorators.csrf import csrf_protect
 
 
 def index(request):
@@ -31,7 +32,7 @@ def contact(request):
 def product(request):
     return render(request, 'web/product.html')
 
-
+@csrf_protect
 def save_contact(request):
     if request.POST.dict().get('number'):
         subject = "(Contact@ "+request.POST.dict().get('number')+") "
