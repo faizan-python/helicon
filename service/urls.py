@@ -45,4 +45,8 @@ urlpatterns = patterns(
         name='report_generate'),
     url(r'^customer/report/generate/(?P<id>[0-9]+)/$', 'service.views.customer_report_generate',
         name='customer_report_generate'),
+    url(r'^generate/delivery/invoice/(?P<id>[0-9]+)/$', 'service.views.generate_delivery_invoice',
+        name='generate_delivery_invoice'),
+    url(r'^delivery/invoice/(?P<id>[0-9]+)/$', 'service.views.delivery_invoice',
+        name='delivery_invoice'),
 )

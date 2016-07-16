@@ -24,7 +24,8 @@ from vehical.models import (
 )
 from service.models import (
     Service,
-    Payment
+    Payment,
+    DeliveryDetail
 )
 from parts.models import (
     Part,
@@ -98,10 +99,10 @@ def service_create(request):
         service_form['customer'] = customer_obj
         service_form['expected_delivery_date'] = datetime.datetime.strptime(
             service_form['expected_delivery_date'], "%m/%d/%Y").date()
-        
+
         if service_form.get('purchase_order_date'):
             service_form['purchase_order_date'] = datetime.datetime.strptime(
-            service_form['purchase_order_date'], "%m/%d/%Y").date()
+                service_form['purchase_order_date'], "%m/%d/%Y").date()
         else:
             del service_form['purchase_order_date']
 
@@ -332,7 +333,7 @@ def pending_payment(request):
                         payment_amount=data.get('pending_payment'),
                         recieved_by=request.user,
                         cheque_number=data.get(
-                             'cheque_number'),
+                            'cheque_number'),
                         payment_type=data.get('payment_type'))
 
                     if payment.payment_type == Payment.PaymentOptions.CHEQUE.value:
@@ -532,3 +533,52 @@ def report_generate(request):
             'total_cost': total_cost})
         return render_to_response('service/reportpdf.html',
                                   context_instance=context)
+
+
+@require_http_methods(["GET", "POST"])
+@login_required(login_url='/admin/')
+def generate_delivery_invoice(request, id):
+    if request.method == "GET":
+        service_obj = Service.objects.filter(invoice_number=id)
+        if service_obj:
+            context = RequestContext(request, {
+                "service": service_obj[0]})
+            return render_to_response('service/addeditdeliverychalan.html',
+                                      context_instance=context)
+        return HttpResponseRedirect("/home/")
+
+    if request.method == "POST":
+        data = request.POST.dict()
+        del data['csrfmiddlewaretoken']
+        service_obj = Service.objects.filter(
+            invoice_number=data.get('service_id'))
+        if service_obj:
+            service_obj = service_obj[0]
+            if service_obj.delivery_invoice_details:
+                delivery_invoice_obj = service_obj.delivery_invoice_details
+                delivery_invoice_obj.vehical_number = data.get(
+                    'vehical_number')
+                delivery_invoice_obj.remark = data.get('remark')
+                delivery_invoice_obj.save()
+            else:
+                delivery_invoice_obj = DeliveryDetail.objects.create(
+                    vehical_number=data.get('vehical_number'),
+                    remark=data.get('remark'))
+                service_obj.delivery_invoice_details = delivery_invoice_obj
+                service_obj.save()
+            redirect_url = "/service/generate/delivery/invoice/"+str(service_obj.invoice_number)+"/"
+            return HttpResponseRedirect(redirect_url)
+        return HttpResponseRedirect("/home/")
+
+
+@require_http_methods(["GET"])
+@login_required(login_url='/admin/')
+def delivery_invoice(request, id):
+    if request.method == "GET":
+        service_obj = Service.objects.filter(invoice_number=id)
+        if service_obj:
+            context = RequestContext(request, {
+                "service": service_obj[0]})
+            return render_to_response('service/deliveryinvoice.html',
+                                      context_instance=context)
+        return HttpResponseRedirect("/home/")

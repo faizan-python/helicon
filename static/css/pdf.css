@@ -1,13 +1,13 @@
-.invoice-box{
-    max-width:800px;
-    margin:auto;
-    padding:30px;
-    border:1px solid #eee;
-    box-shadow:0 0 10px rgba(0, 0, 0, .15);
-    font-size:16px;
-    line-height:24px;
-    font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-    color:#555;
+.invoice-box {
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    color: #555;
+    font-family: "Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    line-height: 17px;
+    margin: auto;
+    max-width: 801px;
+    padding: 30px;
 }
 
 .invoice-box table{
@@ -17,7 +17,7 @@
 }
 
 .invoice-box table td{
-    padding:5px;
+    padding:0px;
     vertical-align:top;
 }
 

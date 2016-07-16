@@ -9,6 +9,30 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/pdf.css' %}">
+        <style type="text/css">
+            .floatleft {
+                float:left; 
+                width: 50%;
+                border-right: 1px solid black;
+            }
+            .floatright {
+            float: right;
+                width: 50%;
+                padding-left: 18px;
+            }
+            .panel-body {
+                padding: 2px;
+            }
+            hr {
+                display: block;
+                height: 1px;
+                border: 0;
+                border-top: 1px solid #ccc;
+                margin: 0em 0;
+                padding: 0;
+                border-color: black;
+            }
+        </style>
         <nav role="navigation" class="navbar navbar-default">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -33,10 +57,8 @@
                                 </td>
                             </tr>
                         </table>
-                        <hr style="margin-top: -7px;">
-                        <center><b> Tax Invoice </b></center>
+                        <center><b> Delivery Invoice </b></center>
                         <br>
-                        <hr style="margin-top: -7px;">
                     </td>
                 </tr>
                 <br>
@@ -45,22 +67,11 @@
                         <table>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4>To : <span style="color:#337AB7;">{{service.customer}}</span></h4>
-                                        </div>
+                                    <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
                                             <p>
-                                                <b>Phone No. : </b> {{service.customer.phone_number|default:"NA"}}<span class="pull-right"><b>Invoice No. : </b> {{service.invoice_number}}</span><br>
-                                                <b>Email : </b> {{service.customer.email|default:"NA"}}<span class="pull-right"><b>P.O. Date : </b> {{service.purchase_order_date|date:"d M Y"|default:"NA"}}</span><br>                                                
-                                                <b>Tine Number : </b> {{service.customer.tin_number|default:"NA"}}<span class="pull-right"><b>P.O. No. : </b> {{service.purchase_order_number|default:"NA"}}</span><br>
-                                                <b>Address : </b> {{service.customer.address|default:"NA"}}<br>
-                                                {% if service.vehical %}
-                                                <b>Vehical No. : </b> {{service.vehical|default:"NA"}}
-                                                {% else %}
-                                                <b>Service : </b>{{service.otherservice|default:"NA"}}<br>
-                                                <b>Service No. :</b>{{service.otherservice.number|default:"NA"}}
-                                                {% endif %}
+                                                <b>Consignee M/S : </b> {{service.customer|default:"NA"}}<br>
+                                                <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> {{service.customer.address}}
                                             </p>
                                         </div>
                                     </div>
@@ -70,7 +81,7 @@
                     </td>
                 </tr>
                 <table>
-                    <h2><small>Item Description</small></h2>
+                    <h5>Please recieve the following in good order and condition and return the duplicate copy duty signed and stamped in token of your having recieved of goods</h5>
                     <tr class="heading">
                         <td style="border: 1px solid #eee;">
                             No. 
@@ -79,7 +90,7 @@
                             Name
                         </td>
                         <td style="border: 1px solid #eee;">
-                            Quantity
+                            Qty.
                         </td>
                         <td style="border: 1px solid #eee;">
                             Price
@@ -97,35 +108,57 @@
                         <td style="border: 1px solid #eee; width: 100px;">&#8377; {% widthratio part.part_quantity 1 part.price %}</td>
                     </tr>
                     {% endfor %}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Vat/C-Form</td>
-                        <td style="border: 1px solid #eee;">{{service.tax}}%</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Vat Amount</td>
-                        <td style="border: 1px solid #eee;">&#8377; {{service.tax_amount}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid #eee;">&#8377; {{service.part_cost|add:service.tax_amount}}</td>
-                    </tr>
                 </table>
                 <br>
                 <b> Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
+                <span class="pull-right"><b> Vehical Number: </b> {{service.delivery_invoice_details.vehical_number|default:"NA"}}</span>
+                <br>
+                <br>
+                <tr>
+                    <td>
+                        <table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="floatleft">
+                                                <b>VAT TIN No. :</b> 24750701947
+                                                <br>
+                                                <b>CST No. :</b> 24750701947
+                                            </div>
+                                            <div class="floatright">
+                                                <b>Party TIN No. :</b> {{service.customer.tin_number|default:"NA"}}
+                                                <br>
+                                                <b>CST No. : </b>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="panel-body">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <b class="pull-right"> Authorized By</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
             </table>
             <br>
             <br>
             <br>
-            <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
+            <br>
+            <b>
+            Received the above goods in good order and condition
+            <span style="padding-left:57px;">Date :</span>
+            <span class="pull-right">Reciever Sign with Stamp</span>
+            </b>
+            <center>
+            <br>
+            <b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
             <img src="{% static 'images/helicon-footer.png' %}">
         </div>
         <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>

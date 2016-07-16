@@ -1,0 +1,146 @@
+{% extends "templates/base.html" %}
+
+{% load staticfiles %}
+
+{% block stylesheets_extend %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="side-body">
+    <div class="page-title">
+        <span class="title">Delivery Invoice</span>
+        <div class="description"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form-inline">
+                        <div class="sub-title">Customer Details</div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">First Name: </label>&nbsp;&nbsp;
+                            {{service.customer.first_name|title|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Last Name: </label>&nbsp;&nbsp;
+                            {{service.customer.last_name|title|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Email: </label>&nbsp;&nbsp;
+                            {{service.customer.email|default:"NA"|default_if_none:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Contact Number:</label>&nbsp;&nbsp;
+                            {{service.customer.phone_number}}
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Tin Number:</label>&nbsp;&nbsp;
+                            {{service.customer.tin_number|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Gender:</label>&nbsp;&nbsp;
+                            {{service.customer.gender|title|default:"NA"}}
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Address: </label>&nbsp;&nbsp;
+                            {{service.customer.address|title|default:"NA"}} 
+                        </div>
+                    </form>
+
+
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Item Descriptions</div>
+                        <div class="panel-body">
+                        </div>
+                        <!-- Table -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               {% for part in service.parts.all %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{part.part_name}}</td>
+                                    <td>{{part.part_quantity}}</td>
+                                    <td>{{part.price}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body" id="deliveryform">
+                    {% if service.delivery_invoice_details %}
+
+                    <form class="form-inline" id="viewdeliveryform">
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Vehicle Number: </label>&nbsp;&nbsp;
+                            {{service.delivery_invoice_details.vehical_number}}
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Remark: </label>&nbsp;&nbsp;
+                            {{service.delivery_invoice_details.remark}}
+                        </div>
+                        <div class="login-button text-center">
+                            <a class="btn btn-primary" id="editDeliveryDetails">Edit</a>
+                            <a class="btn btn-primary" href="{% url 'service:delivery_invoice' service.invoice_number %}" >Generate Delivery Invoice</a>
+                        </div>
+                    </form>
+
+                    <form class="form-inline" action="" style="display: none;" method="post" id="editdeliveryform">
+                        {% csrf_token %}
+                        <div class="sub-title">Update Delivery Details</div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Delivery Vehical Number: </label>&nbsp;&nbsp;
+                            <input type="text" value="{{service.delivery_invoice_details.vehical_number}}" name="vehical_number" autocomplete="off" id="vehical_number" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Remark: </label>&nbsp;&nbsp;
+                            <textarea type="text" rows="2" cols="50" id="remark" name="remark" class="form-control">{{service.delivery_invoice_details.remark}}</textarea>
+                        </div>
+                        <input type="hidden" value="{{service.invoice_number}}" id="service_id" name="service_id">
+                        <div class="login-button text-center">
+                            <button class="btn btn-primary" id="editDeliveryDetails">Update</button>
+                            <a class="btn btn-primary" href="{% url 'service:delivery_invoice' service.invoice_number %}" >Generate Delivery Invoice</a>
+                        </div>
+                    </form>
+
+                    {% else%}
+
+                    <form class="form-inline" action="" method="post" id="deliveryform">
+                        {% csrf_token %}
+                        <div class="sub-title">Enter Delivery Details</div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Delivery Vehical Number: </label>&nbsp;&nbsp;
+                            <input type="text" placeholder="GJ 19 XX XXXX" name="vehical_number" autocomplete="off" id="vehical_number" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Enter Remark: </label>&nbsp;&nbsp;
+                            <textarea type="text" rows="2" cols="50" id="remark" name="remark" class="form-control"> </textarea>
+                        </div>
+                        <input type="hidden" value="{{service.invoice_number}}" id="service_id" name="service_id">
+                        <div class="login-button text-center">
+                            <button class="btn btn-primary" id="saveDeliveryDetails">Save</button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts_extend %}
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/delivery.js' %}"></script>
+{% endblock scripts_extend %}

@@ -26,6 +26,7 @@ class Payment(models.Model):
         CASH = 'Cash'
         CHEQUE = 'Cheque'
         OTHERS = 'Others'
+        Advance = 'Advance'
 
         @classmethod
         def as_tuple(cls):
@@ -44,6 +45,15 @@ class Payment(models.Model):
 
     def __unicode__(self):
         return str(self.payment_amount)
+
+
+class DeliveryDetail(models.Model):
+    vehical_number = models.CharField(blank=True, null=True, max_length=70)
+    remark = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return str(self.vehical_number)
 
 
 class Service(models.Model):
@@ -86,6 +96,8 @@ class Service(models.Model):
     gate_pass_no = models.CharField(blank=True, null=True, max_length=100)
     purchase_order_number = models.CharField(blank=True, null=True, max_length=100)
     purchase_order_date = models.DateTimeField(blank=True, null=True)
+
+    delivery_invoice_details = models.ForeignKey(DeliveryDetail, blank=True, null=True)
 
     def __unicode__(self):
         return str(self.invoice_number)

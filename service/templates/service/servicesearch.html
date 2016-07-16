@@ -92,6 +92,10 @@
                                           <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                         <a class="btn btn-default" type="button" href="{% url 'service:invoice_tax_view' service.invoice_number%}">
                                               Tax Invoice
+                                          </a></br>
+                                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        <a class="btn btn-default" type="button" href="{% url 'service:generate_delivery_invoice' service.invoice_number%}">
+                                            Delivery Invoice
                                           </a>
                                             </div>
                                             <div class="modal-footer">
