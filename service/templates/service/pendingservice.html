@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="side-body">
         <div class="page-title">
-            <span class="title">Service</span>
+            <span class="title">Pending Service</span>
             <div class="description"></div>
         </div>
         <div class="row">
@@ -52,8 +52,8 @@
                                         <td>{{service.otherservice}}</td>
                                     {% endif %}
                                     <td>{{service.customer|title }}</td>
-                                    <td>{{service.service_date}}</td>
-                                    <td>{{service.expected_delivery_date}}</td>
+                                    <td>{{service.service_date|date:"D d M Y"}}</td>
+                                    <td>{{service.expected_delivery_date |date:"D d M Y"}}</td>
                                     <td>{{service.serviced_by|title|default:"NA"|default_if_none:"NA"}}</td>
                                     <td>
                                         <div aria-label="Extra-small button group" role="group" class="btn-group btn-group-xs">

@@ -114,7 +114,8 @@ def service_create(request):
                 advance_payment = True
                 payment = Payment.objects.create(
                     payment_amount=int(service_form.get('advance_payment')),
-                    recieved_by=request.user)
+                    recieved_by=request.user,
+                    payment_type=Payment.PaymentOptions.Advance.value)
         else:
             service_form['advance_payment'] = 0
 
