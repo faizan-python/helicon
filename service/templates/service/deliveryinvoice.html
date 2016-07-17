@@ -9,30 +9,6 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/pdf.css' %}">
-        <style type="text/css">
-            .floatleft {
-                float:left; 
-                width: 50%;
-                border-right: 1px solid black;
-            }
-            .floatright {
-            float: right;
-                width: 50%;
-                padding-left: 18px;
-            }
-            .panel-body {
-                padding: 2px;
-            }
-            hr {
-                display: block;
-                height: 1px;
-                border: 0;
-                border-top: 1px solid #ccc;
-                margin: 0em 0;
-                padding: 0;
-                border-color: black;
-            }
-        </style>
         <nav role="navigation" class="navbar navbar-default">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -57,7 +33,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <center><b> Delivery Invoice </b></center>
+                        <center><b> Delivery Challan Cum Gate Pass </b></center>
                         <br>
                     </td>
                 </tr>
@@ -71,7 +47,8 @@
                                         <div class="panel-body">
                                             <p>
                                                 <b>Consignee M/S : </b> {{service.customer|default:"NA"}}<br>
-                                                <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> {{service.customer.address}}
+                                                <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> {{service.customer.address}}<br>
+                                                <b> Gate Pass No. : </b>&nbsp; {{service.gate_pass_no|default:"NA"}}
                                             </p>
                                         </div>
                                     </div>
@@ -82,36 +59,59 @@
                 </tr>
                 <table>
                     <h5>Please recieve the following in good order and condition and return the duplicate copy duty signed and stamped in token of your having recieved of goods</h5>
-                    <tr class="heading">
-                        <td style="border: 1px solid #eee;">
-                            No. 
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Name
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Qty.
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Price
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Amount
-                        </td>
-                    </tr>
-                    {% for part in service.parts.all %}
-                    <tr class="item">
-                        <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
-                        <td style="border: 1px solid #eee;">{{part.part_name}}</td>
-                        <td style="border: 1px solid #eee; width: 50px;">{{part.part_quantity}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{part.price}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {% widthratio part.part_quantity 1 part.price %}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
                 <br>
-                <b> Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
-                <span class="pull-right"><b> Vehical Number: </b> {{service.delivery_invoice_details.vehical_number|default:"NA"}}</span>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                <center> Sr. No. </center>
+                                            </div>
+                                            <div class="descdeliverycoloumn">
+                                                <center> Item </center>
+                                            </div>
+                                            <div class="qtycoloumn">
+                                                <center> Qty. </center>
+                                            </div>                                            
+                                            <div class="remarkcoloumn">
+                                                <center> Remark </center>
+                                            </div>
+                                        </div>
+                                        <hr/>
+
+                                        {% for part in service.parts.all %}
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                {{ forloop.counter }}
+                                            </div>
+                                            <div class="descdeliverycoloumn">
+                                                 {{part.part_name}}
+                                            </div>
+                                            <div class="qtycoloumn">
+                                                {{part.part_quantity}}
+                                            </div>
+                                            {% if forloop.counter == 1%}   
+                                            <div class="remarkcoloumn">
+                                                {{service.delivery_invoice_details.remark}}
+                                            </div>
+                                            {% else %}
+                                            <div class="remarkcoloumn">
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
+
+
+
+
+
+
                 <br>
                 <br>
                 <tr>
@@ -138,6 +138,7 @@
                                         <br>
                                         <br>
                                         <br>
+                                        <b> Vehical Number: </b> {{service.delivery_invoice_details.vehical_number|default:"NA"}}
                                         <b class="pull-right"> Authorized By</b>
                                         </div>
                                     </div>

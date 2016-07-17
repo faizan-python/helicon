@@ -35,10 +35,8 @@
                                 </td>
                             </tr>
                         </table>
-                        <hr style="margin-top: -7px;">
-                        <center><b> {{customer}} Report </b></center>
+                        <h5><center><b> {{customer}} Report </b></center></h5>
                         <br>
-                        <hr style="margin-top: -7px;">
                     </td>
                 </tr>
                 <br>
@@ -48,72 +46,95 @@
                 </tr>
 
 
-                <table>
-                    <h2><small>Report Description</small></h2>
-                    <tr class="heading">
-                        <td style="border: 1px solid #eee;">
-                            No. 
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Customer Name 
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Product Name
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Total Price
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Total Paid
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Total Pending
-                        </td>
-                    </tr>
-                    {% for service in services%}
-                    <tr class="item">
-                        <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
-                        <td style="border: 1px solid #eee;">{{service.customer}}</td>
-                        {% if service.vehical %}
-                            <td style="border: 1px solid #eee;">{{service.vehical}}</td>
-                        {% else %}
-                            <td style="border: 1px solid #eee;">{{service.otherservice}}</td>
-                        {% endif %}
-                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{service.total_cost}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{service.total_paid}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{service.total_pending}}</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Total Paid Amount</td>
-                        <td style="border: 1px solid #eee;">&#8377; {{total_paid}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Pending Amount</td>
-                        <td style="border: 1px solid #eee;">&#8377; {{total_pending}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Total Amount</td>
-                        <td style="border: 1px solid #eee;">&#8377; {{total_cost}}</td>
-                    </tr>
-                </table>
+                <tr>
+                    <td>
+                        <table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                <center> Sr. No. </center>
+                                            </div>
+                                            <div class="reportnamecoloumn">
+                                                <center> Customer Name </center>
+                                            </div>
+                                            <div class="reportcoloumn">
+                                                <center> Product Name </center>
+                                            </div>                                            
+                                            <div class="reportcoloumn">
+                                                <center> Total Price </center>
+                                            </div>
+                                            <div class="reportcoloumn">
+                                                <center> Total Paid </center>
+                                            </div>
+                                            <div class="reportamountcoloumn">
+                                                <center> Total Pending </center>
+                                            </div>
+                                        </div>
+                                        <hr/>
+
+                                        {% for service in services%}
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                {{ forloop.counter }}
+                                            </div>
+                                            <div class="reportnamecoloumn">
+                                                {{service.customer}}
+                                            </div>
+                                            {% if service.vehical %}
+                                            <div class="reportcoloumn">
+                                                {{service.vehical}}
+                                            </div>
+                                            {% else %}                          
+                                            <div class="reportcoloumn">
+                                                {{service.otherservice}}
+                                            </div>
+                                            {% endif %}
+                                            <div class="reportcoloumn">
+                                                {{service.total_cost}}
+                                            </div>
+                                            <div class="reportcoloumn">
+                                                {{service.total_paid}}
+                                            </div>
+                                            <div class="reportamountcoloumn">
+                                                {{service.total_pending}}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="panel-footer">
+                                        <span class="pull-right" style="width: 173px;">Total Paid Amount : {{total_paid}}</span><br>
+                                        <span class="pull-right" style="width: 173px;">Pending Amount : {{total_pending}}</span><br>
+                                        <span class="pull-right" style="width: 173px;">Total Amount: {{total_cost}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
                 <br>
             </table>
             <br>
-            <br>
-            <br>
+            <tr>
+                <td>
+                    <table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default" style="border-color: black;">
+                                    <div class="panel-body">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <b class="pull-right"> Authorized By</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </table>
+                </td>
+            </tr>
             <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
             <img src="{% static 'images/helicon-footer.png' %}">
         </div>

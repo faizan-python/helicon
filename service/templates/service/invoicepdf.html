@@ -35,31 +35,34 @@
                                 </td>
                             </tr>
                         </table>
-                        <center><b> Invoice </b></center>
+                        <h4><center><b> Invoice </b></center></h4>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <table>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" style=" padding: 1px 14px;">
-                                            To : <span style="color:#337AB7;">{{service.customer}}</span>
-                                        </div>
-                                        <div class="panel-body" style="padding: 1px;">
-                                            <p>
-                                                <b>Phone No. : </b> {{service.customer.phone_number|default:"NA"}}<span class="pull-right"><b>Invoice No. : </b> {{service.invoice_number}}</span><br>
-                                                <b>Email : </b> {{service.customer.email|default:"NA"}}<span class="pull-right"><b>P.O. Date : </b> {{service.purchase_order_date|date:"d M Y"|default:"NA"}}</span><br>
-                                                <b>Tine Number : </b> {{service.customer.tin_number|default:"NA"}}<span class="pull-right"><b>P.O. No. : </b> {{service.purchase_order_number|default:"NA"}}</span><br>
-                                                <b>Address : </b> {{service.customer.address|default:"NA"}}<br>
+                                <div class="col-md-12" style="padding-right: 1px;">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="userdetail">
+                                                <b class="userheader"> To </b> <b>: {{service.customer}} </b><br>
+                                                <b class="userheader">Address </b> : {{service.customer.address|default:"NA"}}<br>
+                                                <b class="userheader">Phone No. </b>: {{service.customer.phone_number|default:"NA"}}<br>
+                                                <b class="userheader">Email </b>: {{service.customer.email|default:"NA"}}<br>
+                                                <b class="userheader">Tin Number </b>: {{service.customer.tin_number|default:"NA"}}<br>
                                                 {% if service.vehical %}
-                                                <b>Vehical No. : </b> {{service.vehical|default:"NA"}}
+                                                <b class="userheader">Vehical No. </b>: {{service.vehical|default:"NA"}}
                                                 {% else %}
-                                                <b>Service : </b>{{service.otherservice|default:"NA"}}<br>
-                                                <b>Service No. : </b>{{service.otherservice.number|default:"NA"}}
+                                                <b class="userheader">Service </b>:{{service.otherservice|default:"NA"}}<br>
+                                                <b class="userheader">Service No. </b>:{{service.otherservice.number|default:"NA"}}
                                                 {% endif %}
-                                            </p>
+                                            </div>
+                                            <div class="invoicedetail">
+                                            <b class="userbody">Invoice No. </b>: {{service.invoice_number}}<br>
+                                            <b class="userbody">P.O. Date </b>: {{service.purchase_order_date|date:"d M Y"|default:"NA"}}<br>
+                                            <b class="userbody">P.O. No. </b>: {{service.purchase_order_number|default:"NA"}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -67,161 +70,196 @@
                         </table>
                     </td>
                 </tr>
-
-
                 {% if service.parts.all %}
-                    <table>
-                        <h5>Item Description</h5>
-                        <tr class="heading">
-                            <td style="border: 1px solid black;">
-                                No. 
-                            </td>
-                            <td style="border: 1px solid black;">
-                                Name
-                            </td>
-                            <td style="border: 1px solid black;">
-                                Quantity
-                            </td>
-                            <td style="border: 1px solid black;">
-                                Price
-                            </td>
-                            <td style="border: 1px solid black;">
-                                Amount
-                            </td>
-                        </tr>
-                        {% for part in service.parts.all %}
-                        <tr class="item">
-                            <td style="border: 1px solid black; width: 50px;">{{ forloop.counter }}</td>
-                            <td style="border: 1px solid black;">{{part.part_name}}</td>
-                            <td style="border: 1px solid black; width: 50px;">{{part.part_quantity}}</td>
-                            <td style="border: 1px solid black; width: 100px;">{{part.price}}</td>
-                            <td style="border: 1px solid black; width: 100px;">{% widthratio part.part_quantity 1 part.price %}</td>
-                        </tr>
-                        {% endfor %}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="border: 1px solid black; font-size: 12px;">Vat/C-Form</td>
-                            <td style="border: 1px solid black;">{{service.tax}}%</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="border: 1px solid black; font-size: 12px;">Vat Amount</td>
-                            <td style="border: 1px solid black;">{{service.tax_amount}}</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="border: 1px solid black; font-size: 12px;">G. Total</td>
-                            <td style="border: 1px solid black;">{{service.part_cost|add:service.tax_amount}}</td>
-                        </tr>
-                    </table>
+                <tr>
+                    <td>
+                        <table>
+                            <h5> <center> Item Description </center> </h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                <center> Sr. No. </center>
+                                            </div>
+                                            <div class="desclabourcoloumn">
+                                                <center> Item </center>
+                                            </div>
+                                            <div class="qtycoloumn">
+                                                <center> Qty. </center>
+                                            </div>                                            
+                                            <div class="pricecoloumn">
+                                                <center> Price </center>
+                                            </div>                                            
+                                            <div class="amountcoloumn">
+                                                <center> Amount </center>
+                                            </div>
+                                        </div>
+                                        <hr/>
+
+                                        {% for part in service.parts.all %}
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                {{ forloop.counter }}
+                                            </div>
+                                            <div class="desclabourcoloumn">
+                                                {{part.part_name}}
+                                            </div>
+                                            <div class="qtycoloumn">
+                                                {{part.part_quantity}}
+                                            </div>                                            
+                                            <div class="pricecoloumn">
+                                                {{part.price}}
+                                            </div>                                            
+                                            <div class="amountcoloumn">
+                                                {% widthratio part.part_quantity 1 part.price %}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="panel-footer">
+                                            <span class="pull-right" style="width: 173px;">Vat/C-Form : {{service.tax}}%</span><br>
+                                            <span class="pull-right" style="width: 173px;">Vat Amount : {{service.tax_amount}}</span><br>
+                                            <span class="pull-right" style="width: 173px;">Grand Total : {{service.part_cost|add:service.tax_amount}}</span>
+                                        </div>
+                                    </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
                 {% endif %}
 
 
                 {% if service.labourcost_detail.all %}
-                    <table>
-                        <h5>Labour Cost Description</h5>
-                        <tr class="heading">
-                            <td style="border: 1px solid black;">
-                                No. 
-                            </td>
-                            <td style="border: 1px solid black;">
-                                Name
-                            </td>
-                            <td style="border: 1px solid black;">
-                                Amount
-                            </td>
-                        </tr>
-                        {% for labour in service.labourcost_detail.all %}
-                        <tr class="item">
-                            <td style="border: 1px solid black; width: 50px;">{{ forloop.counter }}</td>
-                            <td style="border: 1px solid black;">{{labour.name}}</td>
-                            <td style="border: 1px solid black; width: 100px;">{{labour.labour_price}}</td>
-                        </tr>
-                        {% endfor %}
-                        <tr>
-                            <td></td>
-                            <td style="border: 1px solid black; font-size: 12px;">Service Tax</td>
-                            <td style="border: 1px solid black;">{{service.service_tax}}%</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td style="border: 1px solid black; font-size: 12px;">Service Tax Amount</td>
-                            <td style="border: 1px solid black;">{{service.service_tax_amount}}</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td style="border: 1px solid black; font-size: 12px;">G. Total</td>
-                            <td style="border: 1px solid black;">{{service.labour_cost|add:service.service_tax_amount}}</td>
-                        </tr>
-                    </table>
+                <tr>
+                    <td>
+                        <table>
+                            <h5><center> Labour Cost Description </center></h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                <center> Sr. No. </center>
+                                            </div>
+                                            <div class="desclabourcoloumn">
+                                                <center> Name </center>
+                                            </div>
+                                            <div class="amountcoloumn">
+                                                <center> Amount </center>
+                                            </div>
+                                        </div>
+                                        <hr/>
+
+                                        {% for labour in service.labourcost_detail.all %}
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                {{ forloop.counter }}
+                                            </div>
+                                            <div class="desclabourcoloumn">
+                                                {{labour.name}}
+                                            </div>                             
+                                            <div class="amountcoloumn">
+                                                {{labour.labour_price}}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="panel-footer">
+                                        <span class="pull-right" style="width: 173px;">Service Tax : {{service.service_tax}}%</span><br>
+                                        <span class="pull-right" style="width: 173px;">Service Tax Amount : {{service.service_tax_amount}}</span><br>
+                                        <span class="pull-right" style="width: 173px;">Grand Total : {{service.labour_cost|add:service.service_tax_amount}}</span>
+                                        </div>
+                                    </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
                 {% endif %}
 
+                {% if service.payment.all %}
+                <tr>
+                    <td>
+                        <table>
+                            <h5><center> Payment Description </center></h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                <center> Sr. No. </center>
+                                            </div>
+                                            <div class="paymentamountcoloumn">
+                                                <center> Amount </center>
+                                            </div>
+                                            <div class="paymentdatecoloumn">
+                                                <center> Date </center>
+                                            </div>                                            
+                                            <div class="paymentrecievedcoloumn">
+                                                <center> Recieved By </center>
+                                            </div>
+                                            <div class="paymenttypecoloumn">
+                                                <center> Payment Type </center>
+                                            </div>
+                                            <div class="paymentchequecoloumn">
+                                                <center> Cheque Number </center>
+                                            </div>
+                                        </div>
+                                        <hr/>
 
-                <table>
-                    <h5>Payment Description</h5>
-                    <tr class="heading">
-                        <td style="border: 1px solid black;">
-                            No. 
-                        </td>
-                        <td style="border: 1px solid black;">
-                            Amount
-                        </td>
-                        <td style="border: 1px solid black;">
-                            Date
-                        </td>
-                        <td style="border: 1px solid black;">
-                            Recieved By
-                        </td>
-                        <td style="border: 1px solid black;">
-                            Payment Type
-                        </td>
-                        <td style="border: 1px solid black;">
-                            Cheque Number
-                        </td>
-                    </tr>
-                    {% for payment in service.payment.all %}
-                    <tr class="item">
-                        <td style="border: 1px solid black; width: 50px;">{{ forloop.counter }}</td>
-                        <td style="border: 1px solid black;width: 100px;">&#8377; {{payment.payment_amount}}</td>
-                        <td style="border: 1px solid black;">{{payment.created_date}}</td>
-                        <td style="border: 1px solid black; width: 100px;">{{payment.recieved_by}}</td>
-                        <td style="border: 1px solid black; width: 100px;">{{payment.payment_type}}</td>
-                        <td style="border: 1px solid black; width: 100px;">{{payment.cheque_number|default:"NA"}}</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid black; font-size: 12px;">T. Paid Amount</td>
-                        <td style="border: 1px solid black;">&#8377; {{service.total_paid}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid black; font-size: 12px;">Pending Amount</td>
-                        <td style="border: 1px solid black;">&#8377; {{service.total_pending}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid black; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid black;">&#8377; {{service.total_cost}}</td>
-                    </tr>
+                                        {% for payment in service.payment.all %}
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                {{ forloop.counter }}
+                                            </div>
+                                            <div class="paymentamountcoloumn">
+                                                {{payment.payment_amount}}
+                                            </div>
+                                            <div class="paymentdatecoloumn">
+                                                {{payment.created_date|date:"d M Y"|default:"NA"}}
+                                            </div>                                            
+                                            <div class="paymentrecievedcoloumn">
+                                                {{payment.recieved_by}}
+                                            </div>
+                                            <div class="paymenttypecoloumn">
+                                                {{payment.payment_type}}
+                                            </div>
+                                            <div class="paymentchequecoloumn">
+                                                {{payment.cheque_number|default:"NA"}}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="panel-footer">
+                                        <span class="pull-right" style="width: 173px;">T. Paid Amount : {{service.total_paid}}</span><br>
+                                        <span class="pull-right" style="width: 173px;">Pending Amount : {{service.total_pending}}</span><br>
+                                        <span class="pull-right" style="width: 173px;">Grand Total : {{service.total_cost}}</span>
+                                        </div>
+                                    </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
+                {% endif %}
                 </table>
-                <b> Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
-            </table>
+
+                <tr>
+                    <td>
+                        <table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <b> Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
+                                        <b class="pull-right"> Authorized By</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
             <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
             <img src="{% static 'images/helicon-footer.png' %}">
         </div>

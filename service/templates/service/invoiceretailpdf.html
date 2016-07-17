@@ -35,35 +35,35 @@
                                 </td>
                             </tr>
                         </table>
-                        <hr style="margin-top: -7px;">
                         <center><b> Retail Invoice </b></center>
                         <br>
-                        <hr style="margin-top: -7px;">
                     </td>
                 </tr>
-                <br>
                 <tr>
                     <td>
                         <table>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4>To : <span style="color:#337AB7;">{{service.customer}}</span></h4>
-                                        </div>
+                                <div class="col-md-12" style="padding-right: 1px;">
+                                    <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
-                                            <p>
-                                                <b>Phone No. :</b> {{service.customer.phone_number|default:"NA"}}<span class="pull-right"><b>Invoice No. :</b> {{service.invoice_number}}</span><br>
-                                                <b>Email : </b> {{service.customer.email|default:"NA"}}<span class="pull-right"><b>P.O. Date : </b> {{service.purchase_order_date|date:"d M Y"|default:"NA"}}</span><br>
-                                                <b>Tine Number : </b> {{service.customer.tin_number|default:"NA"}}<span class="pull-right"><b>P.O. No. : </b> {{service.purchase_order_number|default:"NA"}}</span><br>
-                                                <b>Address : </b> {{service.customer.address|default:"NA"}}<br>
+                                            <div class="userdetail">
+                                                <b class="userheader"> To </b> <b>: {{service.customer}} </b><br>
+                                                <b class="userheader">Address </b> : {{service.customer.address|default:"NA"}}<br>
+                                                <b class="userheader">Phone No. </b>: {{service.customer.phone_number|default:"NA"}}<br>
+                                                <b class="userheader">Email </b>: {{service.customer.email|default:"NA"}}<br>
+                                                <b class="userheader">Tin Number </b>: {{service.customer.tin_number|default:"NA"}}<br>
                                                 {% if service.vehical %}
-                                                <b>Vehical No. : </b> {{service.vehical|default:"NA"}}
+                                                <b class="userheader">Vehical No. </b>: {{service.vehical|default:"NA"}}
                                                 {% else %}
-                                                <b>Service : </b>{{service.otherservice|default:"NA"}}<br>
-                                                <b>Service No. :</b>{{service.otherservice.number|default:"NA"}}
+                                                <b class="userheader">Service </b>:{{service.otherservice|default:"NA"}}<br>
+                                                <b class="userheader">Service No. </b>:{{service.otherservice.number|default:"NA"}}
                                                 {% endif %}
-                                            </p>
+                                            </div>
+                                            <div class="invoicedetail">
+                                            <b class="userbody">Invoice No. </b>: {{service.invoice_number}}<br>
+                                            <b class="userbody">P.O. Date </b>: {{service.purchase_order_date|date:"d M Y"|default:"NA"}}<br>
+                                            <b class="userbody">P.O. No. </b>: {{service.purchase_order_number|default:"NA"}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -71,48 +71,69 @@
                         </table>
                     </td>
                 </tr>
-                <table>
-                    <h2><small>Labour Cost Description</small></h2>
-                    <tr class="heading">
-                        <td style="border: 1px solid #eee;">
-                            No. 
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Name
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Amount
-                        </td>
-                    </tr>
-                    {% for labour in service.labourcost_detail.all %}
-                    <tr class="item">
-                        <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
-                        <td style="border: 1px solid #eee;">{{labour.name}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{labour.labour_price}}</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Service Tax</td>
-                        <td style="border: 1px solid #eee;">{{service.service_tax}}%</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Service Tax Amount</td>
-                        <td style="border: 1px solid #eee;">&#8377; {{service.service_tax_amount}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid #eee;">&#8377; {{service.labour_cost|add:service.service_tax_amount}}</td>
-                    </tr>
-                </table>
-                <br>
-                <b> Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
+                <tr>
+                    <td>
+                        <table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                <center> Sr. No. </center>
+                                            </div>
+                                            <div class="desclabourcoloumn">
+                                                <center> Name </center>
+                                            </div>
+                                            <div class="amountcoloumn">
+                                                <center> Amount </center>
+                                            </div>
+                                        </div>
+                                        <hr/>
+
+                                        {% for labour in service.labourcost_detail.all %}
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                {{ forloop.counter }}
+                                            </div>
+                                            <div class="desclabourcoloumn">
+                                                {{labour.name}}
+                                            </div>                             
+                                            <div class="amountcoloumn">
+                                                {{labour.labour_price}}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="panel-footer">
+                                        <span class="pull-right" style="width: 173px;">Service Tax : {{service.service_tax}}%</span><br>
+                                        <span class="pull-right" style="width: 173px;">Service Tax Amount : {{service.service_tax_amount}}</span><br>
+                                        <span class="pull-right" style="width: 173px;">Grand Total : {{service.labour_cost|add:service.service_tax_amount}}</span>
+                                        </div>
+                                    </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
             </table>
-            <br>
-            <br>
-            <br>
+                <tr>
+                    <td>
+                        <table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <b> Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
+                                        <b class="pull-right"> Authorized By</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
             <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
             <img src="{% static 'images/helicon-footer.png' %}">
         </div>
