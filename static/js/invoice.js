@@ -8,6 +8,9 @@ $(document).ready(function() {
         minDate: dateToday
     });
 
+    $("#cash").attr('checked', false);
+    $("#cheque").attr('checked', false);
+
     function checkifblank(data) {
         if (data){
             return data
