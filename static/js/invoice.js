@@ -127,7 +127,7 @@ $(document).ready(function() {
         $('#totalcost').val(sum);
 
         if (paid){
-            var pending = sum - paid
+            var pending = sum - paid - advance_payment
             $('#total_pending').val(pending);
         }
         else{
