@@ -30,8 +30,8 @@ def quotation(request):
 @login_required(login_url='/admin/')
 def quotation_generate(request):
     if request.method == "POST":
-        data = request.POST.dict()
-        forms = json.loads(data.keys()[0])
+        data = request.body
+        forms = json.loads(data)
         quotation_form = forms.get('customer')
         part_data = forms.get('part_data')
         del forms['customer']
