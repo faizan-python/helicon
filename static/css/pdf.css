@@ -168,6 +168,22 @@
     overflow: hidden;
     padding-left: 2px;
 }
+.descquotationcoloumn {
+    float:left; 
+    width: 40%;
+    height: 35px;
+    border-right: 1px solid black;
+    overflow: hidden;
+    padding-left: 2px;
+}
+.itemquotationcoloumn {
+    float:left; 
+    width: 24%;
+    height: 35px;
+    border-right: 1px solid black;
+    overflow: hidden;
+    padding-left: 2px;
+}
 .qtycoloumn {
     float:left; 
     width: 5%;

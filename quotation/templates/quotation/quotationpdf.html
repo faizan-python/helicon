@@ -1,4 +1,4 @@
-{% load staticfiles %}
+    {% load staticfiles %}
 <!doctype html>
 <html>
     <head>
@@ -28,34 +28,31 @@
                     <td colspan="2">
                         <table>
                             <tr>
-                                <td class="title">
+                                <td>
                                     <img src="{% static 'images/helicon-logo5.png' %}">
                                 </td>
                             </tr>
                         </table>
-                        <hr style="margin-top: -7px;">
-                        <center><b> Quotation </b></center>
-                        <br>
-                        <hr style="margin-top: -7px;">
+                        <h4><center><b> Quotation </b></center></h4>
                     </td>
                 </tr>
-                <br>
                 <tr>
                     <td>
                         <table>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4>To : <span style="color:#337AB7;">{{quotation.customer_name}}</span></h4>
-                                        </div>
+                                <div class="col-md-12" style="padding-right: 1px;">
+                                    <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
-                                            <p>
-                                                <b>Company Name:</b>{{quotation.company_name}} <span class="pull-right"><b>Quotation No. :</b> {{quotation.id}}</span><br>
-                                                <b>Phone No. :</b> {{quotation.phone_number}}<br>
-                                                <b>Email : </b> {{quotation.email}}<br>
-                                                <b>Address : </b> {{quotation.address}}
-                                            </p>
+                                            <div class="userdetail">
+                                                <b class="userheader"> To </b> <b>: {{quotation.customer_name}} </b><br>
+                                                <b class="userheader">Company </b> : {{quotation.company_name | default:"NA"}}<br>
+                                                <b class="userheader">Phone No. </b> : {{quotation.phone_number | default:"NA"}}<br>
+                                                <b class="userheader">Email </b>: {{quotation.email|default:"NA"}}<br>
+                                                <b class="userheader">Address </b>: {{quotation.address | default:"NA"}}
+                                            </div>
+                                            <div class="invoicedetail">
+                                            <b class="userbody">Quotation No </b>: {{quotation.id}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -63,68 +60,86 @@
                         </table>
                     </td>
                 </tr>
-                <table>
-                    <h2><small>Item Description</small></h2>
-                    <tr class="heading">
-                        <td style="border: 1px solid #eee;">
-                            No. 
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Name
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Description
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Quantity
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Price
-                        </td>
-                        <td style="border: 1px solid #eee;">
-                            Amount
-                        </td>
-                    </tr>
-                    {% for part in quotation.parts.all %}
-                    <tr class="item">
-                        <td style="border: 1px solid #eee; width: 50px;">{{ forloop.counter }}</td>
-                        <td style="border: 1px solid #eee;">{{part.part_name}}</td>
-                        <td style="border: 1px solid #eee;">{{part.description}}</td>
-                        <td style="border: 1px solid #eee; width: 50px;">{{part.part_quantity}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {{part.price}}</td>
-                        <td style="border: 1px solid #eee; width: 100px;">&#8377; {% widthratio part.part_quantity 1 part.price %}</td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Vat/C-Form</td>
-                        <td style="border: 1px solid #eee;">{{quotation.tax}}%</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">Vat Amount</td>
-                        <td style="border: 1px solid #eee;">&#8377; {{quotation.tax_amount}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="border: 1px solid #eee; font-size: 12px;">G. Total</td>
-                        <td style="border: 1px solid #eee;">&#8377; {{quotation.total_cost}}</td>
-                    </tr>
-                </table>
-                <br>
+                <tr>
+                    <td>
+                        <table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                <center> <b> No. </b> </center>
+                                            </div>
+                                            <div class="itemquotationcoloumn">
+                                                <center> <b> Item </b> </center>
+                                            </div>
+                                            <div class="descquotationcoloumn">
+                                                <center> <b> Description </b> </center>
+                                            </div>
+                                            <div class="qtycoloumn">
+                                                <center> <b> Qty. </b> </center>
+                                            </div>                                            
+                                            <div class="pricecoloumn">
+                                                <center> <b> Price </b> </center>
+                                            </div>                                            
+                                            <div class="amountcoloumn">
+                                                <center> <b> Amount </b> </center>
+                                            </div>
+                                        </div>
+                                        <hr/>
+
+                                        {% for part in quotation.parts.all %}
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                {{ forloop.counter }}
+                                            </div>
+                                            <div class="itemquotationcoloumn">
+                                                {{part.part_name}}
+                                            </div>
+                                            <div class="descquotationcoloumn">
+                                                {{part.description}}
+                                            </div>
+                                            <div class="qtycoloumn">
+                                                {{part.part_quantity}}
+                                            </div>                                            
+                                            <div class="pricecoloumn">
+                                                {{part.price}}
+                                            </div>                                            
+                                            <div class="amountcoloumn">
+                                                {% widthratio part.part_quantity 1 part.price %}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="panel-footer">
+                                            <span class="pull-right" style="width: 173px;"> <b>Vat/C-Form : </b> {{quotation.tax}}%</span><br>
+                                            <span class="pull-right" style="width: 173px;"> <b> Vat Amount : </b> {{quotation.tax_amount}}</span><br>
+                                            <span class="pull-right" style="width: 173px;"><b>Grand Total :</b> {{quotation.total_cost}}</span>
+                                        </div>
+                                    </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
             </table>
-            <br>
-            <br>
-            <br>
+                <tr>
+                    <td>
+                        <table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <b class="userheader"> Authorized By : </b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
             <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
             <img src="{% static 'images/helicon-footer.png' %}">
         </div>

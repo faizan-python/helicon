@@ -77,19 +77,19 @@
                                     <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
                                             <div class="nocoloumn">
-                                                <center> Sr. No. </center>
+                                                <center> <b> Sr. No. </b> </center>
                                             </div>
                                             <div class="desclabourcoloumn">
-                                                <center> Item </center>
+                                                <center> <b> Item </b> </center>
                                             </div>
                                             <div class="qtycoloumn">
-                                                <center> Qty. </center>
+                                                <center> <b> Qty. </b> </center>
                                             </div>                                            
                                             <div class="pricecoloumn">
-                                                <center> Price </center>
+                                                <center> <b> Price </b> </center>
                                             </div>                                            
                                             <div class="amountcoloumn">
-                                                <center> Amount </center>
+                                                <center> <b> Amount </b> </center>
                                             </div>
                                         </div>
                                         <hr/>
@@ -114,9 +114,9 @@
                                         </div>
                                         {% endfor %}
                                         <div class="panel-footer">
-                                            <span class="pull-right" style="width: 173px;">Vat/C-Form : {{service.tax}}%</span><br>
-                                            <span class="pull-right" style="width: 173px;">Vat Amount : {{service.tax_amount}}</span><br>
-                                            <span class="pull-right" style="width: 173px;">Grand Total : {{service.part_cost|add:service.tax_amount}}</span>
+                                            <span class="pull-right" style="width: 173px;"><b> Vat/C-Form </b>: {{service.tax}}%</span><br>
+                                            <span class="pull-right" style="width: 173px;"><b> Vat Amount </b>: {{service.tax_amount}}</span><br>
+                                            <span class="pull-right" style="width: 173px;"><b> Grand Total </b>: {{service.part_cost|add:service.tax_amount}}</span>
                                         </div>
                                     </div>
                             </div>

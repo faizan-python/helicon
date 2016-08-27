@@ -80,19 +80,19 @@
                                     <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
                                             <div class="nocoloumn">
-                                                <center> Sr. No. </center>
+                                                <center> <b> Sr. No. </b> </center>
                                             </div>
                                             <div class="desclabourcoloumn">
-                                                <center> Item </center>
+                                                <center> <b> Item </b> </center>
                                             </div>
                                             <div class="qtycoloumn">
-                                                <center> Qty. </center>
+                                                <center> <b> Qty. </b> </center>
                                             </div>                                            
                                             <div class="pricecoloumn">
-                                                <center> Price </center>
+                                                <center> <b> Price </b> </center>
                                             </div>                                            
                                             <div class="amountcoloumn">
-                                                <center> Amount </center>
+                                                <center> <b> Amount </b> </center>
                                             </div>
                                         </div>
                                         <hr/>
@@ -117,9 +117,9 @@
                                         </div>
                                         {% endfor %}
                                         <div class="panel-footer">
-                                            <span class="pull-right" style="width: 173px;">Vat/C-Form : {{service.tax}}%</span><br>
-                                            <span class="pull-right" style="width: 173px;">Vat Amount : {{service.tax_amount}}</span><br>
-                                            <span class="pull-right" style="width: 173px;">Grand Total : {{service.part_cost|add:service.tax_amount}}</span>
+                                            <span class="pull-right" style="width: 173px;"> <b> Vat/C-Form </b> : {{service.tax}}%</span><br>
+                                            <span class="pull-right" style="width: 173px;"><b> Vat Amount </b> : {{service.tax_amount}}</span><br>
+                                            <span class="pull-right" style="width: 173px;"><b> Grand Total </b> : {{service.part_cost|add:service.tax_amount}}</span>
                                         </div>
                                     </div>
                             </div>
@@ -139,13 +139,13 @@
                                     <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
                                             <div class="nocoloumn">
-                                                <center> Sr. No. </center>
+                                                <center> <b> Sr. No. </b> </center>
                                             </div>
                                             <div class="desclabourcoloumn">
-                                                <center> Name </center>
+                                                <center> <b> Name </b> </center>
                                             </div>
                                             <div class="amountcoloumn">
-                                                <center> Amount </center>
+                                                <center> <b> Amount </b> </center>
                                             </div>
                                         </div>
                                         <hr/>
@@ -164,9 +164,9 @@
                                         </div>
                                         {% endfor %}
                                         <div class="panel-footer">
-                                        <span class="pull-right" style="width: 173px;">Service Tax : {{service.service_tax}}%</span><br>
-                                        <span class="pull-right" style="width: 173px;">Service Tax Amount : {{service.service_tax_amount}}</span><br>
-                                        <span class="pull-right" style="width: 173px;">Grand Total : {{service.labour_cost|add:service.service_tax_amount}}</span>
+                                        <span class="pull-right" style="width: 173px;"><b> Service Tax </b> : {{service.service_tax}}%</span><br>
+                                        <span class="pull-right" style="width: 173px;"><b> Service Tax Amount </b>: {{service.service_tax_amount}}</span><br>
+                                        <span class="pull-right" style="width: 173px;"><b> Grand Total </b>: {{service.labour_cost|add:service.service_tax_amount}}</span>
                                         </div>
                                     </div>
                             </div>
@@ -185,22 +185,22 @@
                                     <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
                                             <div class="nocoloumn">
-                                                <center> Sr. No. </center>
+                                                <center> <b> Sr. No. </b> </center>
                                             </div>
                                             <div class="paymentamountcoloumn">
-                                                <center> Amount </center>
+                                                <center> <b> Amount </b> </center>
                                             </div>
                                             <div class="paymentdatecoloumn">
-                                                <center> Date </center>
+                                                <center> <b> Date </b> </center>
                                             </div>                                            
                                             <div class="paymentrecievedcoloumn">
-                                                <center> Recieved By </center>
+                                                <center> <b> Recieved By </b> </center>
                                             </div>
                                             <div class="paymenttypecoloumn">
-                                                <center> Payment Type </center>
+                                                <center> <b> Payment Type </b> </center>
                                             </div>
                                             <div class="paymentchequecoloumn">
-                                                <center> Cheque Number </center>
+                                                <center> <b> Cheque Number </b> </center>
                                             </div>
                                         </div>
                                         <hr/>
@@ -228,9 +228,9 @@
                                         </div>
                                         {% endfor %}
                                         <div class="panel-footer">
-                                        <span class="pull-right" style="width: 173px;">T. Paid Amount : {{service.total_paid}}</span><br>
-                                        <span class="pull-right" style="width: 173px;">Pending Amount : {{service.total_pending}}</span><br>
-                                        <span class="pull-right" style="width: 173px;">Grand Total : {{service.total_cost}}</span>
+                                        <span class="pull-right" style="width: 173px;"> <b>T. Paid Amount </b>: {{service.total_paid}}</span><br>
+                                        <span class="pull-right" style="width: 173px;"><b>Pending Amount </b>: {{service.total_pending}}</span><br>
+                                        <span class="pull-right" style="width: 173px;"><b>Grand Total</b> : {{service.total_cost}}</span>
                                         </div>
                                     </div>
                             </div>
