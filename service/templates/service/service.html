@@ -141,19 +141,22 @@
                 <div class="card-body" style="display: none;" id="othercompleteform">
                     <form class="form-inline" id="otherform">
                         <div class="sub-title">Service Type Details</div>
-                        <div class="form-group" style="padding-right:5em;">
+
+                        <!-- Removing Item Code -->
+<!--                         <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Item Code: </label>&nbsp;&nbsp;
                             <input type="text" placeholder="ES XXXX" name="number" id="number" class="form-control" required>
-                        </div>
+                        </div> -->
                         <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Product Name: </label>&nbsp;&nbsp;
                             <input type="text" placeholder="Audi" name="name" id="name" class="form-control" required>
                         </div>
-                        <div class="form-group" style="padding-right:5em;">
+                                                <!-- Removing Company Name -->
+<!--                         <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Company Name: </label>&nbsp;&nbsp;
                             <input type="text" placeholder="Company Name" id="company_name" name="company_name" class="form-control">
                         </div>
-                        <br>
+ -->                        <br>
                         <br>
                         <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Product Description: </label>&nbsp;&nbsp;
@@ -174,13 +177,14 @@
                 </div>
                 <div class="card-body">
                     <form class="form-inline" id="serviceform">
-                        <label for="exampleInputEmail2">Select Mechanic: </label>&nbsp;&nbsp;
+                          <!-- Removing Select Mechanic 2017 -->
+<!--                         <label for="exampleInputEmail2">Select Mechanic: </label>&nbsp;&nbsp;
                          <select id="mechanicdropdown">
                           {% for mechanic in mechanics%}
                               <option value="{{mechanic.id}}">{{mechanic}}</option>
                           {% endfor %}
                         </select>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp; -->
                         <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Expected Delivery Date: </label>&nbsp;&nbsp;
                             <input type="text" id="expected-date" name="expected_delivery_date" class="form-control" autocomplete="off" required>
