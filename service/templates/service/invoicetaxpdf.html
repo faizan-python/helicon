@@ -53,8 +53,7 @@
                                                 {% if service.vehical %}
                                                 <b class="userheader">Vehical No. </b>: {{service.vehical|default:"NA"}}
                                                 {% else %}
-                                                <b class="userheader">Service </b>:{{service.otherservice|default:"NA"}}<br>
-                                                <b class="userheader">Service No. </b>:{{service.otherservice.number|default:"NA"}}
+                                                <b class="userheader">Service </b>: {{service.otherservice|default:"NA"}}<br>
                                                 {% endif %}
                                             </div>
                                             <div class="invoicedetail">

@@ -55,8 +55,7 @@
                                                 {% if service.vehical %}
                                                 <b class="userheader">Vehical No. </b>: {{service.vehical|default:"NA"}}
                                                 {% else %}
-                                                <b class="userheader">Service </b>:{{service.otherservice|default:"NA"}}<br>
-                                                <b class="userheader">Service No. </b>:{{service.otherservice.number|default:"NA"}}
+                                                <b class="userheader">Service </b>: {{service.otherservice|default:"NA"}}<br>
                                                 {% endif %}
                                             </div>
                                             <div class="invoicedetail">
@@ -84,6 +83,12 @@
                                             <div class="desclabourcoloumn">
                                                 <center> <b> Name </b> </center>
                                             </div>
+                                            <div class="qtycoloumn">
+                                                <center> <b> Qty. </b> </center>
+                                            </div>                                            
+                                            <div class="pricecoloumn">
+                                                <center> <b> Price </b> </center>
+                                            </div>                                            
                                             <div class="amountcoloumn">
                                                 <center> <b> Amount </b> </center>
                                             </div>
@@ -97,9 +102,15 @@
                                             </div>
                                             <div class="desclabourcoloumn">
                                                 {{labour.name}}
-                                            </div>                             
-                                            <div class="amountcoloumn">
+                                            </div>
+                                            <div class="qtycoloumn">
+                                                {{labour.labour_quantity}}
+                                            </div>                                            
+                                            <div class="pricecoloumn">
                                                 {{labour.labour_price}}
+                                            </div>                                            
+                                            <div class="amountcoloumn">
+                                                {% widthratio labour.labour_price 1 labour.labour_quantity %}
                                             </div>
                                         </div>
                                         {% endfor %}

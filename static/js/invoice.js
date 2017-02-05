@@ -51,6 +51,7 @@ $(document).ready(function() {
         var labour_cost_list = []
         var total_labour_cost = 0
         var total_part_cost = 0
+        var labour_sum = 0
 
         /*Part Table*/
         tbl.find('tr').each(function () {
@@ -84,26 +85,31 @@ $(document).ready(function() {
 
        /* Labour Table*/
         $('#labouritemtable').find('tr').each(function () {
-            var price = 0
+            var labour_price = 0
             var labour_sub_dict = {}
+            var labour_quantity = 0
             $(this).find('#name').each(function () {
                 if (this.value.length != 0) {
                     labour_sub_dict[this.id] = this.value;
                 }
             });
+            $(this).find('#labour_quantity').each(function () {
+                if (!isNaN(this.value) && this.value.length != 0) {
+                    labour_quantity = checkifblank(parseInt(this.value));
+                    labour_sub_dict[this.id] = this.value;
+                }
+            });
             $(this).find('#labour_price').each(function () {
                 if (!isNaN(this.value) && this.value.length != 0) {
-                    price = checkifblank(parseFloat(this.value));
+                    labour_price = checkifblank(parseFloat(this.value));
                     labour_sub_dict[this.id] = this.value
                 }
             });
             labour_cost_list.push(labour_sub_dict)
-
-            total_labour_cost += price
-
-            $(this).find('.total').val(sum.toFixed(2));
+            labour_sum = labour_quantity * labour_price
+            total_labour_cost += labour_sum
+            $(this).find('.total').val(labour_sum.toFixed(2));
         });
-
 
         $('#labour_cost').val(total_labour_cost)
         var tax = checkifblank(parseFloat($('#tax').val()))
@@ -180,9 +186,10 @@ $(document).ready(function() {
     $("#addlabour").click(function(event){
         var row1= '<th id='+table_id+' scope="row"> # </th>'
         var row2='<td><input type="text" name="name" id="name" class="form-control" required></td>'
-        var row3='<td><input type="text" name="labour_price" id="labour_price" class="form-control" onKeyPress="return floatonly(this, event)" required></td>'
-        var row4='<td><button class="btn btn-sm btn-default deletelabour" type="button">Delete</button></td>'
-        $('#labouritemtable > tbody:last-child').append('<tr>'+row1+row2+row3+row4+'</tr>')
+        var row3='<td><input type="text" name="labour_quantity" id="labour_quantity" class="form-control" onKeyPress="return floatonly(this, event)"required></td>'
+        var row4='<td><input type="text" name="labour_price" id="labour_price" class="form-control" onKeyPress="return floatonly(this, event)" required></td>'
+        var row5='<td><button class="btn btn-sm btn-default deletelabour" type="button">Delete</button></td>'
+        $('#labouritemtable > tbody:last-child').append('<tr>'+row1+row2+row3+row4+row5+'</tr>')
         table_id += 1
     });
 

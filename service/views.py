@@ -33,6 +33,18 @@ from parts.models import (
 )
 
 
+def generate_datetime_number():
+    data  = str(timezone.datetime.today().year)
+    data += str(timezone.datetime.today().month)
+    data += str(timezone.datetime.today().day)
+    data += str(timezone.datetime.today().hour)
+    data += str(timezone.datetime.today().minute)
+    data += str(timezone.datetime.today().second)
+    data += str(timezone.datetime.today().microsecond)
+    data = int(data)
+    return data
+
+
 @require_http_methods(["GET"])
 @login_required(login_url='/home/')
 def service_add(request):
@@ -90,6 +102,7 @@ def service_create(request):
             other_form['customer'] = customer_obj
             other_form['created_by'] = request.user
             other_form['created_at'] = timezone.now()
+            other_form['number'] = generate_datetime_number()
             other_obj = OtherService.objects.create(**other_form)
             service_form['otherservice'] = other_obj
 
@@ -301,6 +314,7 @@ def invoice(request):
                         if labour.get('name') and labour.get('labour_price'):
                             obj = LabourCost.objects.create(
                                 name=labour.get('name'),
+                                labour_quantity=labour.get('labour_quantity'),
                                 labour_price=labour.get('labour_price'),
                                 created_by=request.user)
                             labour_total_cost += int(obj.labour_price)
