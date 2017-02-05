@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 class Part(models.Model):
     created_by = models.ForeignKey(User)
-    part_name = models.CharField(blank=True, max_length=50)
-    part_company_name = models.CharField(blank=True, max_length=50)
+    part_name = models.CharField(blank=True, max_length=500)
+    part_company_name = models.CharField(blank=True, max_length=500)
     price = models.FloatField(blank=True)
     part_quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
@@ -16,8 +16,9 @@ class Part(models.Model):
 
 class LabourCost(models.Model):
     created_by = models.ForeignKey(User)
-    name = models.CharField(blank=True, max_length=50)
+    name = models.CharField(blank=True, max_length=500)
     labour_price = models.FloatField(blank=True)
+    labour_quantity = models.IntegerField(blank=True, default=0)
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):

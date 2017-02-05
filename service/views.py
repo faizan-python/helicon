@@ -314,6 +314,7 @@ def invoice(request):
                         if labour.get('name') and labour.get('labour_price'):
                             obj = LabourCost.objects.create(
                                 name=labour.get('name'),
+                                labour_quantity=labour.get('labour_quantity'),
                                 labour_price=labour.get('labour_price'),
                                 created_by=request.user)
                             labour_total_cost += int(obj.labour_price)
