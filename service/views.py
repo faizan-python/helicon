@@ -611,6 +611,11 @@ def generate_delivery_invoice(request, id):
                     vehical_number=data.get('vehical_number'),
                     remark=data.get('remark'))
                 service_obj.delivery_invoice_details = delivery_invoice_obj
+                service_obj.challan_date = timezone.datetime.today()
+
+                if data.get('challan_number'):
+                    service_obj.challan_number = data.get('challan_number')
+
                 service_obj.save()
             redirect_url = "/service/generate/delivery/invoice/"+str(service_obj.invoice_number)+"/"
             return HttpResponseRedirect(redirect_url)
