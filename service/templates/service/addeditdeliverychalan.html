@@ -38,6 +38,16 @@
                             <label for="exampleInputEmail2">Tin Number:</label>&nbsp;&nbsp;
                             {{service.customer.tin_number|default:"NA"}}
                         </div>
+                        {% if service.challan_number %}
+                            <div class="form-group" style="padding:1em;">
+                                <label for="exampleInputEmail2">Challan Number:</label>&nbsp;&nbsp;
+                                {{service.challan_number}}
+                            </div>
+                            <div class="form-group" style="padding:1em;">
+                                <label for="exampleInputEmail2">Challan Date:</label>&nbsp;&nbsp;
+                                {{service.challan_date}}
+                            </div>
+                        {% endif %}
                         <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Address: </label>&nbsp;&nbsp;
                             {{service.customer.address|title|default:"NA"}} 
@@ -121,6 +131,10 @@
                         <div class="form-group" style="padding:1em;">
                             <label for="exampleInputEmail2">Enter Remark: </label>&nbsp;&nbsp;
                             <textarea type="text" rows="2" cols="50" id="remark" name="remark" class="form-control"> </textarea>
+                        </div>
+                        <div class="form-group" style="padding:1em;">
+                            <label for="exampleInputEmail2">Challan Number: </label>&nbsp;&nbsp;
+                            <input type="text" id="challan_number" name="challan_number" class="form-control">
                         </div>
                         <input type="hidden" value="{{service.invoice_number}}" id="service_id" name="service_id">
                         <div class="login-button text-center">

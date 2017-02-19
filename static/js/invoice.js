@@ -116,11 +116,13 @@ $(document).ready(function() {
         var service_tax = checkifblank(parseFloat($('#service_tax').val()))
         var paid = checkifblank(parseFloat($('#total_paid').val()))
         var labour_cost = checkifblank(parseFloat($('#labour_cost').val()))
+        var freight_cost = checkifblank(parseFloat($('#freight_cost').val()))
         sum += labour_cost
         var service_tax_cost = (service_tax*labour_cost)/100
         var part_tax_cost = (tax*total_part_cost)/100
         sum += part_tax_cost
         sum += service_tax_cost
+        sum += freight_cost
         $('#tax_amount').val(part_tax_cost)
         $('#service_tax_amount').val(service_tax_cost)
         var advance_payment = checkifblank(parseFloat($('#advance_payment').val()))
@@ -276,7 +278,8 @@ $(document).ready(function() {
                 'cheque_number': $('#cheque_number').val(),
                 'cheque_bank_name': $('#cheque_bank_name').val(),
                 'cheque_date': $('#cheque_date').val(),
-                'gate_pass_no': $('#gate_pass_no').val()
+                'gate_pass_no': $('#gate_pass_no').val(),
+                'freight_cost': $('#freight_cost').val()
             }
             submitdata(data)
         }

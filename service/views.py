@@ -1,5 +1,6 @@
 import json
 import datetime
+import inflect
 
 from django.template import Context, Template
 from django.shortcuts import render
@@ -324,6 +325,8 @@ def invoice(request):
                 service_obj.labourcost_detail.add(*labour_obj)
                 service_obj.part_cost = part_total_cost
                 service_obj.gate_pass_no = data.get('gate_pass_no', "")
+                service_obj.freight_cost = data.get('freight_cost', 0)
+                service_obj.invoice_date = timezone.datetime.today()
                 service_obj.save()
                 return HttpResponse("Invoice Generated Successfilly")
             return HttpResponseRedirect("/home/")
@@ -369,14 +372,34 @@ def pending_payment(request):
             return HttpResponseRedirect("/home/")
 
 
+def get_total_in_words(amount_a, amount_b):
+    total = amount_a + amount_b
+    p = inflect.engine()
+    words = p.number_to_words(total)
+    words = words.replace("point", "rupees and")
+    words = words + " paisa"
+    return words
+
+
 @require_http_methods(["GET"])
 @login_required(login_url='/admin/')
 def invoice_view(request, id):
     if request.method == "GET":
         service_obj = Service.objects.filter(is_active=True, invoice_number=id)
         if service_obj:
+            service_obj         = service_obj[0]
+
+            service_grand_total = get_total_in_words(service_obj.part_cost,
+                                                     service_obj.tax_amount)
+            labour_grand_total  = get_total_in_words(service_obj.labour_cost,
+                                                    service_obj.service_tax_amount)
+            grand_total         = get_total_in_words(service_obj.total_cost, 0)
+
             context = RequestContext(request, {
-                "service": service_obj[0]})
+                "service"             : service_obj,
+                "service_grand_total" : service_grand_total,
+                "labour_grand_total"  : labour_grand_total,
+                "grand_total"         : grand_total})
             return render_to_response('service/invoicepdf.html',
                                       context_instance=context)
 
@@ -387,8 +410,12 @@ def invoice_retail_view(request, id):
     if request.method == "GET":
         service_obj = Service.objects.filter(is_active=True, invoice_number=id)
         if service_obj:
+            service_obj = service_obj[0]
+            labour_grand_total  = get_total_in_words(service_obj.labour_cost,
+                                                    service_obj.service_tax_amount)
             context = RequestContext(request, {
-                "service": service_obj[0]})
+                "service": service_obj,
+                "labour_grand_total"  : labour_grand_total})
             return render_to_response('service/invoiceretailpdf.html',
                                       context_instance=context)
 
@@ -399,8 +426,12 @@ def invoice_tax_view(request, id):
     if request.method == "GET":
         service_obj = Service.objects.filter(is_active=True, invoice_number=id)
         if service_obj:
+            service_obj = service_obj[0]
+            service_grand_total = get_total_in_words(service_obj.part_cost,
+                                                     service_obj.tax_amount)
             context = RequestContext(request, {
-                "service": service_obj[0]})
+                "service": service_obj,
+                "service_grand_total" : service_grand_total})
             return render_to_response('service/invoicetaxpdf.html',
                                       context_instance=context)
 
@@ -580,6 +611,11 @@ def generate_delivery_invoice(request, id):
                     vehical_number=data.get('vehical_number'),
                     remark=data.get('remark'))
                 service_obj.delivery_invoice_details = delivery_invoice_obj
+                service_obj.challan_date = timezone.datetime.today()
+
+                if data.get('challan_number'):
+                    service_obj.challan_number = data.get('challan_number')
+
                 service_obj.save()
             redirect_url = "/service/generate/delivery/invoice/"+str(service_obj.invoice_number)+"/"
             return HttpResponseRedirect(redirect_url)

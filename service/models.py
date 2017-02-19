@@ -97,6 +97,10 @@ class Service(models.Model):
     purchase_order_number = models.CharField(blank=True, null=True, max_length=100)
     purchase_order_date = models.DateTimeField(blank=True, null=True)
 
+    freight_cost = models.FloatField(default=0)
+    invoice_date = models.DateTimeField(blank=True, null=True)
+    challan_number = models.CharField(blank=True, null=True, max_length=100)
+    challan_date = models.DateTimeField(blank=True, null=True) 
     delivery_invoice_details = models.ForeignKey(DeliveryDetail, blank=True, null=True)
 
     def __unicode__(self):

@@ -59,7 +59,10 @@
                                             <div class="invoicedetail">
                                             <b class="userbody">Invoice No. </b>: {{service.invoice_number}}<br>
                                             <b class="userbody">P.O. Date </b>: {{service.purchase_order_date|date:"d M Y"|default:"NA"}}<br>
-                                            <b class="userbody">P.O. No. </b>: {{service.purchase_order_number|default:"NA"}}
+                                            <b class="userbody">P.O. No. </b>: {{service.purchase_order_number|default:"NA"}}<br>
+                                            <b class="userbody">Invoice Date </b>: {{service.invoice_date|date:"d M Y"|default:"NA"}}<br>
+                                            <b class="userbody">Challan Number </b>: {{service.challan_number|default:"NA"}}<br>
+                                            <b class="userbody">Challan Date </b>: {{service.challan_date|default:"NA"}}
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +85,7 @@
                                                 <center> <b> Item </b> </center>
                                             </div>
                                             <div class="qtycoloumn">
-                                                <center> <b> Qty. </b> </center>
+                                                <center> <b> Qty/Set </b> </center>
                                             </div>                                            
                                             <div class="pricecoloumn">
                                                 <center> <b> Price </b> </center>
@@ -116,6 +119,7 @@
                                             <span class="pull-right" style="width: 173px;"><b> Vat/C-Form </b>: {{service.tax}}%</span><br>
                                             <span class="pull-right" style="width: 173px;"><b> Vat Amount </b>: {{service.tax_amount}}</span><br>
                                             <span class="pull-right" style="width: 173px;"><b> Grand Total </b>: {{service.part_cost|add:service.tax_amount}}</span>
+                                            <b> Total In Words </b> : {{service_grand_total |title}}
                                         </div>
                                     </div>
                             </div>
@@ -135,7 +139,7 @@
                                     <br>
                                     <br>
                                     <br>
-                                    <b> Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
+                                    <b> Parties Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
                                     <b class="pull-right"> Authorized By</b>
                                     </div>
                                 </div>
