@@ -84,7 +84,7 @@
                                                 <center> <b> Name </b> </center>
                                             </div>
                                             <div class="qtycoloumn">
-                                                <center> <b> Qty. </b> </center>
+                                                <center> <b> Qty/Set </b> </center>
                                             </div>                                            
                                             <div class="pricecoloumn">
                                                 <center> <b> Price </b> </center>
@@ -118,6 +118,7 @@
                                         <span class="pull-right" style="width: 173px;">Service Tax : {{service.service_tax}}%</span><br>
                                         <span class="pull-right" style="width: 173px;">Service Tax Amount : {{service.service_tax_amount}}</span><br>
                                         <span class="pull-right" style="width: 173px;">Grand Total : {{service.labour_cost|add:service.service_tax_amount}}</span>
+                                        <b> Total In Words </b> : {{labour_grand_total |title}}
                                         </div>
                                     </div>
                             </div>
@@ -136,7 +137,7 @@
                                         <br>
                                         <br>
                                         <br>
-                                        <b> Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
+                                        <b> Parties Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
                                         <b class="pull-right"> Authorized By</b>
                                         </div>
                                     </div>
