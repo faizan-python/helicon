@@ -325,6 +325,8 @@ def invoice(request):
                 service_obj.labourcost_detail.add(*labour_obj)
                 service_obj.part_cost = part_total_cost
                 service_obj.gate_pass_no = data.get('gate_pass_no', "")
+                service_obj.freight_cost = data.get('freight_cost', 0)
+                service_obj.invoice_date = timezone.datetime.today()
                 service_obj.save()
                 return HttpResponse("Invoice Generated Successfilly")
             return HttpResponseRedirect("/home/")

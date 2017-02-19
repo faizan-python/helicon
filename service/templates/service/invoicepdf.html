@@ -60,7 +60,8 @@
                                             <div class="invoicedetail">
                                             <b class="userbody">Invoice No. </b>: {{service.invoice_number}}<br>
                                             <b class="userbody">P.O. Date </b>: {{service.purchase_order_date|date:"d M Y"|default:"NA"}}<br>
-                                            <b class="userbody">P.O. No. </b>: {{service.purchase_order_number|default:"NA"}}
+                                            <b class="userbody">P.O. No. </b>: {{service.purchase_order_number|default:"NA"}}<br>
+                                            <b class="userbody">Invoice Date </b>: {{service.invoice_date|date:"d M Y"|default:"NA"}}
                                             </div>
                                         </div>
                                     </div>
@@ -242,6 +243,7 @@
                                         <div class="panel-footer">
                                         <span class="pull-right" style="width: 173px;"> <b>T. Paid Amount </b>: {{service.total_paid}}</span><br>
                                         <span class="pull-right" style="width: 173px;"><b>Pending Amount </b>: {{service.total_pending}}</span><br>
+                                        <span class="pull-right" style="width: 173px;"><b>Freight Amount </b>: {{service.freight_cost}}</span><br>
                                         <span class="pull-right" style="width: 173px;"><b>Grand Total</b> : {{service.total_cost}}</span>
                                         <b> Total In Words </b> : {{grand_total |title}} 
                                         </div>
