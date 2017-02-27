@@ -279,7 +279,8 @@ $(document).ready(function() {
                 'cheque_bank_name': $('#cheque_bank_name').val(),
                 'cheque_date': $('#cheque_date').val(),
                 'gate_pass_no': $('#gate_pass_no').val(),
-                'freight_cost': $('#freight_cost').val()
+                'freight_cost': $('#freight_cost').val(),
+                'challan_number' : $('#challan_number').val()
             }
             submitdata(data)
         }

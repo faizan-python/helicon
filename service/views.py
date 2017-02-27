@@ -1,6 +1,7 @@
 import json
 import datetime
 import inflect
+from num2words import num2words
 
 from django.template import Context, Template
 from django.shortcuts import render
@@ -327,6 +328,11 @@ def invoice(request):
                 service_obj.gate_pass_no = data.get('gate_pass_no', "")
                 service_obj.freight_cost = data.get('freight_cost', 0)
                 service_obj.invoice_date = timezone.datetime.today()
+                service_obj.challan_date = timezone.datetime.today()
+
+                if data.get('challan_number'):
+                    service_obj.challan_number = data.get('challan_number', "")
+
                 service_obj.save()
                 return HttpResponse("Invoice Generated Successfilly")
             return HttpResponseRedirect("/home/")
@@ -374,10 +380,16 @@ def pending_payment(request):
 
 def get_total_in_words(amount_a, amount_b):
     total = amount_a + amount_b
-    p = inflect.engine()
-    words = p.number_to_words(total)
-    words = words.replace("point", "rupees and")
-    words = words + " paisa"
+    num_list = str(total).split('.')
+    before_decical = num_list[0]
+    before_decimal_inwords = num2words(int(before_decical),lang='en_IN')
+    words = before_decimal_inwords + " rupees"
+
+    if len(num_list) > 1:
+        after_decical = num_list[1]
+        after_decical_inwords = num2words(int(after_decical),lang='en_IN')
+        words = words + " and " + after_decical_inwords + " paisa"
+
     return words
 
 
@@ -611,11 +623,6 @@ def generate_delivery_invoice(request, id):
                     vehical_number=data.get('vehical_number'),
                     remark=data.get('remark'))
                 service_obj.delivery_invoice_details = delivery_invoice_obj
-                service_obj.challan_date = timezone.datetime.today()
-
-                if data.get('challan_number'):
-                    service_obj.challan_number = data.get('challan_number')
-
                 service_obj.save()
             redirect_url = "/service/generate/delivery/invoice/"+str(service_obj.invoice_number)+"/"
             return HttpResponseRedirect(redirect_url)
