@@ -10,6 +10,22 @@ $(document).ready(function() {
         return 0
     }
 
+    function special_character_check(data) {
+        data = data.replace(/"/g, "'")
+        data = encodeURIComponent(data)
+        return data
+    }
+
+    function special_character_check_for_json(data) {
+      response_data = {}
+        $.each(data, function(k, v) {
+          if (k != "k") {
+              response_data[k] = special_character_check(v);
+          }
+        });
+        return response_data
+    }
+
     function calculateSum() {
         var tbl = $('#itemtable');
         var sum = 0;
@@ -22,12 +38,12 @@ $(document).ready(function() {
             var sub_dict = {}
             $(this).find('#part_name').each(function () {
                 if (this.value.length != 0) {
-                    sub_dict[this.id] = this.value;
+                    sub_dict[this.id] = special_character_check(this.value);
                 }
             });
             $(this).find('#description').each(function () {
                 if (this.value.length != 0) {
-                    sub_dict[this.id] = this.value;
+                    sub_dict[this.id] = special_character_check(this.value);
                 }
             });
             $(this).find('#part_quantity').each(function () {
@@ -143,7 +159,7 @@ $(document).ready(function() {
                 'total_cost': checkifblank($('#totalcost').val()),
                 'tax' : checkifblank($('#tax').val()),
                 'tax_amount' : checkifblank($('#tax_amount').val()),
-                'purchase_order_number' : $('#purchase_order_number').val(),
+                'purchase_order_number' : special_character_check($('#purchase_order_number').val()),
                 'part_data': part_list,
                 'quotation_id': $('#quotation_id').val()
             }

@@ -15,6 +15,23 @@ $(document).ready(function() {
       $("#vechicalform").show();
     });
 
+    function special_character_check(data) {
+        data = data.replace(/"/g, "'")
+        data = encodeURIComponent(data)
+        return data
+    }
+
+    function special_character_check_for_json(data) {
+      response_data = {}
+        $.each(data, function(k, v) {
+          if (k != "k") {
+              response_data[k] = special_character_check(v);
+          }
+        });
+        return response_data
+    }
+
+
     $("#addvehical").click(function(event) {
       event.preventDefault();
       $("#vehicaldropdown").prop("disabled", true);
@@ -158,9 +175,9 @@ $(document).ready(function() {
         if ($('#customerform').valid() && $(service_type_form).valid()) {
             $('body').loading({stoppable: false}, 'start');
             var data = {
-                "customer": $('#customerform').serializeJSON(),
-                service_type_form: $(service_type_form).serializeJSON(),
-                "service_deatils": $("#serviceform").serializeJSON(),
+                "customer": special_character_check_for_json($('#customerform').serializeJSON()),
+                service_type_form: special_character_check_for_json($(service_type_form).serializeJSON()),
+                "service_deatils": special_character_check_for_json($("#serviceform").serializeJSON()),
                 "mechanic": $('#mechanicdropdown').val(),
                 "gender": $('#customerform input:radio:checked').val(),
                 "service_type":service_type
