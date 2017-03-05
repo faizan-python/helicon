@@ -46,15 +46,15 @@
                                     <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
                                             <div class="userdetail">
-                                                <b class="userheader"> To </b> <b>: {{service.customer}} </b><br>
-                                                <b class="userheader">Address </b> : {{service.customer.address|default:"NA"}}<br>
+                                                <b class="userheader"> To </b> <b>: {{service.customer|title}} </b><br>
+                                                <b class="userheader">Address </b> : {{service.customer.address|default:"NA"|capfirst}}<br>
                                                 <b class="userheader">Phone No. </b>: {{service.customer.phone_number|default:"NA"}}<br>
                                                 <b class="userheader">Email </b>: {{service.customer.email|default:"NA"}}<br>
                                                 <b class="userheader">Tin Number </b>: {{service.customer.tin_number|default:"NA"}}<br>
                                                 {% if service.vehical %}
                                                 <b class="userheader">Vehical No. </b>: {{service.vehical|default:"NA"}}
                                                 {% else %}
-                                                <b class="userheader">Service </b>: {{service.otherservice|default:"NA"}}<br>
+                                                <b class="userheader">Service </b>: {{service.otherservice|default:"NA"|title}}<br>
                                                 {% endif %}
                                             </div>
                                             <div class="invoicedetail">
@@ -105,7 +105,7 @@
                                                 {{ forloop.counter }}
                                             </div>
                                             <div class="desclabourcoloumn">
-                                                {{part.part_name}}
+                                                {{part.part_name|capfirst}}
                                             </div>
                                             <div class="qtycoloumn">
                                                 {{part.part_quantity}}
@@ -164,7 +164,7 @@
                                                 {{ forloop.counter }}
                                             </div>
                                             <div class="desclabourcoloumn">
-                                                {{labour.name}}
+                                                {{labour.name|capfirst}}
                                             </div>
                                             <div class="qtycoloumn">
                                                 {{labour.labour_quantity}}

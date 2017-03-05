@@ -44,11 +44,11 @@
                                     <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
                                             <div class="userdetail">
-                                                <b class="userheader"> To </b> <b>: {{quotation.customer_name}} </b><br>
-                                                <b class="userheader">Company </b> : {{quotation.company_name | default:"NA"}}<br>
+                                                <b class="userheader"> To </b> <b>: {{quotation.customer_name|title}} </b><br>
+                                                <b class="userheader">Company </b> : {{quotation.company_name | default:"NA"|title}}<br>
                                                 <b class="userheader">Phone No. </b> : {{quotation.phone_number | default:"NA"}}<br>
                                                 <b class="userheader">Email </b>: {{quotation.email|default:"NA"}}<br>
-                                                <b class="userheader">Address </b>: {{quotation.address | default:"NA"}}
+                                                <b class="userheader">Address </b>: {{quotation.address | default:"NA"|capfirst}}
                                             </div>
                                             <div class="invoicedetail">
                                             <b class="userbody">Quotation No </b>: {{quotation.id}}
@@ -94,10 +94,10 @@
                                                 {{ forloop.counter }}
                                             </div>
                                             <div class="itemquotationcoloumn">
-                                                {{part.part_name}}
+                                                {{part.part_name|capfirst}}
                                             </div>
                                             <div class="descquotationcoloumn">
-                                                {{part.description}}
+                                                {{part.description|capfirst}}
                                             </div>
                                             <div class="qtycoloumn">
                                                 {{part.part_quantity}}
