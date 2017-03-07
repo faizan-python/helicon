@@ -51,7 +51,7 @@
                                                 <b class="userheader">Address </b>: {{quotation.address | default:"NA"|capfirst}}
                                             </div>
                                             <div class="invoicedetail">
-                                            <b class="userbody">Quotation No </b>: {{quotation.id}}
+                                            <b class="userbody">Quotation No. </b>: {{quotation.id}}
                                             </div>
                                         </div>
                                     </div>
@@ -121,25 +121,6 @@
                     </td>
                 </tr>
             </table>
-                <tr>
-                    <td>
-                        <table>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel panel-default" style="border-color: black;">
-                                        <div class="panel-body">
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <b class="userheader"> Authorized By : </b>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </table>
-                    </td>
-                </tr>
             <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
             <img src="{% static 'images/helicon-footer.png' %}">
         </div>

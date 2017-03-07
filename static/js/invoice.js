@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var csrftoken = getCookie('csrftoken');
     var table_id = 1
     var labour_table_id = 1
@@ -12,6 +13,25 @@ $(document).ready(function() {
         data = data.replace(/"/g, "'")
         data = encodeURIComponent(data)
         return data
+    }
+
+    function roundofpendingamount(total) {
+
+        totalsplit = total.toString()
+        totalsplit = totalsplit.split(".")
+        if (totalsplit.length > 1) {
+            paisa = totalsplit[1]
+            paisa = parseInt(paisa)
+            if (paisa > 50) {
+                total = parseInt(total) + 1
+                return total
+            }
+            else {
+                total = totalsplit[0]
+                return total
+            }
+        }
+        return total
     }
 
     $("#cash").attr('checked', false);
@@ -129,6 +149,9 @@ $(document).ready(function() {
         sum += part_tax_cost
         sum += service_tax_cost
         sum += freight_cost
+
+        sum = roundofpendingamount(sum)
+
         $('#tax_amount').val(part_tax_cost)
         $('#service_tax_amount').val(service_tax_cost)
         var advance_payment = checkifblank(parseFloat($('#advance_payment').val()))

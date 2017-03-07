@@ -61,8 +61,10 @@
                                             <b class="userbody">P.O. Date </b>: {{service.purchase_order_date|date:"d M Y"|default:"NA"}}<br>
                                             <b class="userbody">P.O. No. </b>: {{service.purchase_order_number|default:"NA"}}<br>
                                             <b class="userbody">Invoice Date </b>: {{service.invoice_date|date:"d M Y"|default:"NA"}}<br>
-                                            <b class="userbody">Challan Number </b>: {{service.challan_number|default:"NA"}}<br>
-                                            <b class="userbody">Challan Date </b>: {{service.challan_date|default:"NA"}}
+                                            <b class="userbody">Challan No. </b>: {{service.challan_number|default:"NA"}}<br>
+                                            <b class="userbody">Challan Date </b>: {{service.challan_date|date:"d M Y"|default:"NA"}}<br>
+                                            <b class="userbody">Gate Pass No. </b>:
+                                            {{service.gate_pass_no|default:"NA"}}
                                             </div>
                                         </div>
                                     </div>
@@ -128,26 +130,6 @@
                 </tr>
                 <br>
             </table>
-            <tr>
-                <td>
-                    <table>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-default" style="border-color: black;">
-                                    <div class="panel-body">
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <b> Parties Gate Pass Number: </b> {{service.gate_pass_no|default:"NA"}}
-                                    <b class="pull-right"> Authorized By</b>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </table>
-                </td>
-            </tr>
             <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>
             <img src="{% static 'images/helicon-footer.png' %}">
         </div>
