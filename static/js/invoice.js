@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var csrftoken = getCookie('csrftoken');
     var table_id = 1
     var labour_table_id = 1
@@ -7,6 +8,31 @@ $(document).ready(function() {
     $("#expected-date").datepicker({
         minDate: dateToday
     });
+
+    function special_character_check(data) {
+        data = data.replace(/"/g, "'")
+        data = encodeURIComponent(data)
+        return data
+    }
+
+    function roundofpendingamount(total) {
+
+        totalsplit = total.toString()
+        totalsplit = totalsplit.split(".")
+        if (totalsplit.length > 1) {
+            paisa = totalsplit[1]
+            paisa = parseInt(paisa)
+            if (paisa > 50) {
+                total = parseInt(total) + 1
+                return total
+            }
+            else {
+                total = totalsplit[0]
+                return total
+            }
+        }
+        return total
+    }
 
     $("#cash").attr('checked', false);
     $("#cheque").attr('checked', false);
@@ -60,7 +86,7 @@ $(document).ready(function() {
             var sub_dict = {}
             $(this).find('#part_name').each(function () {
                 if (this.value.length != 0) {
-                    sub_dict[this.id] = this.value;
+                    sub_dict[this.id] = special_character_check(this.value);
                 }
             });
             $(this).find('#part_quantity').each(function () {
@@ -90,7 +116,7 @@ $(document).ready(function() {
             var labour_quantity = 0
             $(this).find('#name').each(function () {
                 if (this.value.length != 0) {
-                    labour_sub_dict[this.id] = this.value;
+                    labour_sub_dict[this.id] = special_character_check(this.value);
                 }
             });
             $(this).find('#labour_quantity').each(function () {
@@ -123,6 +149,9 @@ $(document).ready(function() {
         sum += part_tax_cost
         sum += service_tax_cost
         sum += freight_cost
+
+        sum = roundofpendingamount(sum)
+
         $('#tax_amount').val(part_tax_cost)
         $('#service_tax_amount').val(service_tax_cost)
         var advance_payment = checkifblank(parseFloat($('#advance_payment').val()))
@@ -270,17 +299,17 @@ $(document).ready(function() {
                 'service_tax_amount' : checkifblank($('#service_tax_amount').val()),
                 'service_tax' : checkifblank($('#service_tax').val()),
                 'tax_amount' : checkifblank($('#tax_amount').val()),
-                'remark': $('#remark').val(),
+                'remark': special_character_check($('#remark').val()),
                 'part_data': part_list,
                 'labour_data': labour_cost_list,
-                'service_id': $('#service-invoice-number').val(),
+                'service_id': special_character_check($('#service-invoice-number').val()),
                 'payment_type': payment_type,
-                'cheque_number': $('#cheque_number').val(),
-                'cheque_bank_name': $('#cheque_bank_name').val(),
-                'cheque_date': $('#cheque_date').val(),
-                'gate_pass_no': $('#gate_pass_no').val(),
-                'freight_cost': $('#freight_cost').val(),
-                'challan_number' : $('#challan_number').val()
+                'cheque_number': special_character_check($('#cheque_number').val()),
+                'cheque_bank_name': special_character_check($('#cheque_bank_name').val()),
+                'cheque_date': special_character_check($('#cheque_date').val()),
+                'gate_pass_no': special_character_check($('#gate_pass_no').val()),
+                'freight_cost': special_character_check($('#freight_cost').val()),
+                'challan_number' : special_character_check($('#challan_number').val())
             }
             submitdata(data)
         }
@@ -306,11 +335,11 @@ $(document).ready(function() {
             data = {
                 "pending_payment": pendingpayment,
                 "total_cost": totalcost,
-                "service_id": $('#service-invoice-number').val(),
+                "service_id": special_character_check($('#service-invoice-number').val()),
                 'payment_type': payment_type,
-                'cheque_number': $('#cheque_number').val(),
-                'cheque_bank_name': $('#cheque_bank_name').val(),
-                'cheque_date': $('#cheque_date').val()
+                'cheque_number': special_character_check($('#cheque_number').val()),
+                'cheque_bank_name': special_character_check($('#cheque_bank_name').val()),
+                'cheque_date': special_character_check($('#cheque_date').val())
             }
             $.ajax({
                  type:"POST",

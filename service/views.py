@@ -286,8 +286,8 @@ def invoice(request):
                                 data.get('cheque_date'), "%m/%d/%Y").date()
                         payment.save()
                     service_obj.payment.add(payment)
-                total_pending = int(
-                    data.get('total_cost', 0)) - int(data.get('total_paid', 0))
+                total_pending = float(
+                    data.get('total_cost', 0)) - float(data.get('total_paid', 0))
                 total_pending -= service_obj.advance_payment
                 service_obj.total_pending = total_pending
                 if total_pending < 1:
@@ -304,8 +304,8 @@ def invoice(request):
                                                       part_quantity=part.get(
                                                           'part_quantity'),
                                                       created_by=request.user)
-                            part_total_cost += (int(obj.price)
-                                                * int(obj.part_quantity))
+                            part_total_cost += (float(obj.price)
+                                                * float(obj.part_quantity))
                             part_obj.append(obj)
 
                 labour_data = data.get('labour_data')
@@ -319,7 +319,7 @@ def invoice(request):
                                 labour_quantity=labour.get('labour_quantity'),
                                 labour_price=labour.get('labour_price'),
                                 created_by=request.user)
-                            labour_total_cost += int(obj.labour_price)
+                            labour_total_cost += float(obj.labour_price)
                             labour_obj.append(obj)
 
                 service_obj.parts.add(*part_obj)
@@ -352,7 +352,7 @@ def pending_payment(request):
                 pending_amount = service_obj.total_pending - \
                     data.get('pending_payment')
 
-                if int(data.get('pending_payment')) > 0:
+                if float(data.get('pending_payment')) > 0:
                     payment = Payment.objects.create(
                         payment_amount=data.get('pending_payment'),
                         recieved_by=request.user,

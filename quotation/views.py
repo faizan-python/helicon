@@ -30,7 +30,7 @@ def quotation(request):
 @login_required(login_url='/admin/')
 def quotation_generate(request):
     if request.method == "POST":
-        data = request.body
+        data = request.POST.dict().keys()[0]
         forms = json.loads(data)
         quotation_form = forms.get('customer')
         part_data = forms.get('part_data')
@@ -51,8 +51,8 @@ def quotation_generate(request):
                                                        part_quantity=part.get(
                                                            'part_quantity'),
                                                        created_by=request.user)
-                    part_total_cost += (int(obj.price)
-                                        * int(obj.part_quantity))
+                    part_total_cost += (float(obj.price)
+                                        * float(obj.part_quantity))
                     part_obj.append(obj)
 
         quotation_obj.parts.add(*part_obj)
