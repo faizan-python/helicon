@@ -73,6 +73,7 @@ $(document).ready(function() {
     function calculateSum() {
         var tbl = $('#itemtable');
         var sum = 0;
+        var part_sum = 0;
         var parts_list = []
         var labour_cost_list = []
         var total_labour_cost = 0
@@ -103,10 +104,10 @@ $(document).ready(function() {
             });
             parts_list.push(sub_dict)
 
-            sum += quantity * price
-            total_part_cost += sum
+            part_sum = quantity * price
+            total_part_cost += part_sum
 
-            $(this).find('.total').val(sum.toFixed(2));
+            $(this).find('.total').val(part_sum.toFixed(2));
         });
 
        /* Labour Table*/
@@ -146,6 +147,7 @@ $(document).ready(function() {
         sum += labour_cost
         var service_tax_cost = (service_tax*labour_cost)/100
         var part_tax_cost = (tax*total_part_cost)/100
+        sum += total_part_cost
         sum += part_tax_cost
         sum += service_tax_cost
         sum += freight_cost
