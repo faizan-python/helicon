@@ -134,6 +134,74 @@
                         </table>
                     </td>
                 </tr>
+
+
+                {% if service.payment.all %}
+                <tr>
+                    <td>
+                        <table>
+                            <h5><center> Payment Description </center></h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default" style="border-color: black;">
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                <center> <b> Sr. No. </b> </center>
+                                            </div>
+                                            <div class="paymentamountcoloumn">
+                                                <center> <b> Amount </b> </center>
+                                            </div>
+                                            <div class="paymentdatecoloumn">
+                                                <center> <b> Date </b> </center>
+                                            </div>                                            
+                                            <div class="paymentrecievedcoloumn">
+                                                <center> <b> Recieved By </b> </center>
+                                            </div>
+                                            <div class="paymenttypecoloumn">
+                                                <center> <b> Payment Type </b> </center>
+                                            </div>
+                                            <div class="paymentchequecoloumn">
+                                                <center> <b> Cheque Number </b> </center>
+                                            </div>
+                                        </div>
+                                        <hr/>
+
+                                        {% for payment in service.payment.all %}
+                                        <div class="panel-body">
+                                            <div class="nocoloumn">
+                                                {{ forloop.counter }}
+                                            </div>
+                                            <div class="paymentamountcoloumn">
+                                                {{payment.payment_amount}}
+                                            </div>
+                                            <div class="paymentdatecoloumn">
+                                                {{payment.created_date|date:"d M Y"|default:"NA"}}
+                                            </div>                                            
+                                            <div class="paymentrecievedcoloumn">
+                                                {{payment.recieved_by}}
+                                            </div>
+                                            <div class="paymenttypecoloumn">
+                                                {{payment.payment_type}}
+                                            </div>
+                                            <div class="paymentchequecoloumn">
+                                                {{payment.cheque_number|default:"NA"}}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="panel-footer">
+                                        <span class="pull-right" style="width: 173px;"> <b>T. Paid Amount </b>: {{service.total_paid}}</span><br>
+                                        <span class="pull-right" style="width: 173px;"><b>Pending Amount </b>: {{service.total_pending}}</span><br>
+                                        <span class="pull-right" style="width: 173px;"><b>Freight Amount </b>: {{service.freight_cost}}</span><br>
+                                        <span class="pull-right" style="width: 173px;"><b>Grand Total</b> : {{service.total_cost}}</span>
+                                        <b> Total In Words </b> : {{grand_total |title}} 
+                                        </div>
+                                    </div>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
+                {% endif %}
+
                 <br>
             </table>
             <center><b>Note : </b> This is a computer generated INVOICE hence does not requires signature.</center>

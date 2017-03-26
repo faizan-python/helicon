@@ -45,11 +45,16 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-default" style="border-color: black;">
                                         <div class="panel-body">
+                                            <div class="deliverydetail">
                                             <p>
                                                 <b>Consignee M/S : </b> {{service.customer|default:"NA"|title}}<br>
                                                 <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> {{service.customer.address}}<br>
                                                 <b> Gate Pass No. : </b>&nbsp; {{service.gate_pass_no|default:"NA"}}
                                             </p>
+                                            </div>
+                                        <div class="invoicedeliverydetail">
+                                            <b class="userbody">Challan No. </b>: {{service.challan_number|default:"NA"}}<br>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

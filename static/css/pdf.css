@@ -96,6 +96,17 @@
     float: left;
     border-right: 1px solid black;
 }
+.deliverydetail {
+    height: 55px;
+    width: 60%;
+    float: left;
+    border-right: 1px solid black;
+}
+.invoicedeliverydetail {
+    height: 55px;
+    width: 40%;
+    float: right;
+}
 .invoicedetail {
     height: 105px;
     width: 40%;
