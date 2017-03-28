@@ -425,9 +425,15 @@ def invoice_retail_view(request, id):
             service_obj = service_obj[0]
             labour_grand_total  = get_total_in_words(service_obj.labour_cost,
                                                     service_obj.service_tax_amount)
+            service_grand_total = get_total_in_words(service_obj.part_cost,
+                                                     service_obj.tax_amount)
+            grand_total         = get_total_in_words(service_obj.total_cost, 0)
+
             context = RequestContext(request, {
                 "service": service_obj,
-                "labour_grand_total"  : labour_grand_total})
+                "service_grand_total" : service_grand_total,
+                "labour_grand_total"  : labour_grand_total,
+                "grand_total"         : grand_total})
             return render_to_response('service/invoiceretailpdf.html',
                                       context_instance=context)
 
@@ -439,11 +445,17 @@ def invoice_tax_view(request, id):
         service_obj = Service.objects.filter(is_active=True, invoice_number=id)
         if service_obj:
             service_obj = service_obj[0]
+            labour_grand_total  = get_total_in_words(service_obj.labour_cost,
+                                                    service_obj.service_tax_amount)
             service_grand_total = get_total_in_words(service_obj.part_cost,
                                                      service_obj.tax_amount)
+            grand_total         = get_total_in_words(service_obj.total_cost, 0)
+
             context = RequestContext(request, {
                 "service": service_obj,
-                "service_grand_total" : service_grand_total})
+                "service_grand_total" : service_grand_total,
+                "labour_grand_total"  : labour_grand_total,
+                "grand_total"         : grand_total})
             return render_to_response('service/invoicetaxpdf.html',
                                       context_instance=context)
 

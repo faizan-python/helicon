@@ -122,7 +122,7 @@
                                                 {{part.price}}
                                             </div>                                            
                                             <div class="amountcoloumn">
-                                                {% widthratio part.part_quantity 1 part.price %}
+                                                {{ part.total_price }}
                                             </div>
                                         </div>
                                         {% endfor %}
@@ -181,7 +181,7 @@
                                                 {{labour.labour_price}}
                                             </div>                                            
                                             <div class="amountcoloumn">
-                                                {% widthratio labour.labour_price 1 labour.labour_quantity %}
+                                                {{ labour.total_price }}
                                             </div>
                                         </div>
                                         {% endfor %}

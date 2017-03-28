@@ -10,6 +10,10 @@ class Part(models.Model):
     part_quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
 
+    @property
+    def total_price(self):
+        return self.price * self.part_quantity
+
     def __unicode__(self):
         return u''.join((self.part_name))
 
@@ -20,6 +24,10 @@ class LabourCost(models.Model):
     labour_price = models.FloatField(blank=True)
     labour_quantity = models.IntegerField(blank=True, default=0)
     is_active = models.BooleanField(default=True)
+
+    @property
+    def total_price(self):
+        return self.labour_price * self.labour_quantity
 
     def __unicode__(self):
         return u''.join((self.name))
