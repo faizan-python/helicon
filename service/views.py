@@ -384,12 +384,6 @@ def get_total_in_words(amount_a, amount_b):
     before_decical = num_list[0]
     before_decimal_inwords = num2words(int(before_decical),lang='en_IN')
     words = before_decimal_inwords + " rupees"
-
-    if len(num_list) > 1:
-        after_decical = num_list[1]
-        after_decical_inwords = num2words(int(after_decical),lang='en_IN')
-        words = words + " and " + after_decical_inwords + " paisa"
-
     return words
 
 
