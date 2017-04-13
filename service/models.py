@@ -56,6 +56,14 @@ class DeliveryDetail(models.Model):
         return str(self.vehical_number)
 
 
+class InvoiceDetail(models.Model):
+    latest_retail_invoice = models.CharField(blank=True, null=True, max_length=100)
+    latest_tax_invoice    = models.CharField(blank=True, null=True, max_length=100)
+
+    def __unicode__(self):
+        return str(self.latest_retail_invoice)
+
+
 class Service(models.Model):
 
     """
@@ -100,8 +108,10 @@ class Service(models.Model):
     freight_cost = models.FloatField(default=0)
     invoice_date = models.DateTimeField(blank=True, null=True)
     challan_number = models.CharField(blank=True, null=True, max_length=100)
-    challan_date = models.DateTimeField(blank=True, null=True) 
+    challan_date = models.DateTimeField(blank=True, null=True)
     delivery_invoice_details = models.ForeignKey(DeliveryDetail, blank=True, null=True)
+    retail_invoice_number = models.IntegerField(blank=True, null=True)
+    tax_invoice_number = models.IntegerField(blank=True, null=True)
 
     def __unicode__(self):
         return str(self.invoice_number)

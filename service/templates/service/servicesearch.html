@@ -22,10 +22,11 @@
                         <table class="datatable table table-striped" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Invoice Number</th>
+                                    <th>Date</th>
+                                    <th>Retail No.</th>
+                                    <th>Tax No.</th>
                                     <th>Service Product</th>
                                     <th>Customer</th>
-                                    <th>Date</th>
                                     <th>Total Paid</th>
                                     <th>Total Pending</th>
                                     <th>Serviced</th>
@@ -34,10 +35,10 @@
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Invoice Number</th>
+                                    <th>Retail No.</th>
+                                    <th>Tax No.</th>
                                     <th>Service Product</th>
                                     <th>Customer</th>
-                                    <th>Date</th>
                                     <th>Total Paid</th>
                                     <th>Total Pending</th>
                                     <th>Serviced</th>
@@ -47,14 +48,15 @@
                             <tbody>
                                 {% for service in services %}
                                 <tr>
-                                    <td>{{service.invoice_number}}</td>
+                                    <td>{{service.service_date|date:"D d M Y"}}</td>
+                                    <td>{{service.retail_invoice_number|default:"NA"}}</td>
+                                    <td>{{service.tax_invoice_number|default:"NA"}}</td>
                                     {% if service.vehical %}
                                         <td>{{service.vehical}}</td>
                                     {% else %}
                                         <td>{{service.otherservice}}</td>
                                     {% endif %}
                                     <td>{{service.customer|title }}</td>
-                                    <td>{{service.service_date}}</td>
                                     <td>&#8377; {{service.total_paid}}</td>
                                     <td>&#8377; {{service.total_pending}}</td>
                                     <td>{{service.is_serviced}}</td>

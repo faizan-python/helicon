@@ -27,7 +27,8 @@ from vehical.models import (
 from service.models import (
     Service,
     Payment,
-    DeliveryDetail
+    DeliveryDetail,
+    InvoiceDetail
 )
 from parts.models import (
     Part,
@@ -226,6 +227,29 @@ def invoice_delete(request, id):
             service_obj = service_obj[0]
             service_obj.is_active = False
             service_obj.save()
+            
+            invoice_detail = InvoiceDetail.objects.get(id=1)
+            if service_obj.retail_invoice_number:
+                services = Service.objects.filter(
+                    retail_invoice_number__gt=service_obj.retail_invoice_number,
+                    is_active=True)
+                for service in services:
+                    service.retail_invoice_number = int(service.retail_invoice_number) - 1
+                    service.save()
+                invoice_detail.latest_retail_invoice = int(invoice_detail.latest_retail_invoice) - 1
+
+
+            if service_obj.tax_invoice_number:
+                services = Service.objects.filter(
+                    tax_invoice_number__gt=service_obj.tax_invoice_number,
+                    is_active=True)
+                for service in services:
+                    service.tax_invoice_number = int(service.tax_invoice_number) - 1
+                    service.save()
+                invoice_detail.latest_tax_invoice = int(invoice_detail.latest_tax_invoice) - 1
+
+            invoice_detail.save()
+
             return HttpResponseRedirect("/service/search/")
         return HttpResponseRedirect("/home/")
     if request.method == "POST":
@@ -308,6 +332,13 @@ def invoice(request):
                                                 * float(obj.part_quantity))
                             part_obj.append(obj)
 
+                if len(part_data) > 1:
+                    latest_invoice_id = InvoiceDetail.objects.get(id=1)
+                    latest_invoice_id.latest_tax_invoice = int(latest_invoice_id.latest_tax_invoice) + 1
+                    latest_invoice_id.save()
+                    service_obj.tax_invoice_number = latest_invoice_id.latest_tax_invoice
+
+
                 labour_data = data.get('labour_data')
                 labour_obj = []
                 labour_total_cost = 0
@@ -321,6 +352,12 @@ def invoice(request):
                                 created_by=request.user)
                             labour_total_cost += float(obj.labour_price)
                             labour_obj.append(obj)
+
+                if len(labour_data) > 1:
+                    latest_invoice_id = InvoiceDetail.objects.get(id=1)
+                    latest_invoice_id.latest_retail_invoice = int(latest_invoice_id.latest_retail_invoice) + 1
+                    latest_invoice_id.save()
+                    service_obj.retail_invoice_number = latest_invoice_id.latest_retail_invoice
 
                 service_obj.parts.add(*part_obj)
                 service_obj.labourcost_detail.add(*labour_obj)
