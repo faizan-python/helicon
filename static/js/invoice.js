@@ -140,7 +140,7 @@ $(document).ready(function() {
 
         $('#labour_cost').val(total_labour_cost)
         var tax = checkifblank(parseFloat($('#tax').val()))
-        var service_tax = checkifblank(parseFloat($('#service_tax').val()))
+        var service_tax = checkifblank(parseFloat(15))
         var paid = checkifblank(parseFloat($('#total_paid').val()))
         var labour_cost = checkifblank(parseFloat($('#labour_cost').val()))
         var freight_cost = checkifblank(parseFloat($('#freight_cost').val()))

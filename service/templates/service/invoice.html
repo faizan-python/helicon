@@ -488,19 +488,21 @@
 
                             <form id="costform">
                                 <div class="card-body">
-                                    <div class="form-group" style="padding-right:5em;">
+                                    <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Advance Paid: </label>&nbsp;&nbsp;
                                         <input type="text" name="advance_payment" id="advance_payment" onKeyPress="return floatonly(this, event)" class="form-control" value={{service.advance_payment}} autocomplete="off" readonly>
                                     </div>
+                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">Service Tax + Swach Bharat Cess + Krishi Kalyan Cess: </label>&nbsp;&nbsp;
+                                        <input type="text" name="first_name" id="service_tax" onKeyPress="return floatonly(this, event)" autocomplete="off" class="form-control" value=15 required readonly>
+                                    </div>
                                     <br>
-
+                                    <br>
+                                    <br>
+                                    <br>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">C-Form or Tax Percentage: </label>&nbsp;&nbsp;
                                         <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" autocomplete="off" value=0 required>
-                                    </div>
-                                    <div class="form-group pull-right" style="padding-right:5em;">
-                                        <label for="exampleInputEmail2">Service Tax Percentage: </label>&nbsp;&nbsp;
-                                        <input type="text" name="first_name" id="service_tax" onKeyPress="return floatonly(this, event)" autocomplete="off" class="form-control" value=0 required>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Freight Cost: </label>&nbsp;&nbsp;
