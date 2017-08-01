@@ -6,6 +6,7 @@ class Part(models.Model):
     created_by = models.ForeignKey(User)
     part_name = models.CharField(blank=True, max_length=500)
     part_company_name = models.CharField(blank=True, max_length=500)
+    part_code = models.CharField(blank=True, max_length=500)
     price = models.FloatField(blank=True)
     part_quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)

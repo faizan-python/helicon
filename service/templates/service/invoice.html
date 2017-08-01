@@ -193,24 +193,48 @@
                                     &#8377; {{service.total_pending}}
                                 </div>
 
-                                <div class="form-group" style="padding-right:5em;">
+<!--                                 <div class="form-group" style="padding-right:5em;">
                                     <label for="exampleInputEmail2">Labour Cost: </label>&nbsp;&nbsp;
                                     &#8377; {{service.labour_cost}}
+                                </div> -->
+                                <div class="form-group" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Freight Cost: </label>&nbsp;&nbsp;
+                                    &#8377; {{service.freight_cost}}
                                 </div>
                                 <div class="form-group" style="padding-right:5em;">
                                     <label for="exampleInputEmail2">Part Cost: </label>&nbsp;&nbsp;
                                     &#8377; {{service.part_cost}}
                                 </div>
-                                <div class="form-group" style="padding-right:5em;">
-                                    <label for="exampleInputEmail2">Freight Cost: </label>&nbsp;&nbsp;
-                                    &#8377; {{service.freight_cost}}
-                                </div>
 
-                                <div class="form-group" id="display-total-cost" style="padding-right:5em;">
-                                    <label for="exampleInputEmail2">Total Cost: </label>&nbsp;&nbsp;
-                                    &#8377; {{service.total_cost}}
-                                </div>
-                                <div class="form-group" style="padding-right:5em;">
+                                {% if service.gst_type == "IGST" %}
+                                    <div class="form-group" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">IGST Rate: </label>&nbsp;&nbsp;
+                                         {{service.tax}} %
+                                    </div>
+                                    <div class="form-group" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">IGST Amount: </label>&nbsp;&nbsp;
+                                         &#8377; {{service.tax_amount}}
+                                    </div>
+                                {% else %}
+                                    <div class="form-group" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">SGST Rate: </label>&nbsp;&nbsp;
+                                         {% widthratio service.tax 2 1 %}%
+                                    </div>
+                                    <div class="form-group" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">SGST Amount: </label>&nbsp;&nbsp;
+                                         &#8377; {% widthratio service.tax_amount 2 1 %}
+                                    </div>
+
+                                    <div class="form-group" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">CGST Rate: </label>&nbsp;&nbsp;
+                                         {% widthratio service.tax 2 1 %}%
+                                    </div>
+                                    <div class="form-group" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">CGST Amount: </label>&nbsp;&nbsp;
+                                         &#8377; {% widthratio service.tax_amount 2 1 %}
+                                    </div>
+                                {% endif %}
+<!--                                 <div class="form-group" style="padding-right:5em;">
                                     <label for="exampleInputEmail2">C-Form or Tax: </label>&nbsp;&nbsp;
                                      {{service.tax}} %
                                 </div>
@@ -226,6 +250,11 @@
                                 <div class="form-group" style="padding-right:5em;">
                                     <label for="exampleInputEmail2">Service Tax Amount: </label>&nbsp;&nbsp;
                                     &#8377; {{service.service_tax_amount}}
+                                </div> -->
+
+                                <div class="form-group" id="display-total-cost" style="padding-right:5em;">
+                                    <label for="exampleInputEmail2">Total Cost: </label>&nbsp;&nbsp;
+                                    &#8377; {{service.total_cost}}
                                 </div>
 
 
@@ -240,7 +269,8 @@
                                             <thead>
                                                 <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
+                                                <th>Name / Service</th>
+                                                <th>HSN Code</th>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
                                                 </tr>
@@ -250,6 +280,7 @@
                                                 <tr>
                                                     <td>{{ forloop.counter }}</td>
                                                     <td>{{part.part_name}}</td>
+                                                    <td>{{part.part_code}}</td>
                                                     <td>{{part.part_quantity}}</td>
                                                     <td>{{part.price}}</td>
                                                 </tr>
@@ -259,7 +290,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card-body">
+                                <div class="card-body" style="display: none;">
                                     <div class="panel panel-default">
                                         <!-- Default panel contents -->
                                         <div class="panel-heading">Labour Cost Descriptions</div>
@@ -403,7 +434,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Name</th>
+                                                    <th>Name / Service</th>
+                                                    <th>HSN Code</th>
                                                     <th>Quantity</th>
                                                     <th>Price</th>
                                                     <th></th>
@@ -418,7 +450,7 @@
                             </div>
 
 <!--                             Labour Cost Cut Down -->
-                            <div class="card-body">
+                            <div class="card-body" style="display: none;">
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-heading">Labour Cost Description</div>
@@ -486,23 +518,43 @@
                                 </div>
                             </div>
 
+                            <div class="card-body">
+                                <div class="sub-title">Select GST Type</div>
+                                <form class="form-inline">
+                                    <div class="checkbox">
+                                        <input type="checkbox" class="group1"  id="sgst" name="sgst">
+                                        <label for="exampleInputEmail2">
+                                            SGST & CGST 
+                                        </label>
+                                    </div>
+                                    &nbsp;&nbsp;
+                                    <div class="checkbox">
+                                        <input type="checkbox" class="group1" id="igst" name="igst">
+                                        <label for="exampleInputEmail2">
+                                            IGST
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+
+
                             <form id="costform">
                                 <div class="card-body">
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Advance Paid: </label>&nbsp;&nbsp;
                                         <input type="text" name="advance_payment" id="advance_payment" onKeyPress="return floatonly(this, event)" class="form-control" value={{service.advance_payment}} autocomplete="off" readonly>
                                     </div>
-                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                    <div style="display: none;" class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Service Tax + Swach Bharat Cess + Krishi Kalyan Cess: </label>&nbsp;&nbsp;
-                                        <input type="text" name="first_name" id="service_tax" onKeyPress="return floatonly(this, event)" autocomplete="off" class="form-control" value=15 required readonly>
+                                        <input type="text" name="first_name" id="service_tax" onKeyPress="return floatonly(this, event)" autocomplete="off" class="form-control" value=0 required readonly>
                                     </div>
                                     <br>
                                     <br>
                                     <br>
                                     <br>
-                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                    <div class="form-group pull-right" style="display: none;" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">C-Form or Tax Percentage: </label>&nbsp;&nbsp;
-                                        <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" autocomplete="off" value=0 required>
+                                        <input type="text" name="first_name" style="display: none;" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" autocomplete="off" value=18 required>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Freight Cost: </label>&nbsp;&nbsp;
@@ -523,16 +575,16 @@
                                     <label for="exampleInputEmail2">Total Pending Amount: </label>&nbsp;&nbsp;
                                     <input type="text" name="total_pending" id="total_pending" placeholder="Pending Amount" class="form-control" readonly>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="display: none;">
                                     <label for="exampleInputEmail2">Labour Cost: </label>&nbsp;&nbsp;
                                     <input type="text" name="labour_cost" id="labour_cost" onKeyPress="return floatonly(this, event)" class="form-control" value=0 readonly>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="display: none;">
                                     <label for="exampleInputEmail2">Service Tax Cost: </label>&nbsp;&nbsp;
                                     <input type="text" name="service_tax_amount" id="service_tax_amount" onKeyPress="return floatonly(this, event)" class="form-control" value=0 readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail2">C-Form or Tax Cost: </label>&nbsp;&nbsp;
+                                    <label for="exampleInputEmail2">CGST & SGST / IGST Amount: </label>&nbsp;&nbsp;
                                     <input type="text" name="tax_amount" id="tax_amount" onKeyPress="return floatonly(this, event)" class="form-control" value=0 readonly>
                                 </div>
                             </div>

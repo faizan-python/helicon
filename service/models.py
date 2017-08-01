@@ -112,6 +112,7 @@ class Service(models.Model):
     delivery_invoice_details = models.ForeignKey(DeliveryDetail, blank=True, null=True)
     retail_invoice_number = models.IntegerField(blank=True, null=True)
     tax_invoice_number = models.IntegerField(blank=True, null=True)
+    gst_type = models.CharField(blank=True, null=True, max_length=100)
 
     def __unicode__(self):
         return str(self.invoice_number)

@@ -70,6 +70,47 @@ $(document).ready(function() {
         }
     });
 
+    $("#sgst").attr('checked', false);
+    $("#igst").attr('checked', false);
+
+    gst_type = ""
+    
+    $("#sgst").click(function(event) {
+        if ($("#sgst").is(':checked')) {
+            gst_type = "SGST and CGST";
+            $("#igst").attr('checked', false);
+        }
+        else{
+            gst_type = "";
+        }
+    });
+
+    $("#igst").click(function(event) {
+        if ($("#igst").is(':checked')) {
+            gst_type = "IGST";
+            $("#sgst").attr('checked', false);
+        }
+        else{
+            gst_type = "";
+        }
+    });
+
+    function checkGSTValidations() {
+        if (gst_type == "") {
+            $.toast({
+                heading: 'Error',
+                text: 'Please Select GST Type !!!',
+                icon: 'error',
+                hideAfter: 4000,
+                position: 'mid-center'
+            })
+            return false;
+        }
+        else {
+            return true
+        }
+    }
+
     function calculateSum() {
         var tbl = $('#itemtable');
         var sum = 0;
@@ -86,6 +127,11 @@ $(document).ready(function() {
             var price = 0
             var sub_dict = {}
             $(this).find('#part_name').each(function () {
+                if (this.value.length != 0) {
+                    sub_dict[this.id] = special_character_check(this.value);
+                }
+            });
+            $(this).find('#part_code').each(function () {
                 if (this.value.length != 0) {
                     sub_dict[this.id] = special_character_check(this.value);
                 }
@@ -178,7 +224,8 @@ $(document).ready(function() {
     }
 
     $("#calculateamount").click(function(event){
-        if ($('#tabledata').valid() && $('#costform').valid() && $('#labourtabledata').valid()) {
+        var gstStatus = checkGSTValidations();
+        if ($('#tabledata').valid() && $('#costform').valid() && $('#labourtabledata').valid() && gstStatus) {
             calculateSum()
             $.toast({
                 heading: 'Cost Generated',
@@ -202,10 +249,11 @@ $(document).ready(function() {
     $("#addpart").click(function(event){
         var row1= '<th id='+labour_table_id+' scope="row"> # </th>'
         var row2='<td><input type="text" name="part_name" id="part_name" class="form-control" required></td>'
-        var row3='<td><input type="text" name="part_quantity" id="part_quantity" class="form-control" onKeyPress="return floatonly(this, event)"required></td>'
-        var row4='<td><input type="text" name="price" id="price" class="form-control" onKeyPress="return floatonly(this, event)" required></td>'
-        var row5='<td><button class="btn btn-sm btn-default deletepart" type="button">Delete</button></td>'
-        $('#itemtable > tbody:last-child').append('<tr>'+row1+row2+row3+row4+row5+'</tr>')
+        var row3='<td><input type="text" name="part_code" id="part_code" class="form-control"></td>'
+        var row4='<td><input type="text" name="part_quantity" id="part_quantity" class="form-control" onKeyPress="return floatonly(this, event)"required></td>'
+        var row5='<td><input type="text" name="price" id="price" class="form-control" onKeyPress="return floatonly(this, event)" required></td>'
+        var row6='<td><button class="btn btn-sm btn-default deletepart" type="button">Delete</button></td>'
+        $('#itemtable > tbody:last-child').append('<tr>'+row1+row2+row3+row4+row5+row6+'</tr>')
         labour_table_id += 1
     });
 
@@ -286,7 +334,8 @@ $(document).ready(function() {
 
     $("#makepayment").click(function(event){
         var chequeStatus = checkChequeValidations();
-        if ($('#tabledata').valid() && $('#costform').valid() && $('#labourtabledata').valid() && chequeStatus) {
+        var gstStatus = checkGSTValidations();
+        if ($('#tabledata').valid() && $('#costform').valid() && $('#labourtabledata').valid() && chequeStatus && gstStatus) {
             $('body').loading({stoppable: false}, 'start');
             var list = calculateSum()
             var part_list = list.parts_list
@@ -306,6 +355,7 @@ $(document).ready(function() {
                 'labour_data': labour_cost_list,
                 'service_id': special_character_check($('#service-invoice-number').val()),
                 'payment_type': payment_type,
+                'gst_type': gst_type,
                 'cheque_number': special_character_check($('#cheque_number').val()),
                 'cheque_bank_name': special_character_check($('#cheque_bank_name').val()),
                 'cheque_date': special_character_check($('#cheque_date').val()),

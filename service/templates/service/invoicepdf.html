@@ -93,7 +93,10 @@
                                                 <center> <b> Sr. No. </b> </center>
                                             </div>
                                             <div class="desclabourcoloumn">
-                                                <center> <b> Item </b> </center>
+                                                <center> <b> Name / Service </b> </center>
+                                            </div>
+                                            <div class="codecoloumn">
+                                                <center> <b> HSN Code </b> </center>
                                             </div>
                                             <div class="qtycoloumn">
                                                 <center> <b> Qty/Set </b> </center>
@@ -115,6 +118,9 @@
                                             <div class="desclabourcoloumn">
                                                 {{part.part_name|capfirst}}
                                             </div>
+                                            <div class="codecoloumn">
+                                                {{part.part_code|capfirst}}
+                                            </div>
                                             <div class="qtycoloumn">
                                                 {{part.part_quantity}}
                                             </div>                                            
@@ -127,8 +133,22 @@
                                         </div>
                                         {% endfor %}
                                         <div class="panel-footer">
-                                            <span class="pull-right" style="width: 173px;"> <b> Vat/C-Form </b> : {{service.tax}}%</span><br>
-                                            <span class="pull-right" style="width: 173px;"><b> Vat Amount </b> : {{service.tax_amount}}</span><br>
+
+                                            {% if service.gst_type == "IGST" %}
+
+                                                <span class="pull-right" style="width: 173px;"> <b> IGST Rate</b> : {{service.tax}}%</span><br>
+                                                <span class="pull-right" style="width: 173px;"><b> IGST Amount </b> : {{service.tax_amount}}</span><br>
+
+                                            {% else %}
+
+                                                <span class="pull-right" style="width: 173px;"> <b> SGST Rate</b> : {% widthratio service.tax 2 1 %}%</span><br>
+                                                <span class="pull-right" style="width: 173px;"><b> SGST Amount </b> : {% widthratio service.tax_amount 2 1 %}</span><br>
+
+                                                <span class="pull-right" style="width: 173px;"> <b> CGST Rate</b> : {% widthratio service.tax 2 1 %}%</span><br>
+                                                <span class="pull-right" style="width: 173px;"><b>CGST Amount </b> :  {% widthratio service.tax_amount 2 1 %}</span><br>
+
+                                            {% endif %}
+
                                             <span class="pull-right" style="width: 173px;"><b> Grand Total </b> : {{service.part_cost|add:service.tax_amount}}</span>
                                             <b> Total In Words </b> : {{service_grand_total |title}}
                                         </div>

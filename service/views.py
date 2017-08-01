@@ -327,7 +327,8 @@ def invoice(request):
                                                       price=part.get('price'),
                                                       part_quantity=part.get(
                                                           'part_quantity'),
-                                                      created_by=request.user)
+                                                      created_by=request.user,
+                                                      part_code=part.get('part_code'))
                             part_total_cost += (float(obj.price)
                                                 * float(obj.part_quantity))
                             part_obj.append(obj)
@@ -366,6 +367,7 @@ def invoice(request):
                 service_obj.freight_cost = data.get('freight_cost', 0)
                 service_obj.invoice_date = timezone.datetime.today()
                 service_obj.challan_date = timezone.datetime.today()
+                service_obj.gst_type = data.get('gst_type', "")
 
                 if data.get('challan_number'):
                     service_obj.challan_number = data.get('challan_number', "")

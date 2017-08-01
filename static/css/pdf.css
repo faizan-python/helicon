@@ -173,7 +173,15 @@
 }
 .desclabourcoloumn {
     float:left; 
-    width: 64%;
+    width: 49%;
+    height: 35px;
+    border-right: 1px solid black;
+    overflow: hidden;
+    padding-left: 2px;
+}
+.codecoloumn {
+    float:left; 
+    width: 15%;
     height: 35px;
     border-right: 1px solid black;
     overflow: hidden;
