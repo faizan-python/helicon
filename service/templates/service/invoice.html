@@ -167,6 +167,9 @@
                             {{service.expected_delivery_date}}
                         </div>
                         <input type="hidden" value="{{service.invoice_number}}" id="service-invoice-number">
+                        <!-- GST DeTAILS -->
+                        <input type="hidden" id="igstAmount" value="{{igst}}">
+                        <input type="hidden" id="gstAmount" value="{{gst}}">
                     </form>
 
                         {% if service.is_serviced %}
@@ -205,7 +208,7 @@
                                     <label for="exampleInputEmail2">Part Cost: </label>&nbsp;&nbsp;
                                     &#8377; {{service.part_cost}}
                                 </div>
-
+<!-- 
                                 {% if service.gst_type == "IGST" %}
                                     <div class="form-group" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">IGST Rate: </label>&nbsp;&nbsp;
@@ -233,7 +236,7 @@
                                         <label for="exampleInputEmail2">CGST Amount: </label>&nbsp;&nbsp;
                                          &#8377; {% widthratio service.tax_amount 2 1 %}
                                     </div>
-                                {% endif %}
+                                {% endif %} -->
 <!--                                 <div class="form-group" style="padding-right:5em;">
                                     <label for="exampleInputEmail2">C-Form or Tax: </label>&nbsp;&nbsp;
                                      {{service.tax}} %
@@ -554,7 +557,7 @@
                                     <br>
                                     <div class="form-group pull-right" style="display: none;" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">C-Form or Tax Percentage: </label>&nbsp;&nbsp;
-                                        <input type="text" name="first_name" style="display: none;" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" autocomplete="off" value=18 required>
+                                        <input type="text" name="first_name" style="display: none;" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" autocomplete="off" value=0 required>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Freight Cost: </label>&nbsp;&nbsp;

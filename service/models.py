@@ -116,3 +116,16 @@ class Service(models.Model):
 
     def __unicode__(self):
         return str(self.invoice_number)
+
+
+class TaxCost(models.Model):
+
+    """
+    TaxCost model
+    """
+    igst = models.FloatField(default=0)
+    sgst = models.FloatField(default=0)
+    cgst = models.FloatField(default=0)
+
+    def __unicode__(self):
+        return str(self.igst)

@@ -141,11 +141,11 @@
 
                                             {% else %}
 
-                                                <span class="pull-right" style="width: 173px;"> <b> SGST Rate</b> : {% widthratio service.tax 2 1 %}%</span><br>
-                                                <span class="pull-right" style="width: 173px;"><b> SGST Amount </b> : {% widthratio service.tax_amount 2 1 %}</span><br>
+                                                <span class="pull-right" style="width: 173px;"> <b> SGST Rate</b> : {{sgst}}%</span><br>
+                                                <span class="pull-right" style="width: 173px;"><b> SGST Amount </b> : {{sgst_amount}}</span><br>
 
-                                                <span class="pull-right" style="width: 173px;"> <b> CGST Rate</b> : {% widthratio service.tax 2 1 %}%</span><br>
-                                                <span class="pull-right" style="width: 173px;"><b>CGST Amount </b> :  {% widthratio service.tax_amount 2 1 %}</span><br>
+                                                <span class="pull-right" style="width: 173px;"> <b> CGST Rate</b> : {{cgst}}%</span><br>
+                                                <span class="pull-right" style="width: 173px;"><b>CGST Amount </b> : {{cgst_amount}}</span><br>
 
                                             {% endif %}
 

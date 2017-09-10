@@ -79,9 +79,11 @@ $(document).ready(function() {
         if ($("#sgst").is(':checked')) {
             gst_type = "SGST and CGST";
             $("#igst").attr('checked', false);
+            $("#tax").val($("#gstAmount").val());
         }
         else{
             gst_type = "";
+            $("#tax").val("");
         }
     });
 
@@ -89,9 +91,11 @@ $(document).ready(function() {
         if ($("#igst").is(':checked')) {
             gst_type = "IGST";
             $("#sgst").attr('checked', false);
+            $("#tax").val($("#igstAmount").val());
         }
         else{
             gst_type = "";
+            $("#tax").val("");
         }
     });
 

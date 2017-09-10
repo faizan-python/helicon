@@ -28,7 +28,8 @@ from service.models import (
     Service,
     Payment,
     DeliveryDetail,
-    InvoiceDetail
+    InvoiceDetail,
+    TaxCost
 )
 from parts.models import (
     Part,
@@ -208,9 +209,12 @@ def service_edit(request, id):
 def invoice_get(request, id):
     if request.method == "GET":
         service_obj = Service.objects.filter(invoice_number=id)
-        if service_obj:
+        tax_obj = TaxCost.objects.filter(id=1)
+        if service_obj and tax_obj:
             context = RequestContext(request, {
-                "service": service_obj[0]})
+                "service": service_obj[0],
+                "igst": tax_obj[0].igst,
+                "gst": tax_obj[0].sgst + tax_obj[0].cgst})
             return render_to_response('service/invoice.html',
                                       context_instance=context)
         return HttpResponseRedirect("/home/")
@@ -426,6 +430,30 @@ def get_total_in_words(amount_a, amount_b):
     return words
 
 
+def get_gst_details(service_obj):
+
+    response_dict = {}
+    if service_obj.gst_type != "IGST":
+        tax_obj = TaxCost.objects.filter(id=1)
+        if tax_obj and service_obj:
+            tax_obj = tax_obj[0]
+            tax_amount = service_obj.tax_amount
+            total_tax = service_obj.tax
+
+            sgst_per = float(tax_obj.sgst)*100.0/float(total_tax)
+            sgst_amount = int(round(float(tax_amount)*float(sgst_per)/100.0))
+
+            cgst_per = float(tax_obj.cgst)*100.0/float(total_tax)
+            cgst_amount = int(round(float(tax_amount)*float(cgst_per)/100.0))
+
+            response_dict["sgst"] = tax_obj.sgst
+            response_dict["sgst_amount"] = sgst_amount
+            response_dict["cgst"] = tax_obj.cgst
+            response_dict["cgst_amount"] = cgst_amount
+
+    return response_dict
+
+
 @require_http_methods(["GET"])
 @login_required(login_url='/admin/')
 def invoice_view(request, id):
@@ -439,12 +467,17 @@ def invoice_view(request, id):
             labour_grand_total  = get_total_in_words(service_obj.labour_cost,
                                                     service_obj.service_tax_amount)
             grand_total         = get_total_in_words(service_obj.total_cost, 0)
+            gst_details         = get_gst_details(service_obj)
 
             context = RequestContext(request, {
                 "service"             : service_obj,
                 "service_grand_total" : service_grand_total,
                 "labour_grand_total"  : labour_grand_total,
-                "grand_total"         : grand_total})
+                "grand_total"         : grand_total,
+                "sgst"                : gst_details.get("sgst", ""),
+                "sgst_amount"         : gst_details.get("sgst_amount", ""),
+                "cgst"                : gst_details.get("cgst", ""),
+                "cgst_amount"         : gst_details.get("cgst_amount", "")})
             return render_to_response('service/invoicepdf.html',
                                       context_instance=context)
 
