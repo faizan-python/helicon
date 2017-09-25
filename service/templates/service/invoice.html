@@ -40,7 +40,7 @@
                             {{service.customer.phone_number}}
                         </div>
                         <div class="form-group" style="padding:1em;">
-                            <label for="exampleInputEmail2">Tin Number:</label>&nbsp;&nbsp;
+                            <label for="exampleInputEmail2">GST Number:</label>&nbsp;&nbsp;
                             {{service.customer.tin_number|default:"NA"}}
                         </div>
                         <div class="form-group" style="padding:1em;">
@@ -552,9 +552,9 @@
                                     <br>
                                     <br>
                                     <br>
-                                    <div class="form-group pull-right" style="display: none;" style="padding-right:5em;">
-                                        <label for="exampleInputEmail2">C-Form or Tax Percentage: </label>&nbsp;&nbsp;
-                                        <input type="text" name="first_name" style="display: none;" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" autocomplete="off" value=18 required>
+                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">GST Percentage: </label>&nbsp;&nbsp;
+                                        <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" autocomplete="off" required>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Freight Cost: </label>&nbsp;&nbsp;
