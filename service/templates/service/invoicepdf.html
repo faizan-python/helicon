@@ -234,7 +234,7 @@
                                             </div>
                                             <div class="paymentdatecoloumn">
                                                 <center> <b> Date </b> </center>
-                                            </div>                                            
+                                            </div>         
                                             <div class="paymentrecievedcoloumn">
                                                 <center> <b> Recieved By </b> </center>
                                             </div>
@@ -255,9 +255,17 @@
                                             <div class="paymentamountcoloumn">
                                                 {{payment.payment_amount}}
                                             </div>
-                                            <div class="paymentdatecoloumn">
-                                                {{payment.created_date|date:"d M Y"|default:"NA"}}
-                                            </div>                                            
+
+                                            {% if payment.payment_type|stringformat:"s" == "Cheque" %}
+                                                <div class="paymentdatecoloumn">
+                                                    {{payment.cheque_date|date:"d M Y"|default:"NA"}}
+                                                </div>
+                                            {% else %}
+                                                <div class="paymentdatecoloumn">
+                                                    {{payment.created_date|date:"d M Y"|default:"NA"}}
+                                                </div>
+                                            {% endif %}
+
                                             <div class="paymentrecievedcoloumn">
                                                 {{payment.recieved_by}}
                                             </div>
