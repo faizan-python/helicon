@@ -168,7 +168,7 @@ def service_search(request):
 @login_required(login_url='/admin/')
 def service_view(request, id):
     if request.method == "GET":
-        service_obj = Service.objects.filter(invoice_number=id)
+        service_obj = Service.objects.filter(is_active=True, invoice_number=id)
         if service_obj:
             context = RequestContext(request, {
                 "service": service_obj[0]})
@@ -192,7 +192,7 @@ def service_pending(request):
 @login_required(login_url='/admin/')
 def service_edit(request, id):
     if request.method == "GET":
-        service_obj = Service.objects.filter(invoice_number=id)
+        service_obj = Service.objects.filter(is_active=True, invoice_number=id)
         if service_obj:
             context = RequestContext(request, {
                 "service": service_obj[0]})
@@ -207,7 +207,7 @@ def service_edit(request, id):
 @login_required(login_url='/admin/')
 def invoice_get(request, id):
     if request.method == "GET":
-        service_obj = Service.objects.filter(invoice_number=id)
+        service_obj = Service.objects.filter(is_active=True, invoice_number=id)
         if service_obj:
             context = RequestContext(request, {
                 "service": service_obj[0]})
@@ -222,7 +222,7 @@ def invoice_get(request, id):
 @login_required(login_url='/admin/')
 def invoice_delete(request, id):
     if request.method == "GET":
-        service_obj = Service.objects.filter(invoice_number=id)
+        service_obj = Service.objects.filter(is_active=True, invoice_number=id)
         if service_obj:
             service_obj = service_obj[0]
             service_obj.is_active = False
@@ -278,7 +278,7 @@ def invoice(request):
         request_dict = request.POST.dict()
         data = json.loads(request_dict.keys()[0])
         service_obj = Service.objects.filter(
-            invoice_number=data.get('service_id'))
+            invoice_number=data.get('service_id'), is_active=True)
         if service_obj:
             service_obj = service_obj[0]
             if not service_obj.is_serviced:
@@ -384,7 +384,7 @@ def pending_payment(request):
         request_dict = request.POST.dict()
         data = json.loads(request_dict.keys()[0])
         service_obj = Service.objects.filter(
-            invoice_number=data.get('service_id'))
+            invoice_number=data.get('service_id'), is_active=True)
         if service_obj:
             service_obj = service_obj[0]
             if service_obj.is_serviced:
@@ -517,7 +517,8 @@ def report(request):
             service_date__gte=from_date,
             service_date__lte=till_date,
             complete_payment=complete_payment,
-            is_serviced=True)
+            is_serviced=True,
+            is_active=True)
         template = get_template('service/reportview.html')
         context = Context({'services': service_obj, 'from': from_date,
                            "till": till_date})
@@ -546,7 +547,8 @@ def customer_report(request):
         customer_obj = Customer.objects.get(id=customer_id[0])
 
         service_obj = Service.objects.filter(customer=customer_obj,
-                                             is_serviced=True)
+                                             is_serviced=True,
+                                             is_active=True)
         template = get_template('service/customerreportview.html')
         context = Context({'services': service_obj, 'customer': customer_obj})
         content = template.render(context)
@@ -578,7 +580,8 @@ def customer_report_generate(request, id):
         customer_obj = Customer.objects.get(id=id)
 
         service_obj = Service.objects.filter(customer=customer_obj,
-                                             is_serviced=True)
+                                             is_serviced=True,
+                                             is_active=True)
         total_cost = 0
         total_paid = 0
         total_pending = 0
@@ -617,7 +620,8 @@ def report_generate(request):
         service_obj = Service.objects.filter(service_date__gt=from_date,
                                              service_date__lt=till_date,
                                              complete_payment=complete_payment,
-                                             is_serviced=True)
+                                             is_serviced=True,
+                                             is_active=True)
 
         total_cost = 0
         total_paid = 0
@@ -642,7 +646,7 @@ def report_generate(request):
 @login_required(login_url='/admin/')
 def generate_delivery_invoice(request, id):
     if request.method == "GET":
-        service_obj = Service.objects.filter(invoice_number=id)
+        service_obj = Service.objects.filter(invoice_number=id, is_active=True)
         if service_obj:
             context = RequestContext(request, {
                 "service": service_obj[0]})
@@ -654,7 +658,8 @@ def generate_delivery_invoice(request, id):
         data = request.POST.dict()
         del data['csrfmiddlewaretoken']
         service_obj = Service.objects.filter(
-            invoice_number=data.get('service_id'))
+            invoice_number=data.get('service_id'),
+            is_active=True)
         if service_obj:
             service_obj = service_obj[0]
             if service_obj.delivery_invoice_details:
@@ -678,7 +683,7 @@ def generate_delivery_invoice(request, id):
 @login_required(login_url='/admin/')
 def delivery_invoice(request, id):
     if request.method == "GET":
-        service_obj = Service.objects.filter(invoice_number=id)
+        service_obj = Service.objects.filter(invoice_number=id, is_active=True)
         if service_obj:
             context = RequestContext(request, {
                 "service": service_obj[0]})
