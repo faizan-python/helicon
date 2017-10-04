@@ -22,9 +22,8 @@
                         <table class="datatable table table-striped" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
+                                    <th>Invoice No.</th>
                                     <th>Date</th>
-                                    <th>Retail No.</th>
-                                    <th>Tax No.</th>
                                     <th>Service Product</th>
                                     <th>Customer</th>
                                     <th>Total Paid</th>
@@ -35,8 +34,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Retail No.</th>
-                                    <th>Tax No.</th>
+                                    <th>Invoice No.</th>
                                     <th>Service Product</th>
                                     <th>Customer</th>
                                     <th>Total Paid</th>
@@ -48,9 +46,8 @@
                             <tbody>
                                 {% for service in services %}
                                 <tr>
-                                    <td>{{service.service_date|date:"D d M Y"}}</td>
-                                    <td>{{service.retail_invoice_number|default:"NA"}}</td>
                                     <td>{{service.tax_invoice_number|default:"NA"}}</td>
+                                    <td>{{service.service_date|date:"D d M Y"}}</td>
                                     {% if service.vehical %}
                                         <td>{{service.vehical}}</td>
                                     {% else %}

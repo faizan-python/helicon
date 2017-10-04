@@ -133,7 +133,7 @@
                     <form class="form-inline">
                         <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Invoice Number: </label>&nbsp;&nbsp;
-                            {{service.invoice_number}}
+                            {{service.tax_invoice_number|default:"NA"}}
                         </div>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="form-group" style="padding-right:5em;">

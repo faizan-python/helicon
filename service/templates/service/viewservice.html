@@ -133,7 +133,7 @@
                 <div class="card-body">
                         <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">Invoice Number: </label>&nbsp;&nbsp;
-                            {{service.invoice_number}}
+                            {{service.tax_invoice_number|default:"NA"}}
                         </div>
                         <div class="form-group" style="padding-right:5em;">
                             <label for="exampleInputEmail2">P.O. Number: </label>&nbsp;&nbsp;
