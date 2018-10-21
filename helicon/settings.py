@@ -144,3 +144,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 #Banner
 #https://www.bannersnack.com/banner-creator/my-banners/
+#faizanhelicon@gmail.com
