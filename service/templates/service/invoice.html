@@ -402,16 +402,16 @@
                                 <br>
 
                                 <div class="form-group col-md-3" style="padding-right:2em;">
-                                    <label for="exampleInputEmail2">Next Service Date: </label>&nbsp;&nbsp;
-                                    <input type="text" id="expected-date" name="next_service_date" class="form-control" autocomplete="off">
-                                </div>
-                                <div class="form-group col-md-3" style="padding-right:2em;">
-                                    <label for="exampleInputEmail2">Gate Pass Number: </label>&nbsp;&nbsp;
-                                    <input type="text" id="gate_pass_no" name="gate_pass_no" class="form-control" autocomplete="off">
+                                    <label for="exampleInputEmail2">Challan Date: </label>&nbsp;&nbsp;
+                                    <input type="text" id="challan_date" name="challan_date" class="form-control" autocomplete="off">
                                 </div>
                                 <div class="form-group col-md-3" style="padding-right:2em;">
                                     <label for="exampleInputEmail2">Challan Number: </label>&nbsp;&nbsp;
                                     <input type="text" id="challan_number" name="challan_number" class="form-control" autocomplete="off">
+                                </div>
+                                <div class="form-group col-md-3" style="padding-right:2em;">
+                                    <label for="exampleInputEmail2">Gate Pass Number: </label>&nbsp;&nbsp;
+                                    <input type="text" id="gate_pass_no" name="gate_pass_no" class="form-control" autocomplete="off">
                                 </div>
                                 <br>
                                 <br>
@@ -490,7 +490,7 @@
                                     <div class="checkbox">
                                         <input type="checkbox" class="group1" id="cheque" name="cheque">
                                         <label for="exampleInputEmail2">
-                                            Cheque
+                                            Cheque / Reference No
                                         </label>
                                     </div>
                                 </form>
@@ -500,18 +500,18 @@
                                     <form class="form-inline" id="chequedataform">
                                         <div class="sub-title">Enter Cheque Details</div>
                                         <div class="form-group" style="padding-right:5em;">
-                                            <label for="exampleInputEmail2">Cheque Number: </label>&nbsp;&nbsp;
+                                            <label for="exampleInputEmail2">Cheque / Reference Number: </label>&nbsp;&nbsp;
                                             <input type="text" placeholder="EX19 XX XXXX" name="cheque_number" autocomplete="off" id="cheque_number" class="form-control" required>
                                         </div>
 
                                         <div class="form-group" style="padding-right:5em;">
-                                            <label for="exampleInputEmail2">Cheque Bank Name: </label>&nbsp;&nbsp;
+                                            <label for="exampleInputEmail2">Cheque / Reference Bank Name: </label>&nbsp;&nbsp;
                                             <input type="text" placeholder="XX XXXX Bank" name="cheque_bank_name" id="cheque_bank_name" class="form-control" autocomplete="off" required>
                                         </div>
 
 
                                         <div class="form-group" style="padding-right:5em;">
-                                            <label for="exampleInputEmail2">Cheque Date: </label>&nbsp;&nbsp;
+                                            <label for="exampleInputEmail2">Date: </label>&nbsp;&nbsp;
                                             <input type="text" id="cheque_date" name="cheque_date" class="form-control" autocomplete="off">
                                         </div>
                                     </form>
@@ -557,8 +557,12 @@
                                         <input type="text" name="first_name" id="tax" onKeyPress="return floatonly(this, event)" class="form-control" autocomplete="off" required>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
-                                        <label for="exampleInputEmail2">Freight Cost: </label>&nbsp;&nbsp;
+                                        <label for="exampleInputEmail2">Freight Amount: </label>&nbsp;&nbsp;
                                         <input type="text" name="first_name" id="freight_cost" onKeyPress="return floatonly(this, event)" autocomplete="off" class="form-control" value=0>
+                                    </div>
+                                    <div class="form-group pull-right" style="padding-right:5em;">
+                                        <label for="exampleInputEmail2">TDS Amount: </label>&nbsp;&nbsp;
+                                        <input type="text" name="first_name" id="tds_cost" onKeyPress="return floatonly(this, event)" autocomplete="off" class="form-control" value=0>
                                     </div>
                                     <div class="form-group pull-right" style="padding-right:5em;">
                                         <label for="exampleInputEmail2">Total Paid: </label>&nbsp;&nbsp;
