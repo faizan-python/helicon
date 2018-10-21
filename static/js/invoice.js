@@ -5,9 +5,7 @@ $(document).ready(function() {
     var labour_table_id = 1
 
     var dateToday = new Date(); 
-    $("#expected-date").datepicker({
-        minDate: dateToday
-    });
+    $("#challan_date").datepicker();
 
     function special_character_check(data) {
         data = data.replace(/"/g, "'")
@@ -346,7 +344,7 @@ $(document).ready(function() {
                 'total_paid' : checkifblank($('#total_paid').val()),
                 'labour_cost' : checkifblank($('#labour_cost').val()),
                 'pending_cost' : checkifblank($('#total_pending').val()),
-                'next_service_date' : checkifblank($('#next_service_date').val()),
+                'challan_date' : checkifblank($('#challan_date').val()),
                 'service_tax_amount' : checkifblank($('#service_tax_amount').val()),
                 'service_tax' : checkifblank($('#service_tax').val()),
                 'tax_amount' : checkifblank($('#tax_amount').val()),
@@ -361,7 +359,8 @@ $(document).ready(function() {
                 'cheque_date': special_character_check($('#cheque_date').val()),
                 'gate_pass_no': special_character_check($('#gate_pass_no').val()),
                 'freight_cost': special_character_check($('#freight_cost').val()),
-                'challan_number' : special_character_check($('#challan_number').val())
+                'challan_number' : special_character_check($('#challan_number').val()),
+                'tds_cost' : special_character_check($('#tds_cost').val())
             }
             submitdata(data)
         }

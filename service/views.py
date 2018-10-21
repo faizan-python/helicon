@@ -291,9 +291,6 @@ def invoice(request):
                 service_obj.service_tax_amount = data.get(
                     'service_tax_amount', 0)
                 service_obj.remark = data.get('remark', "")
-                if data.get('next_service_date'):
-                    service_obj.next_service_date = datetime.datetime.strptime(
-                        data.get('next_service_date'), "%m/%d/%Y").date()
                 service_obj.delivery_date = timezone.now()
                 service_obj.total_paid += int(data.get('total_paid', 0))
                 if int(data.get('total_paid')) > 0:
@@ -365,10 +362,12 @@ def invoice(request):
                 service_obj.part_cost = part_total_cost
                 service_obj.gate_pass_no = data.get('gate_pass_no', "")
                 service_obj.freight_cost = data.get('freight_cost', 0)
+                service_obj.tds_cost = data.get('tds_cost', 0)
                 service_obj.invoice_date = timezone.datetime.today()
-                service_obj.challan_date = timezone.datetime.today()
+                if data.get('challan_date'):
+                    service_obj.challan_date = datetime.datetime.strptime(
+                        data.get('challan_date'), "%m/%d/%Y").date()
                 service_obj.gst_type = data.get('gst_type', "")
-
                 if data.get('challan_number'):
                     service_obj.challan_number = data.get('challan_number', "")
 

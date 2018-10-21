@@ -113,6 +113,7 @@ class Service(models.Model):
     retail_invoice_number = models.IntegerField(blank=True, null=True)
     tax_invoice_number = models.IntegerField(blank=True, null=True)
     gst_type = models.CharField(blank=True, null=True, max_length=100)
+    tds_cost = models.FloatField(default=0)
 
     def __unicode__(self):
         return str(self.invoice_number)
