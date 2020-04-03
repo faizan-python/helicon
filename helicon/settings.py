@@ -25,7 +25,7 @@ SECRET_KEY = '*)%6ny_=!7j0*gzmv1i-_gu=3od*t@_6wc5x$h_tl^q6)8&v%q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -40,12 +40,12 @@ INSTALLED_APPS = (
 
     'userdetails',
     'core',
-    'customer',
-    'mechanic',
-    'parts',
-    'vehical',
-    'service',
-    'quotation',
+    # 'customer',
+    # 'mechanic',
+    # 'parts',
+    # 'vehical',
+    # 'service',
+    # 'quotation',
     'web',
 )
 
@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+#                'django.template.context_processors.media',
             ],
         },
     },
@@ -84,17 +85,24 @@ WSGI_APPLICATION = 'helicon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'helicon',
+#         # 'USER': 'helicon',
+#         # 'PASSWORD': 'heliconengineering',
+#         # 'HOST': 'heliconengineering.cs0b7tshi8pm.us-west-2.rds.amazonaws.com',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': '',
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'helicon',
-        # 'USER': 'helicon',
-        # 'PASSWORD': 'heliconengineering',
-        # 'HOST': 'heliconengineering.cs0b7tshi8pm.us-west-2.rds.amazonaws.com',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -122,6 +130,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'products/') # 'data' is my media folder
+# MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
 MEDIA_URL = '/media/'
 

@@ -9,405 +9,48 @@
      {% include 'templates/web-header.html' %}
 	<!-- start header -->
 
-<div class="page_titel">
+<!-- <div class="page_titel">
 	<div class="container">
 		<div class="row">
 			<div class="page_heading text-center">
-				 <h2>We are Helicon Engineering Works</h2>
 				 <span></span>
 			</div>
 		</div>
 	</div>
-</div>
-
-
+</div> -->
 
 <div id="service_details">
 	 	<div class="container">
 	 		<div class="row">
+
+	 			{% for product in products %}
 				<!-- Right side -->
-				<div class="single_service">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/shaft-cutting.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
+					<div class="single_service">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div class="about_single">
+								<div class="img-holder service_left">
+									<img alt="" src={{product.photo.url}} style="height:200px; width:250px;">
+									<div class="overlay">
+										<a href="#"><i class="fa fa-link"></i></a>
+									</div>
 								</div>
+							</div> 
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+							<div class="service_right">
+								<div class="service_one">
+									<h2>{{product.id}}</h2>
+								</div>
+								<div class="service_title">
+									<h2>{{product.name}}</h2>
+								</div>
+								<h3>{{product.description}}</h3>
+								<hr class="service_line">
+								<a class="btn btn-info hvr-sweep-to-right  sevice_button" href={{product.url}}>BUY NOW</a>
 							</div>
-						</div> 
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
-						<div class="service_right">
-							<div class="service_one">
-								<h2>01</h2>
-							</div>
-							<div class="service_title">
-								<h2>Shaft Cutting Gear Box</h2>
-							</div>
-							<h3>We feel immensely pleased to offer an exclusive gamut of Shaft Cutting Gear Box that is used in various industries. Our provided boxes are manufactured by using the finest quality raw material and cutting edge technology by our adroit professionals. So as to ensure their quality, these boxes are strictly checked by our quality examiners. We provide these boxes in different sizes and specifications as per the demands of our clients. </h3>
-							<hr class="service_line">
-							<h3>Features:</h3>
-
-							    <p>&#9658 Rugged construction <br>
-							    &#9658 Easy installation<br>
-							    &#9658 Rust proof </p>
-
-
-							<h3>Specifications:</h3>
-
-							    <p>&#9658 Density: 6.8-7.0<br>
-							    &#9658 Accuracy: 0.02-0.03 mm<br>
-							    &#9658 Pressure Angle: 20/ 30</p>
-							<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</a>
 						</div>
 					</div>
-				</div>
-				<!-- Right side  end-->
-				
-				<!-- Left Side -->
-				<div class="single_service">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="service_right pull-left spacing">
-							<div class="service_one">
-								<h2>02</h2>
-							</div>
-							<div class="service_title">
-								<h2>Single Shaft Extruder Gear Box</h2>
-							</div>
-							<h3>Being a customer oriented firm, we are engaged in offering a wide range of Single Shaft Extruder Gear Box that is utilized for plastic extruder machine. The offered gear box is manufactured using the finest quality components and sophisticated technology in synchronization with industry norms. In order to maintain its quality, this gear box is rigorously checked on different parameters. Apart from this, we offer this gear box in different sizes and specifications. </h3>
-							<hr class="service_line">
-							<h3>Features:</h3>
-
-							    <p>&#9658 Precisely design <br>
-							    &#9658 Easy usage<br>
-							    &#9658 Light weight </p>
-
-
-							<h3>Specifications:</h3>
-
-							    <p>&#9658 Input Speed: 600~ 1500 rpm<br>
-							    &#9658 Rated Power: 5.5~ 540 kw</p>
-							<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</a>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/single-shaft.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
-								</div>
-							</div>
-						</div> 
-					</div> 
-				</div>
-				<!-- Left Side end -->
-
-                <div class="single_service">
-				   	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/helical-gear-box.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
-								</div>
-							</div>
-						</div> 
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
-						<div class="service_right">
-							<div class="service_one">
-								<h2>03</h2>
-							</div>
-							<div class="service_title">
-								<h2>Helical Gear Box</h2>
-							</div>
-							<h3>We are highly appreciated in the international market for our exquisite collection of Helical Gear Box. Our products are fabricated using superior quality raw material which is sourced from reliable vendor of the market. We are also offering various designs specification, different ratios and output shaft according to the clients need. </h3>
-							<hr class="service_line">
-							<h3>Features:</h3>
-
-							    <p>&#9658 Low noise <br>
-							    &#9658 High performance<br>
-							    &#9658 Market leading price </p>
-
-
-							<h3>Specifications:</h3>
-
-							    <p>&#9658 Input Speed: 1500 rpm<br>
-							    &#9658 Output Speed: 0.15~375 rpm<br>
-							    &#9658 Ratio: 4.07~205</p>
-							<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</a>
-						</div>
-					</div>
-				</div>
-			
-
-                <div class="single_service">
-				 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="service_right pull-left spacing">
-							<div class="service_one">
-								<h2>04</h2>
-							</div>
-							<div class="service_title">
-								<h2>Hollow Gearbox</h2>
-							</div>
-							<h3>Owing to our immense years of industry experience, we are offering a huge array of Hollow Gearbox. Our provided gear box is manufactured by utilizing premium quality components and the latest technology in sync with industry norms. The offered gear box is sternly tested on different parameters to ensure its flawlessness. Apart from this, we offer this gear box in different specifications and customized options as per the demands of our clients.</h3>
-							<hr class="service_line">
-							<h3>Features:</h3>
-
-							    <p>&#9658 Robust construction <br>
-							    &#9658 Compact size <br>
-							    &#9658 High efficiency</p>
-
-
-							<h3>Specifications:</h3>
-
-							    <p>&#9658 Output Torque: up to 36000 n. m<br>
-							    &#9658 Rated Power: 0.18-160 kw<br>
-							    &#9658 Output Speed: 0.16-1028 r/ min</p>
-							<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</a>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/hollow-gearbox.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
-								</div>
-							</div>
-						</div> 
-					</div> 
-				</div>
-
-
-
-
-				<div class="single_service">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/reduction-gear-box.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
-								</div>
-							</div>
-						</div> 
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
-						<div class="service_right">
-							<div class="service_one">
-								<h2>05</h2>
-							</div>
-							<div class="service_title">
-								<h2>Reduction Gear Box</h2>
-							</div>
-							<h3>By utilizing our years of experience, we bring forth a qualitative array of Reduction Gear Box. Our offered gear box is manufactured by using superior quality components and progressive technology in compliance with industry norms. In order to maintain its high efficiency, this gear box is quality tested on different quality measures. In tune with industry standard, we offer this gear box in various sizes, shapes and designs. </h3>
-							<hr class="service_line">
-							<h3>Features:</h3>
-
-							    <p>&#9658 Flawless finish <br>
-							    &#9658 Sturdy structure <br>
-							    &#9658 Optimum performance</p>
-
-
-							<h3>Specifications:</h3>
-
-							    <p>&#9658 Input Speed: 750-3000 rpm<br>
-							    &#9658 Output Torque: top to 6500 N.m<br>
-							    &#9658 Gear accuracy: Less than 6</p>
-							<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</a>
-						</div>
-					</div>
-				</div>
-
-
-
-                <div class="single_service">
-				 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="service_right pull-left spacing">
-							<div class="service_one">
-								<h2>06</h2>
-							</div>
-							<div class="service_title">
-								<h2>Double Helical Gear Box</h2>
-							</div>
-							<h3>We offer a precision engineered range of Double Helical Gear Box to our reputed clients. These gears are fabricated using fine quality alloy grades and latest technology in our state-of-the-art infrastructure facility. Our range of double helical gears are greatly appreciated by our clients from the engineering and cement industries for its prominent features such as longer service life, high ductility, dimensional accuracy and corrosion resistance.</h3>
-							<hr class="service_line">
-							
-
-							<h3>Specifications:</h3>
-
-							    <p>&#9658 Pressure Angle: 20<br>
-							    &#9658 Ambient temperature: -15~45℃<br>
-							    &#9658 Rated frequency: 50-60 HZ</p>
-							<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</a>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/double-helical-gear.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
-								</div>
-							</div>
-						</div> 
-					</div> 
-				</div>
-
-
-
-				<div class="single_service">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/aluminum-gear-box.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
-								</div>
-							</div>
-						</div> 
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
-						<div class="service_right">
-							<div class="service_one">
-								<h2>07</h2>
-							</div>
-							<div class="service_title">
-								<h2>Aluminum Gear Box</h2>
-							</div>
-							<h3>We are paramount in offering an exquisite array of Aluminum Gear Box. The range offered by us includes two variety of aluminum gear boxes, that hollow input and output. These boxes are manufactured using quality assured raw material and latest techniques. We offer these boxes in various customizations based on their sizes, dimensions and others. </h3>
-							<hr class="service_line">
-							<h3>Features:</h3>
-
-							    <p>&#9658 Accurate dimensions <br>
-							    &#9658 longer service life <br>
-							    &#9658 resistance to rust</p>
-
-
-							<h3>Specifications:</h3>
-
-							    <p>&#9658 Input Speed: 1400 rpm<br>
-							    &#9658 Output Speed: 14-185 rpm<br>
-							    &#9658 Output Torque: 2.5-1170 N.m</p>
-							<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</a>
-						</div>
-					</div>
-				</div>
-
-
-
-                <div class="single_service">
-				 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="service_right pull-left spacing">
-							<div class="service_one">
-								<h2>08</h2>
-							</div>
-							<div class="service_title">
-								<h2>Gear Cutting Box</h2>
-							</div>
-							<h3>With thorough understanding of the relevant industry, we are offering a wide range of Gear Cutting Box . Used in different industries, offered cutting facility is manufactured using high grade components and modern technology in adherence with industry norms. We customize this cutting facility in different sizes and designs as per the different demands of our valuable clients. Our provided cutting facility has gained huge appreciation in the market for its various features.</h3>
-							<hr class="service_line">
-							<h3>Features:</h3>
-
-							    <p>&#9658 Precisely designed  <br>
-							    &#9658 Rust proof  <br>
-							    &#9658 Light weight</p>
-
-							<h3>Specifications:</h3>
-
-							    <p>&#9658 Output Speed: 40-48 rpm<br>
-							    &#9658 Pressure Angle: 20<br>
-							    &#9658 Input Speed: 1500 rpm</p>
-							<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</a>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/gear-cutting-box.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
-								</div>
-							</div>
-						</div> 
-					</div> 
-				</div>
-
-
-
-
-
-
-				<div class="single_service">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/long-gear-cutting-box.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
-								</div>
-							</div>
-						</div> 
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
-						<div class="service_right">
-							<div class="service_one">
-								<h2>09</h2>
-							</div>
-							<div class="service_title">
-								<h2>Long Cutting Gear Box</h2>
-							</div>
-							<h3>In our wide range of products, we are manufacturing, exporting and supplying superior quality range of Long Cutting Gear Box. Manufactured using optimum quality raw material and as per the leading quality standards and norms, these products are appropriately used in automotive gearboxes or in the gears of large wind turbines.</h3>
-							<hr class="service_line">
-							<h3>Features:</h3>
-
-							    <p>&#9658 Rugged construction <br>
-							    &#9658 Precisely design <br>
-							    &#9658 High efficiency</p>
-
-
-							<h3>Specifications:</h3>
-
-							    <p>&#9658 Weight: 10 Tons<br>
-							    &#9658 Rated Power: 7.5 KW<br>
-							    &#9658 Sizes: 20 mm To 1500 mm</p>
-							<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</a>
-						</div>
-					</div>
-				</div>
-
-
-
-				<div class="single_service">
-				 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="service_right pull-left spacing">
-							<div class="service_one">
-								<h2>10</h2>
-							</div>
-							<div class="service_title">
-								<h2>bevel-helical-gear-box</h2>
-							</div>
-							<hr class="service_line">
-							<button class="btn btn-info hvr-sweep-to-right  sevice_button" href="{% url 'web_contactus'%}">GET QUOTE</button>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
-						<div class="about_single">
-							<div class="img-holder service_left">
-								<img alt="" src="/static/images/bevel-helical-gear-box.jpg">
-								<div class="overlay">
-									<a href="#"><i class="fa fa-link"></i></a>
-								</div>
-							</div>
-						</div> 
-					</div> 
-				</div>
-
-
-
+				{% endfor %}
 			</div>
 	 	</div>
 	 </div>

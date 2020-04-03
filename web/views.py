@@ -10,6 +10,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 
+from web.models import Category, Product
+
 
 def index(request):
     if request.user.is_authenticated():
@@ -18,7 +20,9 @@ def index(request):
 
 
 def home(request):
-    return render(request, 'web/home.html')
+    category = Category.objects.filter(is_active=True)
+    products = Product.objects.filter(is_active=True)
+    return render(request, 'web/home.html', {"categories": category, "products": products})
 
 
 def about(request):
@@ -30,7 +34,8 @@ def contact(request):
 
 
 def product(request):
-    return render(request, 'web/product.html')
+    products = Product.objects.filter(is_active=True)
+    return render(request, 'web/product.html', {"products": products})
 
 @csrf_exempt
 def save_contact(request):

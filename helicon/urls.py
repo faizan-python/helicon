@@ -15,6 +15,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 urlpatterns = [
     url(r'^superadmin/', include(admin.site.urls)),
     url(r'^$', 'web.views.home', name='web_home'),
@@ -23,22 +27,22 @@ urlpatterns = [
     url(r'^save/contact/', 'web.views.save_contact', name='web_save_contactus'),
     url(r'^product/', 'web.views.product', name='web_product'),
 
-    url(r'^admin/', 'core.views.index', name='core_index'),
-    url(r'^verify/', 'core.views.verify', name='core_verify'),
-    url(r'^home/', 'core.views.home', name='core_home'),
-    url(r'^userprofile/', include('userdetails.urls',
-                                  namespace='userprofile')),
-    url(r'^customer/', include('customer.urls', namespace='customer')),
-    url(r'^part/', include('parts.urls', namespace='part')),
-    url(r'^vehical/', include('vehical.urls', namespace='vehical')),
-    url(r'^service/', include('service.urls', namespace='service')),
-    url(r'^mechanic/', include('mechanic.urls', namespace='mechanic')),
-    url(r'^quotation/', include('quotation.urls', namespace='quotation')),
-    url(r'^login/$', 'userdetails.views.login',
-        name='login'),
-    url(r'^logout/$',
-        'django.contrib.auth.views.logout', {'next_page': '/admin/'},
-        name='logout'),
+    # url(r'^admin/', 'core.views.index', name='core_index'),
+    # url(r'^verify/', 'core.views.verify', name='core_verify'),
+    # url(r'^home/', 'core.views.home', name='core_home'),
+    # url(r'^userprofile/', include('userdetails.urls',
+    #                               namespace='userprofile')),
+    # url(r'^customer/', include('customer.urls', namespace='customer')),
+    # url(r'^part/', include('parts.urls', namespace='part')),
+    # url(r'^vehical/', include('vehical.urls', namespace='vehical')),
+    # url(r'^service/', include('service.urls', namespace='service')),
+    # url(r'^mechanic/', include('mechanic.urls', namespace='mechanic')),
+    # url(r'^quotation/', include('quotation.urls', namespace='quotation')),
+    # url(r'^login/$', 'userdetails.views.login',
+    #     name='login'),
+    # url(r'^logout/$',
+    #     'django.contrib.auth.views.logout', {'next_page': '/admin/'},
+    #     name='logout'),
 
     # Html URL's
     url(r'^product_warm-shaft/', 'web.views.product_warm_shaft', name='web_product_warm_shaft'),
@@ -54,4 +58,5 @@ urlpatterns = [
     url(r'^product_balancing_gear/', 'web.views.product_balancing_gear',name='web_product_balancing_gear'),
     url(r'^product_spur_gear/', 'web.views.product_spur_gear',name='web_product_spur_gear'),
     url(r'^product_loose_gears/', 'web.views.product_loose_gears',name='web_product_loose_gears'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
