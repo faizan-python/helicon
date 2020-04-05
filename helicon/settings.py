@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*)%6ny_=!7j0*gzmv1i-_gu=3od*t@_6wc5x$h_tl^q6)8&v%q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -110,12 +110,12 @@ DATABASES = {
     }
 }
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': 'mydatabase',
 #    }
-#}
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

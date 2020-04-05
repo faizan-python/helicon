@@ -1,0 +1,48 @@
+{% extends "templates/web-base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+     {% include 'templates/web-topheader.html' %}
+	<!-- header stricky menu -->
+     {% include 'templates/web-header.html' %}
+	<!-- start header -->
+
+<!-- <div class="page_titel">
+	<div class="container">
+		<div class="row">
+			<div class="page_heading text-center">
+				 <span></span>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+
+<div id="service_details">
+	 	<div class="container">
+	 		<div class="row">
+				<!-- Right side -->
+					<div class="single_service" id="post_{{product.id}}">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div class="about_single">
+								<h1>Oops! Something went wrong.</h1>
+<!-- 									<img alt="" src={{product.photo.url}} style="height:200px; width:250px;"> -->
+							</div> 
+						</div>
+					</div>
+			</div>
+	 	</div>
+	 </div>
+
+
+
+	<!---footer start area -->
+      {% include 'templates/web-footer.html' %}
+	<!-- footer end area -->
+{% endblock content %}
+
+{% block scripts_extend %}
+	<script src="{% static 'js/jquery.appear.js' %}"></script>
+{% endblock %}

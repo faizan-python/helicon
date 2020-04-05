@@ -24,10 +24,9 @@
 	 	<div class="container">
 	 		<div class="row">
 
-	 			{% for product in products %}
 				<!-- Right side -->
 					<div class="single_service" id="post_{{product.id}}">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="about_single">
 								<div class="img-holder service_left">
 <!-- 									<img alt="" src={{product.photo.url}} style="height:200px; width:250px;"> -->
@@ -49,11 +48,9 @@
 								<h3>{{product.description}}</h3>
 								<hr class="service_line">
 								<a class="btn btn-info hvr-sweep-to-right  sevice_button" href={{product.url}}>{{product.button_text}}</a>
-								<a class="btn btn-info hvr-sweep-to-right  sevice_button" href="/product/{{product.id}}/">View Details</a>
 							</div>
 						</div>
 					</div>
-				{% endfor %}
 			</div>
 	 	</div>
 	 </div>
@@ -66,24 +63,5 @@
 {% endblock content %}
 
 {% block scripts_extend %}
-	<script type="text/javascript">
-		function doThings() {
-			var urlParams = new URLSearchParams(window.location.search);
-			if (urlParams.has('post')) {
-				var headerheight = $(".header").outerHeight();
-				var postId = urlParams.get('post')
-				var target = $("#post_" + postId)
-				if (target.length) {
-				    $('html, body').animate({
-				      scrollTop: target.offset().top - (headerheight + 160)
-				    }, 1);
-				    return true;
-				}
-			}
-		}
-	    $(document).ready(function () {
-	    	doThings()
-	    });
-	</script>
 	<script src="{% static 'js/jquery.appear.js' %}"></script>
 {% endblock %}
