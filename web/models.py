@@ -16,6 +16,7 @@ class Product(models.Model):
     url = models.URLField(max_length=2000)
     is_active = models.BooleanField(default=True)
     photo = models.ImageField(upload_to='products')
+    button_text = models.CharField(max_length=250, default="Buy Now")
 
     def __unicode__(self):
         return u''.join((self.name))

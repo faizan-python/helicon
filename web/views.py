@@ -20,8 +20,8 @@ def index(request):
 
 
 def home(request):
-    category = Category.objects.filter(is_active=True)
-    products = Product.objects.filter(is_active=True)
+    category = Category.objects.filter(is_active=True).order_by('-id')[:10]
+    products = Product.objects.filter(is_active=True).order_by('-id')[:10]
     return render(request, 'web/home.html', {"categories": category, "products": products})
 
 
@@ -34,7 +34,7 @@ def contact(request):
 
 
 def product(request):
-    products = Product.objects.filter(is_active=True)
+    products = Product.objects.filter(is_active=True).order_by('-id')
     return render(request, 'web/product.html', {"products": products})
 
 @csrf_exempt
