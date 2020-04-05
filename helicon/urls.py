@@ -17,6 +17,9 @@ from django.contrib import admin
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import (
+handler400, handler403, handler404, handler500
+)
 
 
 urlpatterns = [
@@ -25,7 +28,8 @@ urlpatterns = [
     url(r'^about/', 'web.views.about', name='web_about'),
     url(r'^contact/', 'web.views.contact', name='web_contactus'),
     url(r'^save/contact/', 'web.views.save_contact', name='web_save_contactus'),
-    url(r'^product/', 'web.views.product', name='web_product'),
+    url(r'^product/$', 'web.views.product', name='web_product'),
+    url(r'^product/(?P<id>[0-9]+)/$', 'web.views.product_detail', name='web_product_detail'),
 
     # url(r'^admin/', 'core.views.index', name='core_index'),
     # url(r'^verify/', 'core.views.verify', name='core_verify'),
@@ -60,3 +64,8 @@ urlpatterns = [
     url(r'^product_loose_gears/', 'web.views.product_loose_gears',name='web_product_loose_gears'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+
+handler404 = 'web.views.handler404'
+handler500 = 'web.views.handler500'
+handler403 = 'web.views.handler404'
+handler400 = 'web.views.handler404'

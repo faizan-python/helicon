@@ -37,6 +37,29 @@ def product(request):
     products = Product.objects.filter(is_active=True).order_by('-id')
     return render(request, 'web/product.html', {"products": products})
 
+
+def product_detail(request, id):
+    product = Product.objects.filter(is_active=True, id=id)
+    if product:
+        product = product[0]
+        return render(request, 'web/product_detail.html', {"product": product})
+    else:
+        return HttpResponseRedirect('/product/')
+
+
+def handler404(request, *args, **argv):
+    response = render_to_response('web/404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
+def handler500(request, *args, **argv):
+    response = render_to_response('web/404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
+
 @csrf_exempt
 def save_contact(request):
     if request.POST.dict().get('number'):

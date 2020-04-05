@@ -66,15 +66,15 @@
 				<!-- gallery img for Gear Box -->
 				{% for product in products %}
 					<div class="masonary-item width-1 outside gearbox">
-						<div class="img-wrap" onclick="/product/?post={{product.id}}">	
+						<div class="img-wrap" onclick="/product/{{product.id}}/">	
 							<!-- gallery img -->
 							<img src={{product.photo.url}} alt="img">
 							<div class="content-wrap">
 								<div class="border">
 									<div class="content">
 										<!-- lightbox img -->
-										<a href="/product/?post={{product.id}}" class="fancybox"><h4>{{product.name}}</h4></a>
-										<a href="/product/?post={{product.id}}" class="fancybox"><span>{{product.description}}</span></a>
+										<a href="/product/{{product.id}}/" class="fancybox"><h4>{{product.name}}</h4></a>
+										<a href="/product/{{product.id}}/" class="fancybox"><span>{{product.description}}</span></a>
 									</div>
 								</div>
 							</div>
